@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from 'next/link'
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 const ChangePasswordSuccess = () => {
@@ -12,12 +13,12 @@ const ChangePasswordSuccess = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col w-full flex-1">
-        <div className="flex w-full h-screen bg-dark-purple justify-center relative">
-          <img
-            src="/new-bg.png"
-            alt="Alat for Cooperative"
-            className="w-full h-full object-cover absolute mix-blend-soft-light bg-opacity-5"
-          />
+      <div className="flex w-full justify-center relative">
+        <img
+          src="/new-bg.png"
+          alt="Alat for Cooperative"
+          className="w-full object-cover absolute bg-dark-purple"
+        />
           <div className="flex p-16 flex-col absolute w-5/12 text-center justify-center items-center">
             <Image
               src="/logo.png"
@@ -35,11 +36,11 @@ const ChangePasswordSuccess = () => {
                   A new password has been created successfully
                 </p>
               </div>
-              <a
+              <Link
                 className="bg-light-purple text-gray-300 rounded-md w-full px-8 py-2 text-center mt-9 inline-block font-semibold hover:bg-dark-purple hover:text-white"
-                href="">
+                href="/login">
                 Log in to your account
-              </a>
+              </Link>
             </div>
           </div>
         </div>

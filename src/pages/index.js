@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from 'next/link'
 import { MdConfirmationNumber } from "react-icons/md";
-
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen  text-center">
@@ -30,7 +30,7 @@ export default function Home() {
                 <p className="text-white inline-block font-semibold text-left w-full mb-4">
                   Join Us Today
                 </p>
-                <h1 className="text-5xl font-bold text-white w-4/6 text-left leading-15">
+                <h1 className="text-5xl font-bold text-white w-4/6 text-left leading-[51px]">
                   Get started on ALAT for Cooperative Platform
                 </h1>
               </div>
@@ -42,32 +42,27 @@ export default function Home() {
               style={{ color: "#980B80" }}>
               Create Account
             </h2>
-            <p className="mb-12 w-4/6 text-gray-500">
+            <p className="mb-12 w-5/6 text-gray-500">
               Create an account using your existing cooperative Wema account
               number
             </p>
             <div>
               <label className="font-semibold">Wema Account Number</label>
-              <div className="bg-gray-100 w-3/4 p-2 flex items-center mb-3 mt-4">
+              <div className="bg-input-fill w-3/4 p-2 flex rounded-md items-center mb-3 mt-4 border border-input-outline">
                 <MdConfirmationNumber className="text-gray-400 m-2" />
                 <input
-                  type="number"
+                  type="text"
                   name="number"
                   placeholder="Enter account number"
-                  className="bg-gray-100 outline-none text-sm flex-1"
+                  className="bg-input-fill outline-none text-sm flex-1"
                 />
               </div>
             </div>
-            <a
-              className="bg-light-purple text-gray-300 rounded-md w-3/4 px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white"
-              href="">
+            <Link href="/success"  className="bg-light-purple text-gray-300 rounded-md w-3/4 px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white">
               Create Account
-            </a>
-            <p className="mt-3 font-semibold text-xs ">
-              Already have an account?{" "}
-              <span className="text-dark-purple font-bold">Sign in here</span>
-            </p>
-          </div>
+           </Link>
+            
+            </div>
         </div>
       </main>
     </div>

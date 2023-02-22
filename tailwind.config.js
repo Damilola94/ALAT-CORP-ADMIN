@@ -11,7 +11,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "dark-purple": "#980B80",
+        "input-fill": "#F9FAFB",
+        "input-outline": "#D1D5DB",
+        "dark-purple": "#A90836",
+        "dark-alat-purple": "#5A074C",
         "light-purple": "#F5E7F2",
         "light-white": "rgba(255, 255, 255, 0.18",
       },

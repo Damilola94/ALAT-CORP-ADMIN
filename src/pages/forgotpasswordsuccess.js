@@ -12,12 +12,12 @@ const ForgotPasswordSuccess = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col w-full flex-1">
-        <div className="flex w-full h-screen bg-dark-purple justify-center relative">
-          <img
-            src="/new-bg.png"
-            alt="Alat for Cooperative"
-            className="w-full h-full object-cover absolute mix-blend-soft-light bg-opacity-5"
-          />
+      <div className="flex w-full justify-center relative">
+        <img
+          src="/new-bg.png"
+          alt="Alat for Cooperative"
+          className="w-full object-cover absolute bg-dark-purple"
+        />
           <div className="flex p-16 flex-col absolute w-5/12 text-center justify-center items-center">
             <Image
               src="/logo.png"

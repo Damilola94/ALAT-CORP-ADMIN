@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from 'next/link'
 import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineMail } from "react-icons/ai";
 
@@ -13,12 +14,12 @@ const AlmostThere = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col w-full flex-1">
-        <div className="flex w-full h-screen bg-dark-purple justify-center relative">
-          <img
-            src="/new-bg.png"
-            alt="Alat for Cooperative"
-            className="w-full h-full object-cover absolute mix-blend-soft-light bg-opacity-5"
-          />
+      <div className="flex w-full justify-center relative">
+        <img
+          src="/new-bg.png"
+          alt="Alat for Cooperative"
+          className="w-full object-cover absolute bg-dark-purple"
+        />
           <div className="flex p-16 flex-col absolute w-5/12 text-center justify-center items-center">
             <Image
               src="/logo.png"
@@ -38,33 +39,34 @@ const AlmostThere = () => {
               </div>
               <div className="mt-6">
                 <label className="font-semibold w-full">Email Address</label>
-                <div className="bg-gray-100  p-2 flex mb-3 mt-3">
-                  <AiOutlineMail className="text-gray-400 m-2" />
-                  <input
+                <div className="p-2 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
+                <AiOutlineMail className="text-gray-400 m-2" />
+                 <input
                     type="email"
                     name="email"
                     placeholder="Enter account number"
-                    className="bg-gray-100 outline-none text-sm flex-1"
+                    className="bg-input-fill outline-none text-sm flex-1"
                   />
                 </div>
               </div>
               <div className="mt-6">
-                <label className="font-semibold w-full">Email Address</label>
-                <div className="bg-gray-100  p-2 flex mb-3 mt-3">
+                <label className="font-semibold w-full">Password</label>
+                <div className="p-2 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                   <RiLockPasswordLine className="text-gray-400 m-2" />
                   <input
                     type="password"
                     name="password"
                     placeholder="Password"
-                    className="bg-gray-100 outline-none text-sm flex-1"
+                    className="text-gray-400 outline-none text-sm flex-1"
                   />
                 </div>
               </div>
-              <a
+              <Link
+                href="/changepassword"  
                 className="bg-light-purple text-gray-300 rounded-md w-full px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white"
-                href="">
+                >
                 Continue
-              </a>
+              </Link>
             </div>
           </div>
         </div>

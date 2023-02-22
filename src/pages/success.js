@@ -30,7 +30,7 @@ const Success = () => {
                 <p className="text-white inline-block font-semibold text-left w-full mb-4">
                   Join Us Today
                 </p>
-                <h1 className="text-5xl font-bold text-white w-4/6 text-left leading-15">
+                <h1 className="text-5xl font-bold text-white w-4/6 text-left leading-[51px]">
                   Get started on ALAT for Cooperative Platform
                 </h1>
               </div>
@@ -43,7 +43,7 @@ const Success = () => {
             </h2>
             <p className="w-full text-gray-500 text-center">
               An email has been sent to{" "}
-              <span className="font-bold">lapo@gmail.com.</span> Kindly check
+              <span className="font-bold text-dark-alat-purple">lapo@gmail.com.</span> Kindly check
               and follow the steps to activate your account.
             </p>
           </div>
