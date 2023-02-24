@@ -1,6 +1,6 @@
 import React from "react";
 
-import {  IoIosNotificationsOutline } from "react-icons/io";
+import { IoIosNotificationsOutline } from "react-icons/io";
 
 const Header = () => {
   return (
@@ -8,13 +8,13 @@ const Header = () => {
       <div className="flex space-x-3">
         <p className="text-black font-extrabold text-xl">Home</p>
       </div>
-      <div className="flex space-x-6 text-center justify-center items-center w-1/6 h-fit">
-        <IoIosNotificationsOutline className="text-4xl text-[#808080]   border-r-gray-500 border-l-gray-500 " />
-        <div className="flex w-full">
-          <div className="w-2/6 h-2/6 bg-dark-purple text-white rounded-full text-center mr-2" >
+      <div className="flex space-x-4 text-center justify-center items-center h-fit align-middle">
+        <IoIosNotificationsOutline className="text-4xl text-[#808080] border-r-gray-500 border-l-gray-500 " />
+        <div className="flex ">
+          <div className="flex items-center justify-center flex-none w-8 h-8 mx-auto bg-dark-purple rounded-full mr-2 text-white">
             <p>L</p>
           </div>
-          <p className="text-gray-600 font-semibold w-full">Lapo John</p>
+          <p className="text-gray-600 font-semibold">Lapo John</p>
         </div>
       </div>
     </div>

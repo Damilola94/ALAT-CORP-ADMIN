@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { AiOutlineMail } from "react-icons/ai";
+import Link from "next/link";
 
 const ForgotPassword = () => {
   return (
@@ -12,12 +13,12 @@ const ForgotPassword = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col w-full flex-1">
-      <div className="flex w-full justify-center relative">
-        <img
-          src="/new-bg.png"
-          alt="Alat for Cooperative"
-          className="w-full object-cover absolute bg-dark-purple"
-        />
+        <div className="flex w-full justify-center relative">
+          <img
+            src="/new-bg.png"
+            alt="Alat for Cooperative"
+            className="w-full object-cover absolute bg-dark-purple"
+          />
           <div className="flex p-16 flex-col absolute w-5/12 text-center justify-center items-center">
             <Image
               src="/logo.png"
@@ -46,16 +47,16 @@ const ForgotPassword = () => {
                   />
                 </div>
               </div>
-              <a
+              <Link
                 className="bg-light-purple text-gray-300 rounded-md w-full px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white"
-                href="">
+                href="/forgotpasswordsuccess">
                 Reset Password
-              </a>
-              <a
-                className="text-gray-300 rounded-md w-full px-12 py-2 text-center mt-5 inline-block font-semibold hover:text-dark-purple"
-                href="">
+              </Link>
+              <Link
+                href="/login"
+                className="text-gray-300 rounded-md w-full px-12 py-2 text-center mt-5 inline-block font-semibold hover:text-dark-purple">
                 Back to Login
-              </a>
+              </Link>
             </div>
           </div>
         </div>

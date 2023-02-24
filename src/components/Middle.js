@@ -1,40 +1,84 @@
 import React from "react";
-// import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { faker } from "@faker-js/faker";
+import { Bar } from "react-chartjs-2";
+import { MdExpandMore } from "react-icons/md";
+import { CgCalendarDates } from "react-icons/cg";
 
-const data = {
-  labels: ["Sep 19", "Sep 20", "Sep 21", "Sep 22", "Sep 23", "Sep24", "Sep 25"],
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Remmitance Per Month",
+    },
+  },
+};
+
+const labels = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+];
+
+export const data = {
+  labels,
   datasets: [
     {
-      label: "Elrond ",
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: "rgba(67, 56, 202)",
-      borderColor: "rgba(67, 56, 202)",
-      borderCapStyle: "butt",
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: "miter",
-      pointBorderColor: "rgba(67, 56, 202)",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(67, 56, 202)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 4,
-      pointHitRadius: 10,
-      data: [12, 10, 6, 6, 6, 7, 7, 8],
+      label: "Remittance",
+      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+      backgroundColor: "#1BA926",
     },
   ],
 };
 
 const Middle = () => {
   return (
-    <div className="bg-white ml-2 shadow-sm w-8/12 h-96 border rounded-xl border-gray-100">
-      <div className="border-b p-3 border-gray-100">
-        <p className="font-semibold">Elrong eGold</p>
+    <div className="bg-white  shadow-sm w-8/12  border rounded-xl border-gray-100">
+      <div className="flex border-b p-3 border-gray-100 justify-between align-middle items-center ">
+        <p className="text-lg font-bold mb-4 text-[#3E0434]">
+          Remmitance Per Month
+        </p>
+        <div className="flex items-center rounded-md align-middle p-3 border border-gray-100">
+          <CgCalendarDates className="mr-2" />
+          <p>This Month</p>
+          <MdExpandMore className="ml-2 cursor-pointer" />
+        </div>
       </div>
-      {/* <Line data={data} /> */}
+      <div className=" mt-5 p-2">
+        <Bar options={options} data={data} />
+      </div>
     </div>
   );
 };
