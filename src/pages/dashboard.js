@@ -1,28 +1,28 @@
 import { useState } from "react";
+import { BsArrowLeftShort, BsChatSquareQuote } from "react-icons/bs";
 import {
-  BsArrowLeftShort,
-  BsChatSquareQuote,
-} from "react-icons/bs";
-import { AiFillFolderOpen, AiOutlineSetting, AiFillCaretRight } from "react-icons/ai";
-import { RiDashboardLine,RiLogoutBoxFill } from "react-icons/ri";
+  AiFillFolderOpen,
+  AiOutlineSetting,
+  AiFillCaretRight,
+} from "react-icons/ai";
+import { RiDashboardLine, RiLogoutBoxFill } from "react-icons/ri";
 import { SiGoogleanalytics } from "react-icons/si";
-import { FaUser, FaLink, FaWallet , } from "react-icons/fa";
+import { FaUser, FaLink, FaWallet } from "react-icons/fa";
 import { IoIosColorFilter } from "react-icons/io";
 
-import {Container, Header} from "../components";
-
+import { Container, Header, Walkthrough, Modal } from "../components";
 
 const App = () => {
   const [open, setOpen] = useState(true);
-  const [test, setTest] = useState(true);
+  const [walkthroughModal, setWalkthroughModal] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [submenuTransaction, setSubmenuTransaction] = useState("");
 
   const Menus = [
-    { 
+    {
       title: "Dashboard",
-    icon: <RiDashboardLine />,
-  },
+      icon: <RiDashboardLine />,
+    },
     {
       title: "Transactions",
       icon: <FaWallet />,
@@ -59,32 +59,41 @@ const App = () => {
     { title: "Files", spacing: true, icon: <AiFillFolderOpen /> },
     { title: "Setting", icon: <AiOutlineSetting /> },
     { title: "Quicklinks", icon: <FaLink /> },
-    { title: "Logout", icon: <RiLogoutBoxFill />, logoutSpacing: true, },
-
+    { title: "Logout", icon: <RiLogoutBoxFill />, logoutSpacing: true },
   ];
 
   const dropDownHandler = (value) => {
-    console.log(value)
+    console.log(value);
     switch (value) {
-      case value:"Transactions"
-      setSubmenuOpen(!submenuOpen)
-      // setSubmenuTransaction("Transactions")
+      case value:
+        "Transactions";
+        setSubmenuOpen(!submenuOpen);
+        // setSubmenuTransaction("Transactions")
         break;
-      case value:"Communications"
+      case value:
+        "Communications";
         // setSubmenuOpen(!submenuOpen)
         break;
-      case value:"Users"
+      case value:
+        "Users";
         // setSubmenuOpen(!submenuOpen)
         break;
       default:
         break;
     }
-  }
+  };
+
+  const walkthroughHandler = () => {
+    setWalkthroughModal(!walkthroughModal);
+  };
 
   return (
     <div className="flex ">
+      <Modal onClick={walkthroughHandler} />
       <div
-        className={`bg-dark-purple p-5 pt-8 ${open ? "w-72" : "w-20"} duration-300 relative` }>
+        className={`bg-dark-purple p-5 pt-8 ${
+          open ? "w-72" : "w-20"
+        } duration-300 relative`}>
         <BsArrowLeftShort
           className={`bg-white text-dark-purple text-3xl rounded-full absolute -right-3 top-9 border border-dark-purple cursor-pointer ${
             !open && "rotate-180"
@@ -110,11 +119,13 @@ const App = () => {
               <li
                 key={index}
                 className={`text-gray-300 text-sm flex items-center gap-x-6 cursor-pointer p-2 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ${
-                  menu.spacing ? "mt-9" : menu.logoutSpacing ? "mt-[7rem]": "mt-3"
+                  menu.spacing
+                    ? "mt-9"
+                    : menu.logoutSpacing
+                    ? "mt-[7rem]"
+                    : "mt-3"
                 }`}>
-                <span className="text-xl block float-left">
-                  {menu.icon}
-                </span>
+                <span className="text-xl block float-left">{menu.icon}</span>
                 <span
                   className={`text-base font-semibold flex-1 duration-200 ${
                     !open && "hidden"
@@ -122,26 +133,23 @@ const App = () => {
                   {menu.title}
                 </span>
                 {menu.submenu && open && (
-                    <AiFillCaretRight
-                      className={`${submenuOpen && "rotate-180"}`}
-                      onClick={() => dropDownHandler(menu.title)}
-                    />
-                  )}
-              </li>
-              {menu.submenu &&
-                submenuOpen &&
-                open && 
-               (
-                  <ul>
-                    {menu.submenuItems.map((submenuItem, index) => (
-                      <li
-                        key={index}
-                        className="text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-8 font-medium">
-                        {submenuItem.title}
-                      </li>
-                    ))}
-                  </ul>
+                  <AiFillCaretRight
+                    className={`${submenuOpen && "rotate-180"}`}
+                    onClick={() => dropDownHandler(menu.title)}
+                  />
                 )}
+              </li>
+              {menu.submenu && submenuOpen && open && (
+                <ul>
+                  {menu.submenuItems.map((submenuItem, index) => (
+                    <li
+                      key={index}
+                      className="text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-8 font-medium">
+                      {submenuItem.title}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </ul>
@@ -155,13 +163,14 @@ const App = () => {
             className={`text-white origin-left font-medium text-xl duration-500 ${
               !open && "scale-0"
             }`}>
-           ALAT for Cooperatives
+            ALAT for Cooperatives
           </h1>
-        </div>        
+        </div>
       </div>
       <div className="w-screen">
         <Header />
         <Container />
+        {walkthroughModal && <Walkthrough />}
       </div>
     </div>
   );

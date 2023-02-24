@@ -1,8 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
-import Link from 'next/link'
+import Link from "next/link";
 import { MdConfirmationNumber } from "react-icons/md";
-export default function Home() {
+
+const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen  text-center">
       <Head>
@@ -58,13 +59,20 @@ export default function Home() {
                 />
               </div>
             </div>
-            <Link href="/success"  className="bg-light-purple text-gray-300 rounded-md w-3/4 px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white">
+            <Link
+              href="/success"
+              className="bg-light-purple text-gray-300 rounded-md w-3/4 px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white">
               Create Account
-           </Link>
-            
-            </div>
+            </Link>
+            <p className="mt-3 font-semibold text-xs">
+              Already have an account?{" "}
+              <span className="text-dark-purple font-bold">Sign in here</span>
+            </p>
+          </div>
         </div>
       </main>
     </div>
   );
-}
+};
+
+export default Home;
