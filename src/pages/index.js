@@ -61,7 +61,10 @@ export default function Home() {
             <Link href="/success"  className="bg-light-purple text-gray-300 rounded-md w-3/4 px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white">
               Create Account
            </Link>
-            
+           <p className="mt-3 font-semibold text-xs ">
+              Already have an account?{" "}
+              <span className="text-dark-purple font-bold">Sign in here</span>
+            </p>
             </div>
         </div>
       </main>
