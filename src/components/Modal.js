@@ -29,7 +29,7 @@ const Modal = ({ onClick }) => {
                     <h4 className="text-2xl font-bold text-black">
                       Welcome to ALAT for Cooperative
                     </h4>
-                    <p className="mt-2 text-[15px] leading-relaxed text-gray-500">
+                     <p className="mt-2 text-[15px] leading-relaxed text-gray-500">
                       Lets us show you how to get the most of our platform
                     </p>
                     <div className="items-center gap-2 inline-block mt-8 space-x-4">
