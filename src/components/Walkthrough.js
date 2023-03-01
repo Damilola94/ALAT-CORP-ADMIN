@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { MdCancel } from "react-icons/md";
+
 
 const Walkthrough = ({}) => {
   const [step, setStep] = useState(0);
@@ -43,38 +45,29 @@ const Walkthrough = ({}) => {
     open && (
       <div className="relative">
         <div
-          className={`bg-dark-purple w-2/6 h-fit rounded-lg px-6 py-6 text-center text-white absolute ${
+          className={`bg-dark-purple w-2/6 h-fit rounded-lg px-3 py-5 text-left text-white absolute ${
             steps[step].count === 0
-              ? "absolute bottom-96"
+              ? "left-[200px] bottom-[450px]"
               : steps[step].count === 1
-              ? "absolute left-10"
+              ? "left-[478px] bottom-[350px]"
               : steps[step].count === 2
               ? "left-96 bottom-96"
               : steps[step].count === 3
-              ? "left-12 bottom-72"
+              ? "left-6 bottom-96"
               : steps[step].count === 4
-              ? "left-80 bottom-96 mt-56"
-              : ""
-          } ${
-            steps[step].count === 0
-              ? "left-96"
-              : steps[step].count === 1
-              ? "absolute bottom-56"
-              : steps[step].count === 2
-              ? "left-80 bottom-96"
-              : steps[step].count === 3
-              ? "left-80 bottom-96"
-              : steps[step].count === 4
-              ? "left-80 bottom-96"
+              ? "left-[560px] bottom-[700px]"
               : ""
           }`}>
           <div>
+            <div className="flex justify-between ">
             {steps[step].content}
-            <div className="mt-10 flex justify-between">
+            <MdCancel className="text-4xl text-white ml-6 shadow-lg cursor-pointer" onClick={() => setOpen(!open)} />
+            </div>
+            <div className="mt-5 flex justify-between">
               <button
                 onClick={nextStep}
                 className="bg-white text-dark-purple p-1 rounded-xl shadow-lg">
-                Continue
+                {step === steps.length - 1 ? "Done" : "Continue"}
               </button>
               <div>
                 <p>

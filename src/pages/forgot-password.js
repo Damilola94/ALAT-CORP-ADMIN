@@ -49,7 +49,7 @@ const ForgotPassword = () => {
               </div>
               <Link
                 className="bg-light-purple text-gray-300 rounded-md w-full px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white"
-                href="/forgotpasswordsuccess">
+                href="/forgot-password-success">
                 Reset Password
               </Link>
               <Link

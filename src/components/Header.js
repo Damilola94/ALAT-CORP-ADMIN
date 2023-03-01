@@ -2,11 +2,12 @@ import React from "react";
 
 import { IoIosNotificationsOutline } from "react-icons/io";
 
-const Header = () => {
+const Header = ({pageName, subPageName}) => {
   return (
     <div className="flex shadow-lg bg-white p-4 justify-between items-center">
-      <div className="flex space-x-3">
-        <p className="text-black font-extrabold text-xl">Home</p>
+      <div className="">
+        <p className="text-black font-extrabold text-xl">{pageName}</p>
+        {subPageName && <p className="text-gray-500 text-sm">{pageName}<span>{" > "}</span><span>{subPageName}</span></p>}
       </div>
       <div className="flex space-x-4 text-center justify-center items-center h-fit align-middle">
         <IoIosNotificationsOutline className="text-4xl text-[#808080] border-r-gray-500 border-l-gray-500 " />
