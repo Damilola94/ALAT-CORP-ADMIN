@@ -18,7 +18,7 @@ const Login = () => {
         <img
           src="/new-bg.png"
           alt="Alat for Cooperative"
-          className="w-full object-cover absolute bg-dark-purple"
+          className="w-full object-fill absolute bg-dark-purple"
         />
           <div className="flex p-16 flex-col absolute w-5/12 text-center justify-center items-center">
             <Link href="/">
@@ -64,7 +64,7 @@ const Login = () => {
               </div>
               <Link
                 className="text-dark-purple w-full  inline-block font-semibold text-sm"
-                href="/forgotpassword">
+                href="/forgot-password">
                 Forgot Password?
               </Link>
               <Link

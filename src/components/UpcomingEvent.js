@@ -15,7 +15,7 @@ const UpcomingEvent = () => {
             dolor asset ifish juxtereb fghdh hdh hfed......
           </p>
           <p className="text-sm mt-5 mb-3 text-black">Details</p>
-          <div>
+          <div className="space-y-3">
             <div className="flex items-center align-middle">
               <HiLocationMarker className="text-2xl text-gray-500" />
               <p className="text-gray-500 ml-2">Online</p>

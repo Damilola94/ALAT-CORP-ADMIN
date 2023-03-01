@@ -32,18 +32,22 @@ const Modal = ({ onClick }) => {
                      <p className="mt-2 text-[15px] leading-relaxed text-gray-500">
                       Lets us show you how to get the most of our platform
                     </p>
-                    <div className="items-center gap-2 inline-block mt-8 space-x-4">
+                    <div className="mt-6 gap-3">
+                      <div>
                       <button
-                        className="mt-2 p-3 flex-1 text-white bg-dark-purple rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                        className="mt-1 p-3 flex-1 px-16 text-white bg-dark-purple rounded-md outline-none ring-offset-2 focus:ring-2"
                         onClick={startTourHandler}>
                         Start the tour
                       </button>
-                      <button
-                        className="mt-2 p-3 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
+                      </div>
+                   <div>
+                   <button
+                        className="mt-1 p-3 flex-1 text-gray-800 rounded-md outline-none ring-offset-2 focus:ring-2"
                         onClick={() => setShowModal(false)}>
                         No thank you
-                      </button>
-                    </div>
+                  </button>
+                  </div>
+                </div>
                   </div>
                 </div>
               </div>

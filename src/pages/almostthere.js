@@ -62,7 +62,7 @@ const AlmostThere = () => {
                 </div>
               </div>
               <Link
-                href="/changepassword"  
+                href="/change-password"  
                 className="bg-light-purple text-gray-300 rounded-md w-full px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white"
                 >
                 Continue
