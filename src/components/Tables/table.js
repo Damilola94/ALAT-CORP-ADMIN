@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import { useGlobalFilter, useTable } from "react-table";
+import { useGlobalFilter, useTable, usePagination } from "react-table";
 import GlobalFilter from "./globalFilter";
 import Pagination from "./pagination";
 import RightSideModal from "../RightSideModal";
@@ -173,6 +173,156 @@ const Tables = () => {
         STATUS: "Pending Verification",
         "RAISED BY": "David John",
       },
+      {
+        id: 11,
+        "S/N": 11,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "ALATbyWema",
+          BANK_IMAGE: "/bank-logo/alat.jfif",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending Verification",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 12,
+        "S/N": 12,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "ALATbyWema",
+          BANK_IMAGE: "/bank-logo/alat.jfif",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Failed",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 13,
+        "S/N": 13,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "Access",
+          BANK_IMAGE: "/bank-logo/access.png",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Failed",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 14,
+        "S/N": 14,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "Access",
+          BANK_IMAGE: "/bank-logo/access.png",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending Verification",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 15,
+        "S/N": 15,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "Access",
+          BANK_IMAGE: "/bank-logo/access.png",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Declined",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 16,
+        "S/N": 16,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "UBA",
+          BANK_IMAGE: "/bank-logo/uba.png",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending Verification",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 17,
+        "S/N": 17,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "ALATbyWema",
+          BANK_IMAGE: "/bank-logo/alat.jfif",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Success",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 18,
+        "S/N": 18,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "ALATbyWema",
+          BANK_IMAGE: "/bank-logo/alat.jfif",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending Verification",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 19,
+        "S/N": 19,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "Stanbic IBTC",
+          BANK_IMAGE: "/bank-logo/stanbic.jfif",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending Verification",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 20,
+        "S/N": 20,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "Zenith",
+          BANK_IMAGE: "/bank-logo/zenith.png",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending Verification",
+        "RAISED BY": "David John",
+      },
     ],
     []
   );
@@ -248,19 +398,27 @@ const Tables = () => {
       columns: productsColumns,
       data: productsData,
     },
-    useGlobalFilter
+    useGlobalFilter,
+    usePagination
   );
 
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
     prepareRow,
     preGlobalFilteredRows,
     setGlobalFilter,
     state,
   } = tableInstance;
+
+  const { pageIndex } = state;
 
   useEffect(() => {
     fetchProducts();
@@ -283,7 +441,14 @@ const Tables = () => {
           setGlobalFilter={setGlobalFilter}
           globalFilter={state.globalFilter}
         />
-        <Pagination />
+        <Pagination
+          previousPage={previousPage}
+          nextPage={nextPage}
+          canPreviousPage={canPreviousPage}
+          canNextPage={canNextPage}
+          pageIndex={pageIndex}
+          pageOptions={pageOptions}
+        />
       </div>
       <table
         {...getTableProps()}
@@ -302,7 +467,7 @@ const Tables = () => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row, idx) => {
+          {page.map((row, idx) => {
             prepareRow(row);
             return (
               <tr
@@ -324,8 +489,14 @@ const Tables = () => {
         </tbody>
       </table>
       <div className="flex justify-between my-7 ">
-        <div></div>
-        <Pagination />
+        <Pagination
+          previousPage={previousPage}
+          nextPage={nextPage}
+          canPreviousPage={canPreviousPage}
+          canNextPage={canNextPage}
+          pageIndex={pageIndex}
+          pageOptions={pageOptions}
+        />
       </div>
     </>
   );
