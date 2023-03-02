@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BsWallet2, BsChatSquareQuote } from "react-icons/bs";
+import { BsWallet2 } from "react-icons/bs";
 
 import { BiWallet } from "react-icons/bi";
 import { FaMoneyCheck } from "react-icons/fa";
@@ -28,8 +28,9 @@ const Card = (props) => {
         </div>
       </div>
       <p className="text-gray-700 mt-5 mb-1 text-xs">{props.title}</p>
-      <p className="text-black font-bold text-2xl">{
-      props.title !== "TOTAL MEMBERS" ? `₦${balance}` : balance}</p>
+      <p className="text-black font-bold text-2xl">
+        {props.title !== "TOTAL MEMBERS" ? `₦${balance}` : balance}
+      </p>
       <div></div>
     </div>
   );

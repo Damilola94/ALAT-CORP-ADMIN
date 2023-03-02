@@ -2,6 +2,8 @@ import "regenerator-runtime/runtime";
 
 import React, { useState } from "react";
 import { useAsyncDebounce } from "react-table";
+import { BsSearch } from "react-icons/bs";
+import { FiFilter } from "react-icons/fi";
 
 const GlobalFilter = ({
   preGlobalFilteredRows,
@@ -15,17 +17,22 @@ const GlobalFilter = ({
   }, 300);
 
   return (
-    <div className="mb-6 mt-6 flex items-center">
-      <h2 className="  text-xl text-gray-600 mr-6">Search</h2>
-      <input
-        className="  h-8 border-2 border-solid border-green-500 outline-none p-4 rounded-lg"
-        value={value || ""}
-        onChange={(e) => {
-          setValue(e.target.value);
-          onChange(e.target.value);
-        }}
-        placeholder={`${count} records...`}
-      />
+    <div className="flex">
+      <div className="p-2 flex rounded-md border border-input-outline bg-input-fill w-5/6 h-9 items-center">
+        <BsSearch className="text-gray-400 text-sm" />
+        <input
+          className="bg-input-fill outline-none text-sm flex-1 ml-2 w-5/6"
+          value={value || ""}
+          onChange={(e) => {
+            setValue(e.target.value);
+            onChange(e.target.value);
+          }}
+          placeholder="Search"
+        />
+      </div>
+      <div className="flex items-center justify-center ml-4 hover:cursor-pointer border-input-outline rounded-md border p-1 flex-none w-10 h-9 text-gray-400 ">
+        <FiFilter className="text-xl" />
+      </div>
     </div>
   );
 };

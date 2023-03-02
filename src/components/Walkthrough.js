@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { MdCancel } from "react-icons/md";
 
-
 const Walkthrough = ({}) => {
   const [step, setStep] = useState(0);
   const [open, setOpen] = useState(true);
@@ -55,13 +54,16 @@ const Walkthrough = ({}) => {
               : steps[step].count === 3
               ? "left-6 bottom-96"
               : steps[step].count === 4
-              ? "left-[560px] bottom-[700px]"
+              ? "left-[560px] bottom-[700px] lg:left-[730px]"
               : ""
           }`}>
           <div>
             <div className="flex justify-between ">
-            {steps[step].content}
-            <MdCancel className="text-4xl text-white ml-6 shadow-lg cursor-pointer" onClick={() => setOpen(!open)} />
+              {steps[step].content}
+              <MdCancel
+                className="text-4xl text-white ml-6 shadow-lg cursor-pointer"
+                onClick={() => setOpen(!open)}
+              />
             </div>
             <div className="mt-5 flex justify-between">
               <button

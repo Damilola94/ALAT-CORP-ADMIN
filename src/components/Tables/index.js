@@ -162,11 +162,13 @@ const Tables = () => {
 
   return (
     <>
-      <GlobalFilter
-        preGlobalFilteredRows={preGlobalFilteredRows}
-        setGlobalFilter={setGlobalFilter}
-        globalFilter={state.globalFilter}
-      />
+      <div>
+        <GlobalFilter
+          preGlobalFilteredRows={preGlobalFilteredRows}
+          setGlobalFilter={setGlobalFilter}
+          globalFilter={state.globalFilter}
+        />
+      </div>
       <table
         {...getTableProps()}
         className="tables-fixed text-base text-gray-900">
