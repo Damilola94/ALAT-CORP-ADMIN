@@ -124,7 +124,7 @@ const SideBar = () => {
       </div>
       <ul className="mt-6">
         {Menus.map((menu, index) => (
-          <div>
+          <div key={index}>
             <Link
               href={menu.url}
               key={index}
@@ -198,7 +198,7 @@ const SideBar = () => {
           </div>
         ))}
       </ul>
-      <div className="inline-flex mt-14 items-center absolute bottom-0">
+      <div className="inline-flex items-center absolute bottom-0">
         <IoIosColorFilter
           className={`bg-white text-4xl rounded cursor-pointer block float-left mr-5 duration-300 ${
             open && "rotate-[360deg]"
