@@ -9,5 +9,6 @@ export { default as Walkthrough } from "./Walkthrough";
 export { default as Modal } from "./Modal";
 export { default as SideBar } from "./SideBar";
 export { default as RightSideModal } from "./RightSideModal";
+export { default as  MOCK_DATA} from "./MOCK_DATA";
 
 

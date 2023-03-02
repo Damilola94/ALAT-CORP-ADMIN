@@ -7,7 +7,14 @@ const Pagination = ({
   canNextPage,
   pageIndex,
   pageOptions,
+  gotoPage, 
+  pageCount
 }) => {
+
+  const [pageHover, setPageHover] = useState(
+    1
+  )
+
   return (
     <div className="flex ml-auto items-center">
       <p className="text-gray-500 text-sm font-medium">
@@ -18,23 +25,39 @@ const Pagination = ({
       </p>
       <ul className="inline-flex -space-x-px ml-2">
         <button
-          className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          className="px-3 py-2 ml-0 text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
           disabled={!canPreviousPage}
-          onClick={() => previousPage()}>
+          onClick={() => previousPage()} >
           Previous
         </button>
-        <button className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+        <button 
+          type="button"
+          disabled={!canPreviousPage}
+          onClick={() => {
+            setPageHover(1)
+            gotoPage(0)}}
+          className={`px-3 py-2 bg-white border border-gray-300  ${pageHover === 1 && "text-dark-purple bg-[#f1c3cf6b]"} hover:text-white hover:bg-dark-purple`}>
           1
         </button>
-        <button className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+        <button 
+          type="button"
+          disabled={!canNextPage}
+          onClick={() => {
+            setPageHover(2)
+            gotoPage(pageCount - 1 )
+          }} className={`px-3 py-2 bg-white border border-gray-300 hover:text-white hover:bg-dark-purple 
+          ${pageHover === 2 && "text-dark-purple bg-[#f1c3cf6b]"} `}>
           2
         </button>
-        <li className="px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+        <button 
+          disabled={!canPreviousPage}
+          onClick={() => {
+            setPageHover(3)
+            previousPage(pageCount - 2)}} className= {`px-3 py-2 bg-white border border-gray-300 hover:text-white hover:bg-dark-purple ${pageHover === 3 && "text-dark-purple bg-[#f1c3cf6b]"}`}>
           3
-        </li>
+        </button>
         <button
-          className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
-        disabled={!canNextPage} onClick={() => nextPage()}"
+          className="px-3 py-2 ml-0 text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
           disabled={!canNextPage}
           onClick={() => nextPage()}>
           Next

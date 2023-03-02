@@ -35,7 +35,7 @@ const Tables = () => {
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
+        STATUS: "Pending",
         "RAISED BY": "David John",
       },
       {
@@ -80,7 +80,7 @@ const Tables = () => {
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
+        STATUS: "Pending",
         "RAISED BY": "David John",
       },
       {
@@ -110,7 +110,7 @@ const Tables = () => {
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
+        STATUS: "Pending",
         "RAISED BY": "David John",
       },
       {
@@ -140,7 +140,7 @@ const Tables = () => {
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
+        STATUS: "Pending",
         "RAISED BY": "David John",
       },
       {
@@ -155,7 +155,7 @@ const Tables = () => {
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
+        STATUS: "Pending",
         "RAISED BY": "David John",
       },
       {
@@ -170,7 +170,157 @@ const Tables = () => {
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
+        STATUS: "Pending",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 11,
+        "S/N": 11,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "ALATbyWema",
+          BANK_IMAGE: "/bank-logo/alat.jfif",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 12,
+        "S/N": 12,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "ALATbyWema",
+          BANK_IMAGE: "/bank-logo/alat.jfif",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Failed",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 13,
+        "S/N": 13,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "Access",
+          BANK_IMAGE: "/bank-logo/access.png",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Failed",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 14,
+        "S/N": 14,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "Access",
+          BANK_IMAGE: "/bank-logo/access.png",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 15,
+        "S/N": 15,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "Access",
+          BANK_IMAGE: "/bank-logo/access.png",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Declined",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 16,
+        "S/N": 16,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "UBA",
+          BANK_IMAGE: "/bank-logo/uba.png",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 17,
+        "S/N": 17,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "ALATbyWema",
+          BANK_IMAGE: "/bank-logo/alat.jfif",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Success",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 18,
+        "S/N": 18,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "ALATbyWema",
+          BANK_IMAGE: "/bank-logo/alat.jfif",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 19,
+        "S/N": 19,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "Stanbic IBTC",
+          BANK_IMAGE: "/bank-logo/stanbic.jfif",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending",
+        "RAISED BY": "David John",
+      },
+      {
+        id: 20,
+        "S/N": 20,
+        DATE: "20 Feb, 2023 @5:30am",
+        "TRANSACTION ID": "TR-637153993...",
+        "BANK NAME": {
+          BANK_NAME: "Zenith",
+          BANK_IMAGE: "/bank-logo/zenith.png",
+        },
+        "ACCOUNT NUMBER": 2190404040,
+        "ACCOUNT NAME": "Oladapo John",
+        AMOUNT: "₦200,000",
+        STATUS: "Pending",
         "RAISED BY": "David John",
       },
       {
@@ -359,7 +509,7 @@ const Tables = () => {
                     return (
                       <span
                         className={`text-xs p-1 rounded-lg font-medium ${
-                          value === "Pending Verification"
+                          value === "Pending"
                             ? "bg-[#FDF6B2]"
                             : value === "Success"
                             ? "bg-[#DEF7EC] p-2"
@@ -407,12 +557,15 @@ const Tables = () => {
     getTableBodyProps,
     headerGroups,
     page,
+    row,
     nextPage,
     previousPage,
     canNextPage,
     canPreviousPage,
     pageOptions,
     prepareRow,
+    gotoPage, 
+    pageCount,
     preGlobalFilteredRows,
     setGlobalFilter,
     state,
@@ -420,11 +573,11 @@ const Tables = () => {
 
   const { pageIndex } = state;
 
+  const rowdata = page.length !== 9 ? page : row
+
   useEffect(() => {
     fetchProducts();
   }, []);
-
-  const isEven = (idx) => idx % 2 === 0;
 
   const rightSideModalHandler = () => {
     setOpen(!open);
@@ -448,6 +601,8 @@ const Tables = () => {
           canNextPage={canNextPage}
           pageIndex={pageIndex}
           pageOptions={pageOptions}
+          gotoPage={gotoPage}
+          pageCount={pageCount}
         />
       </div>
       <table
@@ -467,15 +622,13 @@ const Tables = () => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map((row, idx) => {
+          {rowdata.map((row) => {
             prepareRow(row);
             return (
               <tr
                 onClick={rightSideModalHandler}
                 {...row.getRowProps()}
-                className={`hover:cursor-pointer hover:bg-gray-300 hover:bg-opacity-50  ${
-                  isEven(idx) ? "bg-gray-300 bg-opacity-10" : ""
-                }`}>
+                className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}>
                 {row.cells.map((cell) => (
                   <td
                     {...cell.getCellProps()}
