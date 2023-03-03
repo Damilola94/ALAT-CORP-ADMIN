@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 // import tw from "twin.macro";
 import { useGlobalFilter, useSortBy, useTable } from "react-table";
-import GlobalFilter from "./globalFilter";
+import GlobalFilter from "./GlobalFilter";
 
 const Tables = () => {
   const [products, setProducts] = useState([]);

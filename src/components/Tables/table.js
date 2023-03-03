@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { useGlobalFilter, useTable, usePagination } from "react-table";
-import GlobalFilter from "./globalFilter";
-import Pagination from "./pagination";
-import RightSideModal from "../RightSideModal";
+import GlobalFilter from "./GlobalFilter";
+import Pagination from "./Pagination";
+import RightSideModal from "../Modals/RightSideModal";
 
 const Tables = () => {
   const [products, setProducts] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [content, setContent] = useState("");
 
   const fetchProducts = async () => {
     const response = await axios
@@ -323,156 +323,6 @@ const Tables = () => {
         STATUS: "Pending",
         "RAISED BY": "David John",
       },
-      {
-        id: 11,
-        "S/N": 11,
-        DATE: "20 Feb, 2023 @5:30am",
-        "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
-        "ACCOUNT NUMBER": 2190404040,
-        "ACCOUNT NAME": "Oladapo John",
-        AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
-        "RAISED BY": "David John",
-      },
-      {
-        id: 12,
-        "S/N": 12,
-        DATE: "20 Feb, 2023 @5:30am",
-        "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
-        "ACCOUNT NUMBER": 2190404040,
-        "ACCOUNT NAME": "Oladapo John",
-        AMOUNT: "₦200,000",
-        STATUS: "Failed",
-        "RAISED BY": "David John",
-      },
-      {
-        id: 13,
-        "S/N": 13,
-        DATE: "20 Feb, 2023 @5:30am",
-        "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Access",
-          BANK_IMAGE: "/bank-logo/access.png",
-        },
-        "ACCOUNT NUMBER": 2190404040,
-        "ACCOUNT NAME": "Oladapo John",
-        AMOUNT: "₦200,000",
-        STATUS: "Failed",
-        "RAISED BY": "David John",
-      },
-      {
-        id: 14,
-        "S/N": 14,
-        DATE: "20 Feb, 2023 @5:30am",
-        "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Access",
-          BANK_IMAGE: "/bank-logo/access.png",
-        },
-        "ACCOUNT NUMBER": 2190404040,
-        "ACCOUNT NAME": "Oladapo John",
-        AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
-        "RAISED BY": "David John",
-      },
-      {
-        id: 15,
-        "S/N": 15,
-        DATE: "20 Feb, 2023 @5:30am",
-        "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Access",
-          BANK_IMAGE: "/bank-logo/access.png",
-        },
-        "ACCOUNT NUMBER": 2190404040,
-        "ACCOUNT NAME": "Oladapo John",
-        AMOUNT: "₦200,000",
-        STATUS: "Declined",
-        "RAISED BY": "David John",
-      },
-      {
-        id: 16,
-        "S/N": 16,
-        DATE: "20 Feb, 2023 @5:30am",
-        "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "UBA",
-          BANK_IMAGE: "/bank-logo/uba.png",
-        },
-        "ACCOUNT NUMBER": 2190404040,
-        "ACCOUNT NAME": "Oladapo John",
-        AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
-        "RAISED BY": "David John",
-      },
-      {
-        id: 17,
-        "S/N": 17,
-        DATE: "20 Feb, 2023 @5:30am",
-        "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
-        "ACCOUNT NUMBER": 2190404040,
-        "ACCOUNT NAME": "Oladapo John",
-        AMOUNT: "₦200,000",
-        STATUS: "Success",
-        "RAISED BY": "David John",
-      },
-      {
-        id: 18,
-        "S/N": 18,
-        DATE: "20 Feb, 2023 @5:30am",
-        "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
-        "ACCOUNT NUMBER": 2190404040,
-        "ACCOUNT NAME": "Oladapo John",
-        AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
-        "RAISED BY": "David John",
-      },
-      {
-        id: 19,
-        "S/N": 19,
-        DATE: "20 Feb, 2023 @5:30am",
-        "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Stanbic IBTC",
-          BANK_IMAGE: "/bank-logo/stanbic.jfif",
-        },
-        "ACCOUNT NUMBER": 2190404040,
-        "ACCOUNT NAME": "Oladapo John",
-        AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
-        "RAISED BY": "David John",
-      },
-      {
-        id: 20,
-        "S/N": 20,
-        DATE: "20 Feb, 2023 @5:30am",
-        "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Zenith",
-          BANK_IMAGE: "/bank-logo/zenith.png",
-        },
-        "ACCOUNT NUMBER": 2190404040,
-        "ACCOUNT NAME": "Oladapo John",
-        AMOUNT: "₦200,000",
-        STATUS: "Pending Verification",
-        "RAISED BY": "David John",
-      },
     ],
     []
   );
@@ -510,23 +360,13 @@ const Tables = () => {
                       <span
                         className={`text-xs p-1 rounded-lg font-medium ${
                           value === "Pending"
-                            ? "bg-[#FDF6B2]"
+                            ? "bg-[#FDF6B2] text-[#723B13]"
                             : value === "Success"
-                            ? "bg-[#DEF7EC] p-2"
+                            ? "bg-[#DEF7EC] p-2 text-[#03543F]"
                             : value === "Declined"
-                            ? "bg-[#F3F4F6]"
+                            ? "bg-[#F3F4F6] text-[#111928]"
                             : value === "Failed"
-                            ? "bg-[#FDE8E8]"
-                            : ""
-                        } ${
-                          value === "Pending Verification"
-                            ? "text-[#723B13]"
-                            : value === "Success"
-                            ? "text-[#03543F]"
-                            : value === "Declined"
-                            ? "text-[#111928]"
-                            : value === "Failed"
-                            ? "text-[#9B1C1C]"
+                            ? "bg-[#FDE8E8] text-[#9B1C1C]"
                             : ""
                         }`}>
                         {value}
@@ -564,7 +404,7 @@ const Tables = () => {
     canPreviousPage,
     pageOptions,
     prepareRow,
-    gotoPage, 
+    gotoPage,
     pageCount,
     preGlobalFilteredRows,
     setGlobalFilter,
@@ -573,18 +413,24 @@ const Tables = () => {
 
   const { pageIndex } = state;
 
-  const rowdata = page.length !== 9 ? page : row
+  const rowdata = page.length !== 9 ? page : row;
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const rightSideModalHandler = () => {
-    setOpen(!open);
+  const closeModalHandler = () => {
+    setContent("");
   };
+
+  const rightSideModalHandler = (row) => {
+    const { values } = row;
+    setContent(<RightSideModal values={values} onClick={closeModalHandler} />);
+  };
+
   return (
     <>
-      {open && <RightSideModal onClick={rightSideModalHandler} />}
+      {content}
       <p className="text-[#1D0218] text-sm font-bold mb-4">
         Showing 1 - 50 of 100 Transactions
       </p>
@@ -626,8 +472,10 @@ const Tables = () => {
             prepareRow(row);
             return (
               <tr
-                onClick={rightSideModalHandler}
                 {...row.getRowProps()}
+                onClick={() => {
+                  rightSideModalHandler(row);
+                }}
                 className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}>
                 {row.cells.map((cell) => (
                   <td

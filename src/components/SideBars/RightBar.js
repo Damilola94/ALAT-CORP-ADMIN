@@ -1,6 +1,6 @@
 import React from "react";
 import { BsArrowRightCircleFill } from "react-icons/bs";
-import UpcomingEvent from "./UpcomingEvent";
+import UpcomingEvent from "../UpcomingEvent";
 
 const RightBar = () => {
   return (

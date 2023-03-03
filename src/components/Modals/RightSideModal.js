@@ -1,11 +1,23 @@
 import { useState } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import RightModalCard from "./RightModalCard";
+import RightModalCard from "../Cards/RightModalCard";
+import ApproveModal from "../Modals/ApproveModal";
 
-const RightSideModal = ({ onClick }) => {
-  const showModal = true;
+const RightSideModal = ({ onClick, values }) => {
+  const [showModal, setShoModal] = useState(true);
+  const [content, setContent] = useState("");
+
+  const closeModalHandler = () => {
+    setShoModal(!showModal);
+  };
+
+  const rightSideModalHandler = () => {
+    setContent(<ApproveModal onClick={closeModalHandler} />);
+  };
+
   return (
     <>
+      {content}
       {showModal ? (
         <>
           <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -37,6 +49,12 @@ const RightSideModal = ({ onClick }) => {
                   secondValue={"Oladapo John"}
                 />
                 <RightModalCard
+                  firstKey={"DESCRIPTION"}
+                  firstValue={"Dividends"}
+                  secondKey={"STATUS"}
+                  secondValue={values.STATUS}
+                />
+                <RightModalCard
                   firstKey={"DATE CREATED"}
                   firstValue={"20 Feb, 2023 @5:30am"}
                   secondKey={"AMOUNT"}
@@ -48,14 +66,30 @@ const RightSideModal = ({ onClick }) => {
                   secondKey={""}
                   secondValue={""}
                 />
-                <div className="flex  items-center justify-center align-middle bg-white shadow-2xl absolute bottom-0 w-full cursor-pointer">
-                  <div className="w-1/2 bg-white h-16   py-6 text-dark-purple  font-semibold">
-                    REJECT
+                <RightModalCard
+                  firstKey={"Comments"}
+                  firstValue={
+                    "This transaction was rejected because it’s a duplicate"
+                  }
+                  secondKey={"STATUS"}
+                  secondValue={values.STATUS}
+                  commentName={"Greg J"}
+                  comments
+                />
+                {values.STATUS == "Pending" && (
+                  <div className="flex  items-center justify-center align-middle bg-white shadow-2xl absolute bottom-0 w-full cursor-pointer">
+                    <div
+                      className="w-1/2 bg-white h-16   py-6 text-dark-purple  font-semibold"
+                      onClick={rightSideModalHandler}>
+                      REJECT
+                    </div>
+                    <div
+                      className="w-1/2  bg-dark-purple h-16 py-6 text-white font-semibold"
+                      onClick={closeModalHandler}>
+                      APPROVE
+                    </div>
                   </div>
-                  <div className="w-1/2  bg-dark-purple h-16 py-6 text-white font-semibold">
-                    APPROVE
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
