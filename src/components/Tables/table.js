@@ -26,12 +26,10 @@ const Tables = () => {
       {
         id: 1,
         "S/N": 1,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
+        "BANK NAME": "ALATbyWema",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -41,12 +39,10 @@ const Tables = () => {
       {
         id: 2,
         "S/N": 2,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
+        "BANK NAME": "ALATbyWema",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -56,12 +52,10 @@ const Tables = () => {
       {
         id: 3,
         "S/N": 3,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Access",
-          BANK_IMAGE: "/bank-logo/access.png",
-        },
+        "BANK NAME": "Access",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -71,12 +65,10 @@ const Tables = () => {
       {
         id: 4,
         "S/N": 4,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Access",
-          BANK_IMAGE: "/bank-logo/access.png",
-        },
+        "BANK NAME": "Access",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -86,12 +78,10 @@ const Tables = () => {
       {
         id: 5,
         "S/N": 5,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Access",
-          BANK_IMAGE: "/bank-logo/access.png",
-        },
+        "BANK NAME": "Access",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -101,12 +91,10 @@ const Tables = () => {
       {
         id: 6,
         "S/N": 6,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "UBA",
-          BANK_IMAGE: "/bank-logo/uba.png",
-        },
+        "BANK NAME": "UBA",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -116,12 +104,10 @@ const Tables = () => {
       {
         id: 7,
         "S/N": 7,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
+        "BANK NAME": "ALATbyWema",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -131,12 +117,10 @@ const Tables = () => {
       {
         id: 8,
         "S/N": 8,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
+        "BANK NAME": "ALATbyWema",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -146,12 +130,10 @@ const Tables = () => {
       {
         id: 9,
         "S/N": 9,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Stanbic IBTC",
-          BANK_IMAGE: "/bank-logo/stanbic.jfif",
-        },
+        "BANK NAME": "Stanbic IBTC",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -161,12 +143,10 @@ const Tables = () => {
       {
         id: 10,
         "S/N": 10,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Zenith",
-          BANK_IMAGE: "/bank-logo/zenith.png",
-        },
+        "BANK NAME": "Zenith",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -176,12 +156,10 @@ const Tables = () => {
       {
         id: 11,
         "S/N": 11,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
+        "BANK NAME": "ALATbyWema",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -191,12 +169,10 @@ const Tables = () => {
       {
         id: 12,
         "S/N": 12,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
+        "BANK NAME": "ALATbyWema",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -206,12 +182,10 @@ const Tables = () => {
       {
         id: 13,
         "S/N": 13,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Access",
-          BANK_IMAGE: "/bank-logo/access.png",
-        },
+        "BANK NAME": "Access",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -221,12 +195,10 @@ const Tables = () => {
       {
         id: 14,
         "S/N": 14,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Access",
-          BANK_IMAGE: "/bank-logo/access.png",
-        },
+        "BANK NAME": "Access",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -236,12 +208,10 @@ const Tables = () => {
       {
         id: 15,
         "S/N": 15,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Access",
-          BANK_IMAGE: "/bank-logo/access.png",
-        },
+        "BANK NAME": "Access",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -251,12 +221,10 @@ const Tables = () => {
       {
         id: 16,
         "S/N": 16,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "UBA",
-          BANK_IMAGE: "/bank-logo/uba.png",
-        },
+        "BANK NAME": "UBA",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -266,12 +234,10 @@ const Tables = () => {
       {
         id: 17,
         "S/N": 17,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
+        "BANK NAME": "ALATbyWema",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -281,12 +247,10 @@ const Tables = () => {
       {
         id: 18,
         "S/N": 18,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
-        },
+        "BANK NAME": "ALATbyWema",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -296,12 +260,10 @@ const Tables = () => {
       {
         id: 19,
         "S/N": 19,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Stanbic IBTC",
-          BANK_IMAGE: "/bank-logo/stanbic.jfif",
-        },
+        "BANK NAME": "Stanbic IBTC",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -311,12 +273,10 @@ const Tables = () => {
       {
         id: 20,
         "S/N": 20,
-        DATE: "20 Feb, 2023 @5:30am",
+        DATE: "20 Feb, 2023",
+        TIME: "5:30am",
         "TRANSACTION ID": "TR-637153993...",
-        "BANK NAME": {
-          BANK_NAME: "Zenith",
-          BANK_IMAGE: "/bank-logo/zenith.png",
-        },
+        "BANK NAME": "Zenith",
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
         AMOUNT: "₦200,000",
@@ -333,25 +293,12 @@ const Tables = () => {
     () =>
       data[0]
         ? Object.keys(data[0])
-            .filter((key) => key !== "id")
+            .filter(
+              (key) =>
+                key !== "id" && key !== "TRANSACTION ID" && key !== "RAISED BY"
+            )
             .map((key) => {
-              if (key === "BANK NAME")
-                return {
-                  Header: key,
-                  accessor: key,
-                  Cell: ({ value }) => {
-                    return (
-                      <div className="flex items-center">
-                        <img src={value.BANK_IMAGE} className="w-5 h-5" />
-                        <p className="text-xs p-2 font-medium text-[#808080]">
-                          {value.BANK_NAME}
-                        </p>
-                      </div>
-                    );
-                  },
-                  maxWith: 1,
-                };
-              else if (key === "STATUS") {
+              if (key === "STATUS") {
                 return {
                   Header: key,
                   accessor: key,
@@ -459,7 +406,7 @@ const Tables = () => {
             <tr {...headerGroup.getHeaderGroupProps()} className="">
               {headerGroup.headers.map((column) => (
                 <th
-                  className="text-xs p-2 bg-[#F9FAFB] text-[#1D0218]"
+                  className="text-left text-xs p-4 bg-[#F9FAFB] text-[#1D0218]"
                   {...column.getHeaderProps()}>
                   {column.render("Header")}
                 </th>

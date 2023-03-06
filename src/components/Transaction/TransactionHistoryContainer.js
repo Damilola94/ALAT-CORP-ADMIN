@@ -1,9 +1,9 @@
 import React from "react";
-import Tables from "./Tables/Table";
+import Tables from "../Tables/Table";
 
-import GlobalContainer from "./ui/GlobalContainer";
+import GlobalContainer from "../ui/GlobalContainer";
 
-const TransactionContainer = () => {
+const TransactionHistoryContainer = () => {
   return (
     <div className="h-fit mb-4">
       <GlobalContainer pageName={"Transaction History"} />
@@ -16,4 +16,4 @@ const TransactionContainer = () => {
   );
 };
 
-export default TransactionContainer;
+export default TransactionHistoryContainer;
