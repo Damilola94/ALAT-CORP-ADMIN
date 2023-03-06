@@ -1,8 +1,8 @@
 import Head from "next/head";
 
-import { TransactionHistoryContainer, Header, SideBar } from "../../components";
+import { FundTransferContainer, Header, SideBar } from "../../components";
 
-const TransactionHistory = () => {
+const FundTransfer = () => {
   return (
     <div className="flex bg-[#FAFAFA]">
       <Head>
@@ -13,11 +13,11 @@ const TransactionHistory = () => {
       </Head>
       <SideBar />
       <div className="w-screen">
-        <Header pageName={"Transactions"} subPageName={"Transaction History"} />
-        <TransactionHistoryContainer />
+        <Header pageName={"Transactions"} subPageName={"Fund Transfer"} />
+        <FundTransferContainer />
       </div>
     </div>
   );
 };
 
-export default TransactionHistory;
+export default FundTransfer;
