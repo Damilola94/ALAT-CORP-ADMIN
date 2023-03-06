@@ -5,19 +5,22 @@ import ApproveModal from "../Modals/ApproveModal";
 
 const RightSideModal = ({ onClick, values }) => {
   const [showModal, setShoModal] = useState(true);
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(null);
 
   const closeModalHandler = () => {
-    setShoModal(!showModal);
+    onClick()
   };
 
-  const rightSideModalHandler = () => {
-    setContent(<ApproveModal onClick={closeModalHandler} />);
+  const rejectModalHandler = () => {
+    onClick()
+    // setShoModal(!showModal)
+    console.log('man');
+    setContent(true);
   };
 
   return (
     <>
-      {content}
+      {content && <ApproveModal/>}
       {showModal ? (
         <>
           <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -40,7 +43,7 @@ const RightSideModal = ({ onClick, values }) => {
                   firstValue={"TTR-6371539936789999000ee"}
                   secondKey={"BANK NAME"}
                   secondValue={"ALATbyWema"}
-                  secondImage={"/bank-logo/alat.jfif"}
+                  secondImage={"/bank-logo/alat.png"}
                 />
                 <RightModalCard
                   firstKey={"ACCOUNT NUMBER"}
@@ -80,7 +83,7 @@ const RightSideModal = ({ onClick, values }) => {
                   <div className="flex  items-center justify-center align-middle bg-white shadow-2xl absolute bottom-0 w-full cursor-pointer">
                     <div
                       className="w-1/2 bg-white h-16   py-6 text-dark-purple  font-semibold"
-                      onClick={rightSideModalHandler}>
+                      onClick={rejectModalHandler}>
                       REJECT
                     </div>
                     <div

@@ -58,10 +58,10 @@ const Walkthrough = ({}) => {
               : ""
           }`}>
           <div>
-            <div className="flex justify-between ">
+            <div className="flex justify-between">
               {steps[step].content}
               <MdCancel
-                className="text-4xl text-white ml-6 shadow-lg cursor-pointer"
+                className="text-4xl text-white ml-6 cursor-pointer"
                 onClick={() => setOpen(!open)}
               />
             </div>

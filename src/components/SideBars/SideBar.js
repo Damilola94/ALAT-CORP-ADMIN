@@ -126,6 +126,8 @@ const SideBar = () => {
         {Menus.map((menu, index) => (
           <div key={index}>
             <Link
+              replace
+              // legacyBehavior
               href={menu.url}
               key={index}
               className={`text-gray-300 text-sm flex items-center gap-x-6 cursor-pointer p-2 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ${
@@ -135,6 +137,7 @@ const SideBar = () => {
                   ? "mt-[7rem]"
                   : "mt-3"
               }`}>
+              {/* <a>                 */}
               <span className="text-xl block float-left">{menu.icon}</span>
               <span
                 className={`text-base font-semibold flex-1 duration-200 ${
@@ -160,11 +163,13 @@ const SideBar = () => {
               ) : (
                 ""
               )}
+              {/* </a> */}
             </Link>
             {menu.submenu1 && submenuOpen1 && open ? (
               <ul>
                 {menu.submenuItems.map((submenuItem, index) => (
                   <Link
+                    replace
                     href={submenuItem.url}
                     key={index}
                     className="text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-8 font-medium">

@@ -30,7 +30,7 @@ const Tables = () => {
         "TRANSACTION ID": "TR-637153993...",
         "BANK NAME": {
           BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
+          BANK_IMAGE: "/bank-logo/alat.png",
         },
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
@@ -45,7 +45,7 @@ const Tables = () => {
         "TRANSACTION ID": "TR-637153993...",
         "BANK NAME": {
           BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
+          BANK_IMAGE: "/bank-logo/alat.png",
         },
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
@@ -120,7 +120,7 @@ const Tables = () => {
         "TRANSACTION ID": "TR-637153993...",
         "BANK NAME": {
           BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
+          BANK_IMAGE: "/bank-logo/alat.png",
         },
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
@@ -135,7 +135,7 @@ const Tables = () => {
         "TRANSACTION ID": "TR-637153993...",
         "BANK NAME": {
           BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
+          BANK_IMAGE: "/bank-logo/alat.png",
         },
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
@@ -180,7 +180,7 @@ const Tables = () => {
         "TRANSACTION ID": "TR-637153993...",
         "BANK NAME": {
           BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
+          BANK_IMAGE: "/bank-logo/alat.png",
         },
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
@@ -195,7 +195,7 @@ const Tables = () => {
         "TRANSACTION ID": "TR-637153993...",
         "BANK NAME": {
           BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
+          BANK_IMAGE: "/bank-logo/alat.png",
         },
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
@@ -270,7 +270,7 @@ const Tables = () => {
         "TRANSACTION ID": "TR-637153993...",
         "BANK NAME": {
           BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
+          BANK_IMAGE: "/bank-logo/alat.png",
         },
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",
@@ -285,7 +285,7 @@ const Tables = () => {
         "TRANSACTION ID": "TR-637153993...",
         "BANK NAME": {
           BANK_NAME: "ALATbyWema",
-          BANK_IMAGE: "/bank-logo/alat.jfif",
+          BANK_IMAGE: "/bank-logo/alat.png",
         },
         "ACCOUNT NUMBER": 2190404040,
         "ACCOUNT NAME": "Oladapo John",

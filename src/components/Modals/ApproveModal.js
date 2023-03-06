@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { IoIosColorFilter } from "react-icons/io";
 
-const Modal = ({ onClick }) => {
+const ApproveModal = ({ onClick }) => {
   const [showModal, setShowModal] = useState(true);
 
-  const startTourHandler = () => {
-    setShowModal(false);
-    onClick();
+  const rejectTransaction = () => {
+    setShowModal(!showModal);
+
   };
 
   return (
@@ -16,7 +15,7 @@ const Modal = ({ onClick }) => {
           <div className="fixed inset-0 z-10 overflow-y-auto">
             <div
               className="fixed inset-0 w-full h-full bg-black opacity-40"
-              onClick={() => setShowModal(false)}></div>
+              onClick={() => setShowModal(!showModal) }></div>
             <div className="flex items-center min-h-screen">
               <div className="relative w-full max-w-2xl rounded-lg mx-auto bg-white shadow-2xl flex h-80">
                 <div className="sm:flex lg:block w-full">
@@ -31,18 +30,18 @@ const Modal = ({ onClick }) => {
                       <textarea
                         id="message"
                         rows="4"
-                        className="block p-4 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Add comment..."></textarea>
+                        className="block p-4 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-200 focus:ring-dark-purple focus:border-dark-purple"
+                        placeholder="Add comment..."/>
                     </div>
                     <div className="mt-6 gap-3 space-x-3">
                       <button
                         className="mt-1 p-2 flex-1 px-4 text-white bg-dark-purple rounded-md outline-none ring-offset-2 focus:ring-2"
-                        onClick={startTourHandler}>
+                        onClick={rejectTransaction}>
                         Reject Transaction
                       </button>
                       <button
                         className="mt-1 p-2 flex-1 text-black bg-gray-300  rounded-md outline-none ring-offset-2 focus:ring-2"
-                        onClick={() => setShowModal(false)}>
+                        onClick={rejectTransaction}>
                         Cancel
                       </button>
                     </div>
@@ -57,4 +56,4 @@ const Modal = ({ onClick }) => {
   );
 };
 
-export default Modal;
+export default ApproveModal;
