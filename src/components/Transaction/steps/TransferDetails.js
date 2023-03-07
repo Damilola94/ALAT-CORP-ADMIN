@@ -9,6 +9,7 @@ const Account = () => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
+
   return (
     <div className="flex flex-col">
       <div>

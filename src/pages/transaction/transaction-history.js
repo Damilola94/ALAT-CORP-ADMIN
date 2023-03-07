@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { TransactionHistoryContainer, Header, SideBar } from "../../components";
+import { TransactionHistoryContainer, Header } from "../../components";
 
 const TransactionHistory = () => {
   return (

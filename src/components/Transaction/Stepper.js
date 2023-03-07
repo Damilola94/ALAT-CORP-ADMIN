@@ -4,8 +4,6 @@ const Stepper = ({ steps, currentStep }) => {
   const [newStep, setNewStep] = useState([]);
   const stepRef = useRef();
 
-  console.log(steps);
-
   const updateStep = (stepNumber, steps) => {
     const newSteps = [...steps];
     let count = 0;
