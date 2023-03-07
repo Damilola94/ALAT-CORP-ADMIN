@@ -54,7 +54,7 @@ const Walkthrough = ({}) => {
               : steps[step].count === 3
               ? "left-6 bottom-96"
               : steps[step].count === 4
-              ? "left-[560px] bottom-[700px] lg:left-[560px]"
+              ? "left-[730px] bottom-[700px] max-[1280px]:left-[560px]"
               : ""
           }`}>
           <div>

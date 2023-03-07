@@ -127,7 +127,6 @@ const SideBar = () => {
           <div key={index}>
             <Link
               replace
-              // legacyBehavior
               href={menu.url}
               key={index}
               className={`text-gray-300 text-sm flex items-center gap-x-6 cursor-pointer p-2 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ${

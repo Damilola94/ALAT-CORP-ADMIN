@@ -51,7 +51,7 @@ const StepperUI = () => {
               className={`bg-white border ${
                 options === 1 ? "border-dark-purple" : "border-gray-400"
               }  px-4 py-2 rounded-md font-semibold cursor-pointer flex  text-base`}
-              onClick={() => setOptions(1)}>
+             >
               <input
                 type="radio"
                 className={`${
@@ -63,9 +63,9 @@ const StepperUI = () => {
             </div>
             <div
               className={`border text-gray-400 ${
-                options === 2 ? "border-dark-purple" : "border-gray-400"
+                options === 2 ? "border-dark-purple text-dark-purple" : "border-gray-400"
               } px-4 py-2 rounded-md font-semibold cursor-pointer flex text-base`}
-              onClick={() => setOptions(2)}>
+              >
               <input
                 type="radio"
                 className={`${
@@ -73,7 +73,7 @@ const StepperUI = () => {
                 }`}
                 onClick={() => setOptions(2)}
               />
-              <h3 className="ml-3">Bulk Transfer</h3>
+              <h3 className={`ml-3 ${  options === 2 ? "text-dark-purple" : ""}`}>Bulk Transfer</h3>
             </div>
           </div>
         </div>
