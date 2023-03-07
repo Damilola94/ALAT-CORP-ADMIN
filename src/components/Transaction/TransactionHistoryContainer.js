@@ -1,7 +1,7 @@
 import React from "react";
-import Tables from "../Tables/Table";
 
 import GlobalContainer from "../ui/GlobalContainer";
+import Tables from "../Tables/Table";
 
 const TransactionHistoryContainer = () => {
   return (
