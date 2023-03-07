@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { BsArrowLeftShort, BsChatSquareQuote } from "react-icons/bs";
 import {
   AiFillFolderOpen,
@@ -20,10 +20,10 @@ const SideBar = () => {
   const [submenuOpen3, setSubmenuOpen3] = useState(false);
 
   const getActive = (currentLocation) => {
-    if(pathname === currentLocation){
-      return "bg-white text-red-900"
+    if (pathname === currentLocation || pathname === `${currentLocation}`) {
+      return "bg-white text-red-900";
     }
-  }
+  };
 
   const Menus = [
     {
@@ -56,16 +56,12 @@ const SideBar = () => {
     },
     {
       title: "Communications",
-      url: "communications",
+      url: "#",
       icon: <BsChatSquareQuote />,
       submenu2: true,
       submenuItems: [
-        { title: "Communications 1" ,
-          url: "/communications/email",
-        },
-        { title: "Communications 2" ,
-          url: "/communications/message",
-        },
+        { title: "Communications 1", url: "/communications/email" },
+        { title: "Communications 2", url: "/communications/message" },
       ],
     },
     {
@@ -79,15 +75,9 @@ const SideBar = () => {
       icon: <FaUser />,
       submenu3: true,
       submenuItems: [
-        { title: "Initiator" ,
-          url: "/initiator",
-        },
-        { title: "Verifier" ,
-          url: "/verifier",
-        },
-        { title: "Approval" ,
-          url: "/approval",
-        },
+        { title: "Initiator", url: "/initiator" },
+        { title: "Verifier", url: "/verifier" },
+        { title: "Approval", url: "/approval" },
       ],
     },
     {
@@ -153,7 +143,6 @@ const SideBar = () => {
                   ? "mt-[7rem]"
                   : "mt-3"
               } ${getActive(menu.url)}`}>
-              {/* <a>                 */}
               <span className="text-xl block float-left">{menu.icon}</span>
               <span
                 className={`text-base font-semibold flex-1 duration-200 ${
@@ -179,7 +168,6 @@ const SideBar = () => {
               ) : (
                 ""
               )}
-              {/* </a> */}
             </Link>
             {menu.submenu1 && submenuOpen1 && open ? (
               <ul>
@@ -187,7 +175,9 @@ const SideBar = () => {
                   <Link
                     href={submenuItem.url}
                     key={index}
-                    className="text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-8 font-medium">
+                    className={`text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-8 font-medium ${getActive(
+                      submenuItem.url
+                    )}`}>
                     {submenuItem.title}
                   </Link>
                 ))}
