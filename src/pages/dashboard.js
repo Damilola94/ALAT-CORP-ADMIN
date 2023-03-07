@@ -1,10 +1,9 @@
 import { useState } from "react";
 import Head from "next/head";
 
-
 import { DashboardContainer, Header, Walkthrough, Modal, SideBar } from "../components";
 
-const App = () => {
+const Dashboard = () => {
   const [walkthroughModal, setWalkthroughModal] = useState(false);
  
   const walkthroughHandler = () => {
@@ -20,8 +19,7 @@ const App = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Modal onClick={walkthroughHandler} />
-      <SideBar/>
-      <div className="w-screen">
+      <div>
       <Header pageName= {"Home"} />
         <DashboardContainer />
         {walkthroughModal && <Walkthrough />}
@@ -30,4 +28,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Dashboard;

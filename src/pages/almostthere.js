@@ -76,3 +76,7 @@ const AlmostThere = () => {
 };
 
 export default AlmostThere;
+
+AlmostThere.getLayout = function PageLayout(page){
+  return <>{page}</> 
+}

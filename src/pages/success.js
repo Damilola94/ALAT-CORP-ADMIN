@@ -54,3 +54,7 @@ const Success = () => {
 };
 
 export default Success;
+
+Success.getLayout = function PageLayout(page){
+  return <>{page}</> 
+}

@@ -39,8 +39,7 @@ const Home = () => {
           </div>
           <div className="w-3/6 bg-white py-56 px-40 text-left">
             <h2
-              className="text-3xl font-bold mb-2"
-              style={{ color: "#980B80" }}>
+              className="text-3xl font-bold mb-2 text-dark-purple">
               Create Account
             </h2>
             <p className="mb-12 w-5/6 text-gray-500">
@@ -76,3 +75,7 @@ const Home = () => {
 };
 
 export default Home;
+
+Home.getLayout = function PageLayout(page){
+  return <>{page}</> 
+}

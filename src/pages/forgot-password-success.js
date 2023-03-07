@@ -50,3 +50,8 @@ const ForgotPasswordSuccess = () => {
 };
 
 export default ForgotPasswordSuccess;
+
+
+ForgotPasswordSuccess.getLayout = function PageLayout(page){
+  return <>{page}</> 
+}

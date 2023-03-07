@@ -50,3 +50,7 @@ const ChangePasswordSuccess = () => {
 };
 
 export default ChangePasswordSuccess;
+
+ChangePasswordSuccess.getLayout = function PageLayout(page){
+  return <>{page}</> 
+}

@@ -75,3 +75,7 @@ const ChangePassword = () => {
 };
 
 export default ChangePassword;
+
+ChangePassword.getLayout = function PageLayout(page){
+  return <>{page}</> 
+}
