@@ -1,7 +1,7 @@
 import React from "react";
 
 import GlobalContainer from "../ui/GlobalContainer";
-import Tables from "../Tables/Table";
+import TransactionHistoryTable from "../Tables/TransactionHistoryTable";
 
 const TransactionHistoryContainer = () => {
   return (
@@ -9,7 +9,7 @@ const TransactionHistoryContainer = () => {
       <GlobalContainer pageName={"Transaction History"} />
       <div className="p-2 mx-6 bg-white rounded-b-lg border border-gray-200">
         <div className="p-1">
-          <Tables />
+          <TransactionHistoryTable />
         </div>
       </div>
     </div>

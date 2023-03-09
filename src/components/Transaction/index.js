@@ -16,10 +16,13 @@ const StepperUI = () => {
 
   const steps = ["Transfer Details", "Confirm Details", "Complete Transaction"];
 
+  const handleAddMore = (userData) => {
+    console.log(userData)
+  }
   const displaySteps = (step) => {
     switch (step) {
       case 1:
-        return <TransferDetails />;
+        return <TransferDetails handleAddMore={handleAddMore} />;
       case 2:
         return <ConfirmDetails />;
       case 3:
@@ -49,7 +52,7 @@ const StepperUI = () => {
           <div className="space-x-4 flex">
             <div
               className={`bg-white border ${
-                options === 1 ? "border-dark-purple" : "border-gray-400"
+                options === 1 ? "border-dark-purple text-dark-purple" : "border-gray-400 text-gray-400"
               }  px-4 py-2 rounded-md font-semibold cursor-pointer flex  text-base`}
              >
               <input

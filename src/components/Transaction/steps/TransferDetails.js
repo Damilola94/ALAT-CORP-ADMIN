@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { StepperContext } from "@/contexts/StepperContex";
 import Switch from "@/components/ui/Switch";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
-const Account = () => {
+
+const Account = ({handleAddMore}) => {
   const { userData, setUserData } = useContext(StepperContext);
 
   const handleChange = (e) => {
@@ -99,6 +101,16 @@ const Account = () => {
         <div className=" flex-1"></div>
       </div>
       <Switch />
+      <div className="flex bg-light-purple text-dark-purple uppercase mt-7 px-4 py-2 rounded-lg font-bold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out w-2/6 items-center space-x-4">
+      <AiOutlinePlusCircle/>
+      <button
+        onClick={() =>
+          handleAddMore(userData)
+        }
+       >
+         Add More
+      </button>
+      </div>
     </div>
   );
 };

@@ -1,16 +1,26 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { BsArrowLeftShort, BsChatSquareQuote } from "react-icons/bs";
+import { BsArrowLeftShort } from "react-icons/bs";
 import {
-  AiFillFolderOpen,
-  AiOutlineSetting,
-  AiFillCaretRight,
+  AiFillCaretRight
 } from "react-icons/ai";
-import { RiDashboardLine, RiLogoutBoxFill } from "react-icons/ri";
-import { SiGoogleanalytics } from "react-icons/si";
-import { FaUser, FaLink, FaWallet } from "react-icons/fa";
+import {  RiLogoutBoxFill } from "react-icons/ri";
 import { IoIosColorFilter } from "react-icons/io";
+
+import LoanIcon from "public/icons/loan";
+import TransactionIcon from "public/icons/transaction";
+import CommunicationIcon from "public/icons/communication";
+import ReportAnalyticsIcon from "public/icons/reportAnalytics";
+import UserIcon from "public/icons/user";
+import FilesIcon from "public/icons/files";
+import SettingIcon from "public/icons/settings";
+import QuickLinkIcon from "public/icons/quicklink";
+import DashboardIcon from "public/icons/dashboard";
+import LogoutIcon from "public/icons/logout";
+
+
+
 
 const SideBar = () => {
   const [open, setOpen] = useState(true);
@@ -28,12 +38,12 @@ const SideBar = () => {
   const Menus = [
     {
       title: "Dashboard",
-      icon: <RiDashboardLine />,
+      icon: <DashboardIcon />,
       url: "/dashboard",
     },
     {
       title: "Transactions",
-      icon: <FaWallet />,
+      icon: <TransactionIcon />,
       url: "#",
       submenu1: true,
       submenuTitle: "Transactions",
@@ -52,12 +62,12 @@ const SideBar = () => {
       title: "Loan Management",
       url: "/loan-management",
       spacing: true,
-      icon: <FaWallet />,
+      icon: <LoanIcon />,
     },
     {
       title: "Communications",
       url: "#",
-      icon: <BsChatSquareQuote />,
+      icon: <CommunicationIcon />,
       submenu2: true,
       submenuItems: [
         { title: "Communications 1", url: "/communications/email" },
@@ -67,12 +77,12 @@ const SideBar = () => {
     {
       title: "Report Analytics",
       url: "/report-analytics",
-      icon: <SiGoogleanalytics />,
+      icon: <ReportAnalyticsIcon />,
     },
     {
       title: "Users",
       url: "#",
-      icon: <FaUser />,
+      icon: <UserIcon />,
       submenu3: true,
       submenuItems: [
         { title: "Initiator", url: "/initiator" },
@@ -84,14 +94,14 @@ const SideBar = () => {
       title: "Files",
       url: "/files",
       spacing: true,
-      icon: <AiFillFolderOpen />,
+      icon: <FilesIcon />,
     },
-    { title: "Setting", url: "/setting", icon: <AiOutlineSetting /> },
-    { title: "Quicklinks", url: "/quicklinks", icon: <FaLink /> },
+    { title: "Setting", url: "/setting", icon: <SettingIcon /> },
+    { title: "Quicklinks", url: "/quicklinks", icon: <QuickLinkIcon /> },
     {
       title: "Logout",
       url: "/logout",
-      icon: <RiLogoutBoxFill />,
+      icon: <LogoutIcon />,
       logoutSpacing: true,
     },
   ];

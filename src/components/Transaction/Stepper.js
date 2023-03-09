@@ -40,7 +40,6 @@ const Stepper = ({ steps, currentStep }) => {
         count++;
       }
     }
-
     return newSteps;
   };
 
