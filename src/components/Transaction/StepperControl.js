@@ -7,7 +7,7 @@ const StepperControl = ({
   handleLastClick,
 }) => {
   return (
-    <div className="container flex  justify-end mt-4 space-x-4">
+    <div className="container flex justify-end mt-4 space-x-4">
       {/*back button*/}
       {currentStep !== 1 && (
         <button

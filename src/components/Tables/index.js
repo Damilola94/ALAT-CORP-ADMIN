@@ -133,6 +133,7 @@ const Tables = () => {
       },
     ]);
   };
+  
   const tableInstance = useTable(
     {
       columns: productsColumns,

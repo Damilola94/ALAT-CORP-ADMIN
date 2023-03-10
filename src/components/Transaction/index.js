@@ -5,7 +5,7 @@ import StepperControl from "./StepperControl";
 import TransferDetails from "./steps/TransferDetails";
 import ConfirmDetails from "./steps/ConfirmDetails";
 import CompleteTransaction from "./steps/CompleteTransaction";
-import SuccessModal from "../Modals/SuccessModal";
+import EditModal from "../Modals/EditModal";
 
 const StepperUI = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -13,16 +13,28 @@ const StepperUI = () => {
   const [userData, setUserData] = useState("");
   const [finalData, setFinalData] = useState([]);
   const [options, setOptions] = useState(1);
+  const [editModal, setEditModal] = useState(false);
+  const [editData, setEditData] = useState("");
 
   const steps = ["Transfer Details", "Confirm Details", "Complete Transaction"];
 
-  const handleAddMore = (userData) => {
-    console.log(userData)
-  }
+  const handleEditModal = () => {
+    setEditModal(!editModal);
+  };
+
+  const handleEditData = (data) => {
+    setEditData(data);
+  };
+
   const displaySteps = (step) => {
     switch (step) {
       case 1:
-        return <TransferDetails handleAddMore={handleAddMore} />;
+        return (
+          <TransferDetails
+            handleEditModal={handleEditModal}
+            handleEditData={handleEditData}
+          />
+        );
       case 2:
         return <ConfirmDetails />;
       case 3:
@@ -43,7 +55,13 @@ const StepperUI = () => {
 
   return (
     <>
-      {modal && <SuccessModal />}
+      {editModal && (
+        <EditModal
+          handleEditModal={handleEditModal}
+          editModal={editModal}
+          editData={editData}
+        />
+      )}
       <div className="bg-white">
         <div className="p-5">
           <p className="font-semibold text-lg mb-6 text-[rgb(29,2,24)] ">
@@ -52,9 +70,10 @@ const StepperUI = () => {
           <div className="space-x-4 flex">
             <div
               className={`bg-white border ${
-                options === 1 ? "border-dark-purple text-dark-purple" : "border-gray-400 text-gray-400"
-              }  px-4 py-2 rounded-md font-semibold cursor-pointer flex  text-base`}
-             >
+                options === 1
+                  ? "border-dark-purple text-dark-purple"
+                  : "border-gray-400 text-gray-400"
+              }  px-4 py-2 rounded-md font-semibold cursor-pointer flex  text-base`}>
               <input
                 type="radio"
                 className={`${
@@ -66,9 +85,10 @@ const StepperUI = () => {
             </div>
             <div
               className={`border text-gray-400 ${
-                options === 2 ? "border-dark-purple text-dark-purple" : "border-gray-400"
-              } px-4 py-2 rounded-md font-semibold cursor-pointer flex text-base`}
-              >
+                options === 2
+                  ? "border-dark-purple text-dark-purple"
+                  : "border-gray-400"
+              } px-4 py-2 rounded-md font-semibold cursor-pointer flex text-base`}>
               <input
                 type="radio"
                 className={`${
@@ -76,7 +96,9 @@ const StepperUI = () => {
                 }`}
                 onClick={() => setOptions(2)}
               />
-              <h3 className={`ml-3 ${  options === 2 ? "text-dark-purple" : ""}`}>Bulk Transfer</h3>
+              <h3 className={`ml-3 ${options === 2 ? "text-dark-purple" : ""}`}>
+                Bulk Transfer
+              </h3>
             </div>
           </div>
         </div>
@@ -93,7 +115,7 @@ const StepperUI = () => {
               </div>
               {/*Display Components */}
               <div className="flex w-full">
-                <div className="my-5 p-10 w-3/5 bg-white">
+                <div className="my-5 p-10 w-full bg-white">
                   <StepperContext.Provider
                     value={{
                       userData,
