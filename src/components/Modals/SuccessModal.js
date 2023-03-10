@@ -1,13 +1,8 @@
 import { useState } from "react";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
-const SuccessModal = ({ onClick }) => {
+const SuccessModal = ({}) => {
   const [showModal, setShowModal] = useState(true);
-
-  const startTourHandler = () => {
-    setShowModal(false);
-    onClick();
-  };
 
   return (
     <>

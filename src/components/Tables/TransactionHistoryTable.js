@@ -6,7 +6,7 @@ import Pagination from "./Pagination";
 import RightSideModal from "../Modals/RightSideModal";
 import { MOCK_DUMMY } from "../DummyData";
 
-const Tables = () => {
+const TransactionHistoryTable = () => {
   const [products, setProducts] = useState([]);
   const [content, setContent] = useState("");
 
@@ -17,15 +17,11 @@ const Tables = () => {
 
     if (response) {
       const products = response.data;
-      console.log("Products: ", products);
       setProducts(products);
     }
   };
 
-  const data = useMemo(
-    () => MOCK_DUMMY,
-    []
-  );
+  const data = useMemo(() => MOCK_DUMMY, []);
 
   const productsData = useMemo(() => [...data], [data]);
 
@@ -167,7 +163,7 @@ const Tables = () => {
                 {row.cells.map((cell) => (
                   <td
                     {...cell.getCellProps()}
-                    className="border border-[#E1E5EE] text-xs p-4 font-medium text-[#808080]">
+                    className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]">
                     {cell.render("Cell")}
                   </td>
                 ))}
@@ -190,4 +186,4 @@ const Tables = () => {
   );
 };
 
-export default Tables;
+export default TransactionHistoryTable;
