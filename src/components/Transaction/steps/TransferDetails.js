@@ -1,12 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import {  useDispatch, useSelector } from 'react-redux'
+import { AiOutlinePlusCircle } from "react-icons/ai";
+
 import { StepperContext } from "@/contexts/StepperContex";
 import Switch from "@/components/ui/Switch";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import FundTransferTable from "@/components/Tables/FundTransferTable";
+import { addBeneficiary, selectValue } from "@/redux/beneficiarySlice";
 
-const TransferDetails = ({ handleEditModal, handleEditData }) => {
-  const { userData, setUserData } = useContext(StepperContext);
+const TransferDetails = ({ handleEditModal }) => {
+  const dispatch = useDispatch()
+  const { userData, setUserData, } = useContext(StepperContext);
   const [moreBeneficiary, setMoreBeneficiary] = useState([]);
+  const tableData = useSelector(selectValue)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,23 +20,20 @@ const TransferDetails = ({ handleEditModal, handleEditData }) => {
 
   const handleAddMore = () => {
     const addMoreData = [];
-    addMoreData.push({ ...userData, id: Date.now() });
+    addMoreData.push({"s/n": moreBeneficiary.length + 1, ...userData,  });
     setMoreBeneficiary((prevState) => {
       return [...prevState, ...addMoreData];
     });
-    handleEditData(userData);
     setUserData("");
   };
 
-  const handleEditSaved = (data) => {
-    setMoreBeneficiary((prevState) => {
-      return [...prevState, ...addMoreData];
-    });
-  };
+  useEffect(() => {
+    dispatch(addBeneficiary(moreBeneficiary))
+  }, [moreBeneficiary])
 
   const handleRemove = (value) => {
     const removedBeneficiary = moreBeneficiary.filter(
-      (item) => item.id !== value.id
+      (item) => item["s/n"] !== value["s/n"]
     );
     setMoreBeneficiary(removedBeneficiary);
   };
@@ -47,11 +49,11 @@ const TransferDetails = ({ handleEditModal, handleEditData }) => {
             Enter the details of your transaction
           </h1>
         </div>
-        {moreBeneficiary.length > 0 ? (
+        {tableData.length > 0 ? (
           <FundTransferTable
-            beneficiaryData={moreBeneficiary}
             handleEditModal={handleEditModal}
             handleRemove={handleRemove}
+            setMoreBeneficiary={setMoreBeneficiary}
           />
         ) : (
           ""

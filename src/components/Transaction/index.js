@@ -6,24 +6,20 @@ import TransferDetails from "./steps/TransferDetails";
 import ConfirmDetails from "./steps/ConfirmDetails";
 import CompleteTransaction from "./steps/CompleteTransaction";
 import EditModal from "../Modals/EditModal";
+import SuccessModal from "../Modals/SuccessModal";
 
 const StepperUI = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [modal, setModal] = useState(false);
   const [userData, setUserData] = useState("");
-  const [finalData, setFinalData] = useState([]);
   const [options, setOptions] = useState(1);
   const [editModal, setEditModal] = useState(false);
-  const [editData, setEditData] = useState("");
-
+  const [editModalId, setEditModalId] = useState("")
   const steps = ["Transfer Details", "Confirm Details", "Complete Transaction"];
 
-  const handleEditModal = () => {
+  const handleEditModal = (value) => {
     setEditModal(!editModal);
-  };
-
-  const handleEditData = (data) => {
-    setEditData(data);
+    setEditModalId(value)
   };
 
   const displaySteps = (step) => {
@@ -32,11 +28,10 @@ const StepperUI = () => {
         return (
           <TransferDetails
             handleEditModal={handleEditModal}
-            handleEditData={handleEditData}
           />
         );
       case 2:
-        return <ConfirmDetails />;
+        return <ConfirmDetails/>;
       case 3:
         return <CompleteTransaction />;
       default:
@@ -59,7 +54,13 @@ const StepperUI = () => {
         <EditModal
           handleEditModal={handleEditModal}
           editModal={editModal}
-          editData={editData}
+          editModalId={editModalId}
+        />
+      )}
+      {modal && (
+        <SuccessModal
+        handleLastClick={handleLastClick}
+        modal={modal}
         />
       )}
       <div className="bg-white">
@@ -120,9 +121,7 @@ const StepperUI = () => {
                     value={{
                       userData,
                       setUserData,
-                      finalData,
-                      setFinalData,
-                    }}>
+                     }}>
                     {displaySteps(currentStep)}
                   </StepperContext.Provider>
                 </div>

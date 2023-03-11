@@ -6,37 +6,41 @@ import {
   usePagination,
   useRowSelect,
 } from "react-table";
-import Checkbox from "../Transaction/CheckBox";
 import { RiDeleteBin7Line } from "react-icons/ri";
+import { useSelector } from "react-redux";
 import { AiOutlineEdit } from "react-icons/ai";
 
+import { selectValue } from '../../redux/beneficiarySlice'
+import Checkbox from "../Transaction/CheckBox";
+
+
 const FundTransferTable = ({
-  beneficiaryData,
   handleEditModal,
   handleRemove,
+  confirmDetails,
+  setMoreBeneficiary,
 }) => {
   const [products, setProducts] = useState([]);
+  const tableData = useSelector(selectValue)
 
   const fetchProducts = async () => {
     const response = await axios
       .get("https://fakestoreapi.com/products")
       .catch((err) => console.log(err));
-
     if (response) {
       const products = response.data;
       setProducts(products);
     }
   };
 
-  const data = useMemo(() => beneficiaryData, [beneficiaryData]);
+  const data = useMemo(() => tableData, [tableData]);
 
-  const productsData = useMemo(() => [...data], [data]);
+  const transactionData = useMemo(() => [...data], [data]) 
 
-  const productsColumns = useMemo(
+  const transactionColumns = useMemo(
     () =>
       data[0]
         ? Object.keys(data[0])
-            // .filter((key) => key !== "id")
             .map((key) => {
               return {
                 Header: key.toUpperCase(),
@@ -65,7 +69,7 @@ const FundTransferTable = ({
             <div className="flex">
               <button
                 className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple "
-                onClick={() => handleEditModal()}>
+                onClick={() => handleEditModal(row.values)}>
                 <AiOutlineEdit />
               </button>
               <button
@@ -82,11 +86,11 @@ const FundTransferTable = ({
 
   const tableInstance = useTable(
     {
-      columns: productsColumns,
-      data: productsData,
+      columns: transactionColumns,
+      data: transactionData,
     },
     useGlobalFilter,
-    tableHooks,
+    !confirmDetails && tableHooks,
     usePagination,
     useRowSelect
   );
@@ -102,10 +106,15 @@ const FundTransferTable = ({
   } = tableInstance;
 
   const rowdata = page.length !== 9 ? page : row;
-
+  
   const handleMultipleDelete = () => {
-    const result = data.items.filter((e) => itemsids.includes(e.id));
-  };
+    const result = tableData.filter((val) => {
+      return !selectedFlatRows.find((a) => {
+        return val["s/n"] === a.values["s/n"]
+      })
+    })
+    setMoreBeneficiary(result)
+  }
 
   useEffect(() => {
     fetchProducts();
@@ -117,7 +126,7 @@ const FundTransferTable = ({
         <div className="flex space-x-5 items-center my-5">
           <h2>{`${selectedFlatRows.length} recipients selected`}:</h2>
           <button
-            onClick={() => {}}
+            onClick={() => handleMultipleDelete()}
             className="bg-[#E24D4D] text-white uppercase px-10 py-2 rounded-lg font-semibold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out">
             Delete
           </button>

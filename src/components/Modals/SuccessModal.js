@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
-const SuccessModal = ({}) => {
+const SuccessModal = ({handleLastClick, modal}) => {
   const [showModal, setShowModal] = useState(true);
 
   return (
     <>
-      {showModal ? (
+      {modal ? (
         <>
           <div className="fixed inset-0 z-10 overflow-y-auto">
             <div
               className="fixed inset-0 w-full h-full bg-black opacity-40"
-              onClick={() => setShowModal(false)}></div>
+              onClick={() => handleLastClick()}></div>
             <div className="flex items-center min-h-screen justify-center ">
               <div className="relative w-96 max-w-xl mx-auto bg-white shadow-lg rounded-lg flex h-96 justify-center items-center">
                 <div className="sm:flex lg:block w-full">

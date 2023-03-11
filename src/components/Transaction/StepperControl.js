@@ -11,12 +11,14 @@ const StepperControl = ({
       {/*back button*/}
       {currentStep !== 1 && (
         <button
+          type="button"
           onClick={() => handleClick()}
           className={`bg-white text-dark-purple uppercase py- px-4 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out`}>
           Previous
         </button>
       )}
       <button
+        type="button"
         onClick={() =>
           currentStep === steps.length ? handleLastClick() : handleClick("next")
         }
