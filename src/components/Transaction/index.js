@@ -9,36 +9,26 @@ import BulkTransferDetails from "./BulkTransferSteps/BulkTransferDetails";
 import BulkConfirmDetails from "./BulkTransferSteps/BulkConfirmDetails";
 import BulkCompleteTransaction from "./BulkTransferSteps/BulkCompleteTransaction";
 import EditModal from "../Modals/EditModal";
-import BulkTransfer from "./TransferMethod/BulkTransfer";
+import SuccessModal from "../Modals/SuccessModal";
 
 const StepperUI = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [modal, setModal] = useState(false);
   const [userData, setUserData] = useState("");
-  const [finalData, setFinalData] = useState([]);
   const [options, setOptions] = useState(1);
   const [editModal, setEditModal] = useState(false);
-  const [editData, setEditData] = useState("");
-
+  const [editModalId, setEditModalId] = useState("");
   const steps = ["Transfer Details", "Confirm Details", "Complete Transaction"];
 
-  const handleEditModal = () => {
+  const handleEditModal = (value) => {
     setEditModal(!editModal);
-  };
-
-  const handleEditData = (data) => {
-    setEditData(data);
+    setEditModalId(value);
   };
 
   const displaySingleTransferSteps = (step) => {
     switch (step) {
       case 1:
-        return (
-          <TransferDetails
-            handleEditModal={handleEditModal}
-            handleEditData={handleEditData}
-          />
-        );
+        return <TransferDetails handleEditModal={handleEditModal} />;
       case 2:
         return <ConfirmDetails />;
       case 3:
@@ -80,8 +70,11 @@ const StepperUI = () => {
         <EditModal
           handleEditModal={handleEditModal}
           editModal={editModal}
-          editData={editData}
+          editModalId={editModalId}
         />
+      )}
+      {modal && (
+        <SuccessModal handleLastClick={handleLastClick} modal={modal} />
       )}
       <div className="bg-white">
         <div className="p-5">
@@ -141,8 +134,6 @@ const StepperUI = () => {
                     value={{
                       userData,
                       setUserData,
-                      finalData,
-                      setFinalData,
                     }}>
                     {displaySingleTransferSteps(currentStep)}
                   </StepperContext.Provider>

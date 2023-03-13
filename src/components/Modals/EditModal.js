@@ -1,20 +1,47 @@
-import React, { useState } from "react";
-import Switch from "@/components/ui/Switch";
+import React, { useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
-import StepperControl from "@/components/Transaction/StepperControl";
+import { useDispatch, useSelector } from "react-redux";
+
+import Switch from "@/components/ui/Switch";
+import { addBeneficiary, selectValue } from "@/redux/beneficiarySlice";
 
 const EditModal = ({
-  userData,
-  setUserData,
   handleEditModal,
-  editData,
   editModal,
+  editModalId
 }) => {
+  const tableData = useSelector(selectValue)
+  const dispatch = useDispatch()
+  const [editData, setEditData] = useState("")
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
+    setEditData({ ...editData, [name]: value });
   };
 
+  useEffect(() => {
+   const result = tableData.filter((el) => {
+      return el["s/n"] === editModalId["s/n"]
+    }) 
+    setEditData(result[0])
+  }, [])
+    
+  const handleEditSaved = () => {
+    const updateObjectInArray =(arr, updatedObj) => {
+      return arr.map(obj => {
+        if (obj["s/n"] === editData["s/n"]) {
+          return updatedObj;
+        } else {
+          return obj;
+        }
+      });
+    }
+    const updatedArr = updateObjectInArray(tableData, editData);
+    dispatch(addBeneficiary(updatedArr))    
+    handleEditModal()
+  };
+  
+ 
   return (
     <>
       {editModal ? (
@@ -32,7 +59,7 @@ const EditModal = ({
                         <h2 className="text-2xl font-bold w-full text-[#333333]">
                           Edit Receipient
                         </h2>
-                        <div>
+                        <div  onClick={() => handleEditModal()}> 
                           <ImCancelCircle className="text-gray-500 w-full text-lg cursor-pointer" />
                         </div>
                       </div>
@@ -47,7 +74,7 @@ const EditModal = ({
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
                                 onChange={handleChange}
-                                value={editData?.["Bank Name"] || ""}
+                                value={editData["Bank Name"] || ""}
                                 name="Bank Name"
                                 placeholder="Select Bank"
                                 className="bg-input-fill outline-none text-sm flex-1"
@@ -61,7 +88,7 @@ const EditModal = ({
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
                                 onChange={handleChange}
-                                value={editData?.["Account Number"] || ""}
+                                value={editData["Account Number"] || ""}
                                 name="Account Number"
                                 placeholder="Account number"
                                 className="bg-input-fill outline-none text-sm flex-1"
@@ -77,7 +104,7 @@ const EditModal = ({
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
                                 onChange={handleChange}
-                                value={editData?.["Account Name"] || ""}
+                                value={editData["Account Name"] || ""}
                                 name="Account Name"
                                 placeholder="Account Name"
                                 className="bg-input-fill outline-none text-sm flex-1"
@@ -91,7 +118,7 @@ const EditModal = ({
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
                                 onChange={handleChange}
-                                value={editData?.["Amount"] || ""}
+                                value={editData["Amount"] || ""}
                                 name="Amount"
                                 placeholder="Amount"
                                 className="bg-input-fill outline-none text-sm flex-1"
@@ -107,7 +134,7 @@ const EditModal = ({
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
                                 onChange={handleChange}
-                                value={editData?.["Description"] || ""}
+                                value={editData["Description"] || ""}
                                 name="Description"
                                 placeholder="e.g dividends"
                                 className="bg-input-fill outline-none text-sm flex-1"
@@ -123,12 +150,12 @@ const EditModal = ({
                       {/* Navigation controls */}
                       <div className="container flex justify-end mt-8 space-x-4">
                         <button
-                          onClick={() => handleClick()}
+                          onClick={() => handleEditModal()}
                           className={`bg-white text-dark-purple uppercase py- px-4 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out`}>
                           Cancel
                         </button>
                         <button
-                          onClick={() => {}}
+                          onClick={() => handleEditSaved()}
                           className="bg-dark-purple text-white uppercase px-12 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out">
                           Save
                         </button>

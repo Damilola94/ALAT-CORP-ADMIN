@@ -23,9 +23,9 @@ const TransactionHistoryTable = () => {
 
   const data = useMemo(() => MOCK_DUMMY, []);
 
-  const productsData = useMemo(() => [...data], [data]);
+  const transactionData = useMemo(() => [...data], [data]);
 
-  const productsColumns = useMemo(
+  const transactionColumns = useMemo(
     () =>
       data[0]
         ? Object.keys(data[0])
@@ -68,8 +68,8 @@ const TransactionHistoryTable = () => {
   );
   const tableInstance = useTable(
     {
-      columns: productsColumns,
-      data: productsData,
+      columns: transactionColumns,
+      data: transactionData,
     },
     useGlobalFilter,
     usePagination
