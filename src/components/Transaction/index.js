@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { StepperContext } from "@/contexts/StepperContex";
 import Stepper from "./Stepper";
 import StepperControl from "./StepperControl";
-import TransferDetails from "./steps/TransferDetails";
-import ConfirmDetails from "./steps/ConfirmDetails";
-import CompleteTransaction from "./steps/CompleteTransaction";
+import TransferDetails from "./SingleTransferSteps/TransferDetails";
+import ConfirmDetails from "./SingleTransferSteps/ConfirmDetails";
+import CompleteTransaction from "./SingleTransferSteps/CompleteTransaction";
+import BulkTransferDetails from "./BulkTransferSteps/BulkTransferDetails";
+import BulkConfirmDetails from "./BulkTransferSteps/BulkConfirmDetails";
+import BulkCompleteTransaction from "./BulkTransferSteps/BulkCompleteTransaction";
 import EditModal from "../Modals/EditModal";
+import BulkTransfer from "./TransferMethod/BulkTransfer";
 
 const StepperUI = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -26,7 +30,7 @@ const StepperUI = () => {
     setEditData(data);
   };
 
-  const displaySteps = (step) => {
+  const displaySingleTransferSteps = (step) => {
     switch (step) {
       case 1:
         return (
@@ -39,6 +43,23 @@ const StepperUI = () => {
         return <ConfirmDetails />;
       case 3:
         return <CompleteTransaction />;
+      default:
+    }
+  };
+
+  const displayBulkTransferSteps = (step) => {
+    switch (step) {
+      case 1:
+        return (
+          <BulkTransferDetails
+            handleEditModal={handleEditModal}
+            handleEditData={handleEditData}
+          />
+        );
+      case 2:
+        return <BulkConfirmDetails />;
+      case 3:
+        return <BulkCompleteTransaction />;
       default:
     }
   };
@@ -123,7 +144,7 @@ const StepperUI = () => {
                       finalData,
                       setFinalData,
                     }}>
-                    {displaySteps(currentStep)}
+                    {displaySingleTransferSteps(currentStep)}
                   </StepperContext.Provider>
                 </div>
               </div>
@@ -140,9 +161,42 @@ const StepperUI = () => {
             {/* Navigation controls */}
           </>
         ) : (
-          <div>
-            <h1>Bulk Transfer</h1>
-          </div>
+          <>
+            {/* Stepper */}
+            <div className="container horizontal mt-5 ">
+              <div className="flex -mx-6">
+                <div className="p-10 w-full bg-[#FAFAFA]">
+                  <div className="w-4/6">
+                    <Stepper steps={steps} currentStep={currentStep} />
+                  </div>
+                </div>
+              </div>
+              {/*Display Components */}
+              <div className="flex w-full">
+                <div className="my-5 p-10 w-full bg-white">
+                  <StepperContext.Provider
+                    value={{
+                      userData,
+                      setUserData,
+                      finalData,
+                      setFinalData,
+                    }}>
+                    {displayBulkTransferSteps(currentStep)}
+                  </StepperContext.Provider>
+                </div>
+              </div>
+            </div>
+            {/* Navigation controls */}
+            <div className="">
+              <StepperControl
+                handleClick={handleClick}
+                handleLastClick={handleLastClick}
+                currentStep={currentStep}
+                steps={steps}
+              />
+            </div>
+            {/* Navigation controls */}
+          </>
         )}
       </div>
     </>

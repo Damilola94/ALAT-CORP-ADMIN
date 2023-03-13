@@ -102,10 +102,7 @@ const FundTransferTable = ({
   } = tableInstance;
 
   const rowdata = page.length !== 9 ? page : row;
-
-  const handleMultipleDelete = () => {
-    const result = data.items.filter((e) => itemsids.includes(e.id));
-  };
+  
 
   useEffect(() => {
     fetchProducts();

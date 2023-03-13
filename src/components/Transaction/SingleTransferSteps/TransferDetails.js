@@ -23,12 +23,6 @@ const TransferDetails = ({ handleEditModal, handleEditData }) => {
     setUserData("");
   };
 
-  const handleEditSaved = (data) => {
-    setMoreBeneficiary((prevState) => {
-      return [...prevState, ...addMoreData];
-    });
-  };
-
   const handleRemove = (value) => {
     const removedBeneficiary = moreBeneficiary.filter(
       (item) => item.id !== value.id

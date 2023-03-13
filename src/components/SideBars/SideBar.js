@@ -2,10 +2,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { BsArrowLeftShort } from "react-icons/bs";
-import {
-  AiFillCaretRight
-} from "react-icons/ai";
-import {  RiLogoutBoxFill } from "react-icons/ri";
+import { AiFillCaretRight } from "react-icons/ai";
+import { RiLogoutBoxFill } from "react-icons/ri";
 import { IoIosColorFilter } from "react-icons/io";
 
 import LoanIcon from "public/icons/loan";
@@ -18,9 +16,6 @@ import SettingIcon from "public/icons/settings";
 import QuickLinkIcon from "public/icons/quicklink";
 import DashboardIcon from "public/icons/dashboard";
 import LogoutIcon from "public/icons/logout";
-
-
-
 
 const SideBar = () => {
   const [open, setOpen] = useState(true);
