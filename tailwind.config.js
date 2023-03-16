@@ -15,14 +15,11 @@ module.exports = {
         "input-outline": "#D1D5DB",
         "dark-purple": "#A90836",
         "dark-alat-purple": "#5A074C",
-        "light-purple": "#F5E7F2",
+        "light-purple": "#FBF3F5",
         "light-white": "rgba(255, 255, 255, 0.18",
       },
-      height: ['278px'],
-      fontSize:{
-        xsm: '8px'
-      }
+      scrollbar: {},
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };

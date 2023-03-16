@@ -31,11 +31,13 @@ const SingleTransfer = () => {
   const handleSummit = (e) => {
     e.preventDefault();
     if (excelFile !== null) {
+      const fileJSON = [];
       const workbook = XLSX.read(excelFile, { type: "buffer" });
       const workSheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[workSheetName];
       const data = XLSX.utils.sheet_to_json(worksheet);
-      setExcelData(data);
+      fileJSON.push(...data);
+      setExcelData(fileJSON);
     } else {
       setExcelData(null);
     }
@@ -43,8 +45,8 @@ const SingleTransfer = () => {
 
   return (
     <>
-      <form className="container horizontal mt-5" onSubmit={handleSummit}>
-        <label>
+      <form className="container horizontal mt-5" 
+        <label>onSubmit={handleSummit}>
           <h5>Upload Excel File</h5>
           <br></br>
           <input

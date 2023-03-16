@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 
 import { StepperContext } from "@/contexts/StepperContex";
-import { selectValue } from "@/redux/beneficiarySlice";
 import FundTransferTable from "@/components/Tables/FundTransferTable";
+import { selectValue } from "@/redux/beneficiarySlice";
 
-const BulkConfirmDetails = () => {
+const ConfirmDetails = ({}) => {
   const { userData } = useContext(StepperContext);
   const tableData = useSelector(selectValue);
 
@@ -92,4 +92,4 @@ const BulkConfirmDetails = () => {
   );
 };
 
-export default BulkConfirmDetails;
+export default ConfirmDetails;

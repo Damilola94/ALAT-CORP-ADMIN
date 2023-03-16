@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { StepperContext } from "@/contexts/StepperContex";
 import Stepper from "./Stepper";
 import StepperControl from "./StepperControl";
-import TransferDetails from "./SingleTransferSteps/TransferDetails";
-import ConfirmDetails from "./SingleTransferSteps/ConfirmDetails";
-import CompleteTransaction from "./SingleTransferSteps/CompleteTransaction";
+import TransferDetails from "./BulkTransferSteps/SingleTransferSteps/TransferDetails";
+import ConfirmDetails from "./BulkTransferSteps/SingleTransferSteps/ConfirmDetails";
+import CompleteTransaction from "./BulkTransferSteps/SingleTransferSteps/CompleteTransaction";
 import BulkTransferDetails from "./BulkTransferSteps/BulkTransferDetails";
 import BulkConfirmDetails from "./BulkTransferSteps/BulkConfirmDetails";
 import BulkCompleteTransaction from "./BulkTransferSteps/BulkCompleteTransaction";
@@ -40,12 +40,7 @@ const StepperUI = () => {
   const displayBulkTransferSteps = (step) => {
     switch (step) {
       case 1:
-        return (
-          <BulkTransferDetails
-            handleEditModal={handleEditModal}
-            handleEditData={handleEditData}
-          />
-        );
+        return <BulkTransferDetails handleEditModal={handleEditModal} />;
       case 2:
         return <BulkConfirmDetails />;
       case 3:
@@ -169,8 +164,6 @@ const StepperUI = () => {
                     value={{
                       userData,
                       setUserData,
-                      finalData,
-                      setFinalData,
                     }}>
                     {displayBulkTransferSteps(currentStep)}
                   </StepperContext.Provider>
