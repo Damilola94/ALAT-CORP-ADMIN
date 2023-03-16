@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
   
   return (
     <Provider store={store}>
-       <div className="flex bg-[#FAFAFA]">
+       <div className="flex bg-[#FAFAFA] h-full">
       <SideBar/>
       <Component {...pageProps} />
       </div>
