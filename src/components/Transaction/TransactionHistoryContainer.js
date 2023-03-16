@@ -5,7 +5,7 @@ import TransactionHistoryTable from "../Tables/TransactionHistoryTable";
 
 const TransactionHistoryContainer = () => {
   return (
-    <div className="h-fit mb-4">
+    <div className="h-fit mb-6">
       <GlobalContainer pageName={"Transaction History"} />
       <div className="p-2 mx-6 bg-white rounded-b-lg border border-gray-200">
         <div className="p-1">

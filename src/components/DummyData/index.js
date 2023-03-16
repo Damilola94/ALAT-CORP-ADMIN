@@ -302,3 +302,24 @@ export const MOCK_DUMMY_FT = [
     "RAISED BY": "David John",
   },
 ];
+
+export const MOCK_DUMMY_BENEFICIARY = [
+  {
+    "S/N": 1,
+    "BANK NAME": "ALATbyWema",
+    "ACCOUNT NUMBER": 2190404040,
+    "ACCOUNT NAME": "Oladapo John",
+  },
+  {
+    "S/N": 2,
+    "BANK NAME": "ALATbyWema",
+    "ACCOUNT NUMBER": 2190404040,
+    "ACCOUNT NAME": "Oladapo John",
+  },
+  {
+    "S/N": 3,
+    "BANK NAME": "Access",
+    "ACCOUNT NUMBER": 2190404040,
+    "ACCOUNT NAME": "Oladapo John",
+  },
+];

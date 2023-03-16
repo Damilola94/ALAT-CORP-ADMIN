@@ -2,10 +2,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { BsArrowLeftShort } from "react-icons/bs";
-import {
-  AiFillCaretRight
-} from "react-icons/ai";
-import {  RiLogoutBoxFill } from "react-icons/ri";
+import { AiFillCaretRight } from "react-icons/ai";
+import { RiLogoutBoxFill } from "react-icons/ri";
 import { IoIosColorFilter } from "react-icons/io";
 
 import LoanIcon from "public/icons/loan";
@@ -19,10 +17,7 @@ import QuickLinkIcon from "public/icons/quicklink";
 import DashboardIcon from "public/icons/dashboard";
 import LogoutIcon from "public/icons/logout";
 
-
-
-
-const SideBar = () => {
+const SideBar = ({ setOpenSideBar }) => {
   const [open, setOpen] = useState(true);
   const { pathname } = useRouter();
   const [submenuOpen1, setSubmenuOpen1] = useState(false);
@@ -55,6 +50,10 @@ const SideBar = () => {
         {
           title: "Funds Transfer",
           url: "/transaction/fund-transfer",
+        },
+        {
+          title: "Beneficiary",
+          url: "/transaction/beneficiary",
         },
       ],
     },
@@ -116,19 +115,25 @@ const SideBar = () => {
     }
   };
 
+  const handleDrawer = () => {
+    setOpen(!open);
+    setOpenSideBar(open);
+  };
+
   return (
     <div
       className={`bg-dark-purple p-5 pt-8 ${
         open ? "w-72" : "w-20"
       } duration-300 relative`}>
       <BsArrowLeftShort
-        className={`bg-white text-dark-purple text-3xl rounded-full absolute -right-3 top-9 border border-dark-purple cursor-pointer ${
+        className={`z-50 text-white text-3xl rounded-full absolute left-[230px] top-9  cursor-pointer ${
           !open && "rotate-180"
         }`}
-        onClick={() => setOpen(!open)}
+        onClick={() => handleDrawer()}
       />
       <div className="inline-flex">
         <IoIosColorFilter
+          onClick={() => handleDrawer()}
           className={`bg-white text-4xl rounded cursor-pointer block float-left mr-2 duration-300 ${
             open && "rotate-[360deg]"
           }`}
@@ -150,7 +155,7 @@ const SideBar = () => {
                 menu.spacing
                   ? "mt-9"
                   : menu.logoutSpacing
-                  ? "mt-[7rem]"
+                  ? "my-[7rem]"
                   : "mt-3"
               } ${getActive(menu.url)}`}>
               <span className="text-xl block float-left">{menu.icon}</span>

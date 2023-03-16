@@ -1,13 +1,13 @@
 import React from "react";
 
-import DashboardContainerUI from "./ui/DashboardContainerUI";
-import Card from "./Cards/Card";
-import Middle from "./Middle";
-import RightBar from "./SideBars/RightBar";
+import DashboardContainerUI from "./DashboardContainerUI";
+import Card from "../Cards/Card";
+import Middle from "../Middle";
+import RightBar from "../SideBars/RightBar";
 
 const DashboardContainer = () => {
   return (
-    <div className="h-fit">
+    <div className="h-fit mb-4">
       <DashboardContainerUI>
         <div className="grid lg:grid-cols-5 gap-4">
           <Card title="DEPOSIT BALANCE" balance={"25,000,000"} icon={0} />
@@ -17,7 +17,7 @@ const DashboardContainer = () => {
           <Card title="TOTAL MEMBERS" balance={254} icon={3} />
         </div>
       </DashboardContainerUI>
-      <div className="flex m-6 mt-6 space-x-6">
+      <div className="flex m-6 space-x-6">
         <Middle />
         <RightBar />
       </div>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {  useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 import { StepperContext } from "@/contexts/StepperContex";
@@ -8,10 +8,10 @@ import FundTransferTable from "@/components/Tables/FundTransferTable";
 import { addBeneficiary, selectValue } from "@/redux/beneficiarySlice";
 
 const TransferDetails = ({ handleEditModal }) => {
-  const dispatch = useDispatch()
-  const { userData, setUserData, } = useContext(StepperContext);
+  const dispatch = useDispatch();
+  const { userData, setUserData } = useContext(StepperContext);
   const [moreBeneficiary, setMoreBeneficiary] = useState([]);
-  const tableData = useSelector(selectValue)
+  const tableData = useSelector(selectValue);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +20,7 @@ const TransferDetails = ({ handleEditModal }) => {
 
   const handleAddMore = () => {
     const addMoreData = [];
-    addMoreData.push({"s/n": moreBeneficiary.length + 1, ...userData,  });
+    addMoreData.push({ "s/n": moreBeneficiary.length + 1, ...userData });
     setMoreBeneficiary((prevState) => {
       return [...prevState, ...addMoreData];
     });
@@ -28,8 +28,8 @@ const TransferDetails = ({ handleEditModal }) => {
   };
 
   useEffect(() => {
-    dispatch(addBeneficiary(moreBeneficiary))
-  }, [moreBeneficiary])
+    dispatch(addBeneficiary(moreBeneficiary));
+  }, [moreBeneficiary]);
 
   const handleRemove = (value) => {
     const removedBeneficiary = moreBeneficiary.filter(

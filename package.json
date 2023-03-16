@@ -25,7 +25,9 @@
     "regenerator-runtime": "^0.13.11",
     "styled-component": "^2.8.0",
     "styled-components": "^5.3.6",
-    "twin.macro": "^3.1.0"
+    "tailwind-scrollbar": "^3.0.0",
+    "twin.macro": "^3.1.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",

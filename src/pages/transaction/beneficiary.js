@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { TransactionHistoryContainer, Header } from "../../components";
+import { BeneficiaryHistoryContainer, Header } from "../../components";
 
 const TransactionHistory = () => {
   return (
@@ -12,8 +12,8 @@ const TransactionHistory = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="w-full">
-        <Header pageName={"Transactions"} subPageName={"Transaction History"} />
-        <TransactionHistoryContainer />
+        <Header pageName={"Beneficiary"} subPageName={"Beneficiary"} />
+        <BeneficiaryHistoryContainer />
       </div>
     </div>
   );

@@ -1,9 +1,7 @@
-import { useState } from "react";
+import React from "react";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
-const SuccessModal = ({handleLastClick, modal}) => {
-  const [showModal, setShowModal] = useState(true);
-
+const SuccessModal = ({ handleLastClick, modal }) => {
   return (
     <>
       {modal ? (

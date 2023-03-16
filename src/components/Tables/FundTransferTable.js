@@ -10,18 +10,25 @@ import { RiDeleteBin7Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { AiOutlineEdit } from "react-icons/ai";
 
-import { selectValue } from '../../redux/beneficiarySlice'
+import { selectValue } from "../../redux/beneficiarySlice";
 import Checkbox from "../Transaction/CheckBox";
-
+import GlobalFilter from "./GlobalFilter";
+import Pagination from "./Pagination";
+import UploadAction from "../Transaction/BulkTransferSteps/UploadAction";
+import ConfirmModal from "../Modals/ConfirmModal";
 
 const FundTransferTable = ({
   handleEditModal,
   handleRemove,
   confirmDetails,
   setMoreBeneficiary,
+  bulkTransferDetails,
 }) => {
   const [products, setProducts] = useState([]);
-  const tableData = useSelector(selectValue)
+  const tableData = useSelector(selectValue);
+  const [hoverState, setHoverState] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
+  const [cancelModal, setCancelModal] = useState(false);
 
   const fetchProducts = async () => {
     const response = await axios
@@ -35,18 +42,17 @@ const FundTransferTable = ({
 
   const data = useMemo(() => tableData, [tableData]);
 
-  const transactionData = useMemo(() => [...data], [data]) 
+  const transactionData = useMemo(() => [...data], [data]);
 
   const transactionColumns = useMemo(
     () =>
       data[0]
-        ? Object.keys(data[0])
-            .map((key) => {
-              return {
-                Header: key.toUpperCase(),
-                accessor: key,
-              };
-            })
+        ? Object.keys(data[0]).map((key) => {
+            return {
+              Header: key.toUpperCase(),
+              accessor: key,
+            };
+          })
         : [],
     [data]
   );
@@ -68,7 +74,10 @@ const FundTransferTable = ({
           Cell: ({ row }) => (
             <div className="flex">
               <button
-                className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple "
+                className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
+                onMouseMove={() => {
+                  handleMouseOver();
+                }}
                 onClick={() => handleEditModal(row.values)}>
                 <AiOutlineEdit />
               </button>
@@ -101,20 +110,44 @@ const FundTransferTable = ({
     headerGroups,
     page,
     row,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    gotoPage,
+    pageCount,
     prepareRow,
     selectedFlatRows,
+    preGlobalFilteredRows,
+    setGlobalFilter,
+    state,
   } = tableInstance;
 
+  const { pageIndex } = state;
+
   const rowdata = page.length !== 9 ? page : row;
-  
+
   const handleMultipleDelete = () => {
     const result = tableData.filter((val) => {
       return !selectedFlatRows.find((a) => {
-        return val["s/n"] === a.values["s/n"]
-      })
-    })
-    setMoreBeneficiary(result)
-  }
+        return val["s/n"] === a.values["s/n"];
+      });
+    });
+    setMoreBeneficiary(result);
+  };
+
+  const handleMouseOver = () => {
+    setHoverState(!hoverState);
+  };
+
+  const handleUploadModal = () => {
+    setConfirmModal(!confirmModal);
+  };
+
+  const handleCancelModal = () => {
+    setCancelModal(!cancelModal);
+  };
 
   useEffect(() => {
     fetchProducts();
@@ -122,6 +155,52 @@ const FundTransferTable = ({
 
   return (
     <>
+      {confirmModal && (
+        <ConfirmModal
+          handleClick={handleUploadModal}
+          confirmModal={confirmModal}
+          subTitle={"Are you sure you want to clear this upload?"}
+        />
+      )}
+      {cancelModal && (
+        <ConfirmModal
+          handleClick={handleCancelModal}
+          cancelModal={cancelModal}
+          subTitle={
+            "Are you sure you want to upload another file? The current details will be deleted"
+          }
+        />
+      )}
+      {bulkTransferDetails && (
+        <UploadAction
+          handleUploadModal={handleUploadModal}
+          handleCancelModal={handleCancelModal}
+        />
+      )}
+      {bulkTransferDetails && (
+        <div>
+          <p className="text-[#1D0218] text-sm font-bold mb-4">
+            Showing 1 - 50 of 100 Transactions
+          </p>
+          <div className="flex mt-2 mb-6 items-center">
+            <GlobalFilter
+              preGlobalFilteredRows={preGlobalFilteredRows}
+              setGlobalFilter={setGlobalFilter}
+              globalFilter={state.globalFilter}
+            />
+            <Pagination
+              previousPage={previousPage}
+              nextPage={nextPage}
+              canPreviousPage={canPreviousPage}
+              canNextPage={canNextPage}
+              pageIndex={pageIndex}
+              pageOptions={pageOptions}
+              gotoPage={gotoPage}
+              pageCount={pageCount}
+            />
+          </div>
+        </div>
+      )}
       {selectedFlatRows.length > 1 && (
         <div className="flex space-x-5 items-center my-5">
           <h2>{`${selectedFlatRows.length} recipients selected`}:</h2>
@@ -168,6 +247,20 @@ const FundTransferTable = ({
           })}
         </tbody>
       </table>
+      {bulkTransferDetails && (
+        <div className="flex justify-between my-7 ">
+          <Pagination
+            previousPage={previousPage}
+            nextPage={nextPage}
+            canPreviousPage={canPreviousPage}
+            canNextPage={canNextPage}
+            pageIndex={pageIndex}
+            pageOptions={pageOptions}
+            gotoPage={gotoPage}
+            pageCount={pageCount}
+          />
+        </div>
+      )}
     </>
   );
 };
