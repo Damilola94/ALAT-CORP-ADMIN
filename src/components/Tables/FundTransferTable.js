@@ -157,6 +157,7 @@ const FundTransferTable = ({
     <>
       {confirmModal && (
         <ConfirmModal
+          uploadCheck
           handleClick={handleUploadModal}
           confirmModal={confirmModal}
           subTitle={"Are you sure you want to clear this upload?"}

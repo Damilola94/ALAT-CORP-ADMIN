@@ -89,7 +89,7 @@ const AddBeneficiaryModal = ({ handleAddModal, addModal, editModalId }) => {
                           Cancel
                         </button>
                         <button
-                          onClick={() => handleEditSaved()}
+                          onClick={() => handleAddModal()}
                           className="bg-dark-purple text-white uppercase px-12 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out">
                           Save
                         </button>

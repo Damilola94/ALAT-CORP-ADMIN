@@ -25,10 +25,6 @@ const BulkTransferDetails = ({ handleEditModal }) => {
     }
   };
 
-  Array(10).map((_, item) => {
-    item && handleProgressBar();
-  });
-
   useEffect(() => {
     handleProgressBar();
   }, [progress]);

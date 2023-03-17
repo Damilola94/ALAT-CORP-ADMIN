@@ -5,19 +5,13 @@ import { ImDatabase } from "react-icons/im";
 
 import GlobalFilter from "./GlobalFilter";
 import Pagination from "./Pagination";
-import { MOCK_DUMMY_BENEFICIARY } from "../DummyData";
+import { MOCK_DUMMY_CONTRIBUTION } from "../DummyData";
 import EmptyState from "../EmptyState";
-import ConfirmModal from "../Modals/ConfirmModal";
-import AddBeneficiaryModal from "../Modals/AddBeneficiaryModal";
 
-const BeneficiaryTable = ({}) => {
+
+const ContributionTable = ({ handleAddModal }) => {
   const [products, setProducts] = useState([]);
   const [confirmModal, setConfirmModal] = useState(false);
-  const [addModal, setAddModal] = useState(false);
-
-  const handleAddModal = () => {
-    setAddModal(!addModal);
-  };
 
   const fetchProducts = async () => {
     const response = await axios
@@ -30,19 +24,48 @@ const BeneficiaryTable = ({}) => {
     }
   };
 
-  const data = useMemo(() => MOCK_DUMMY_BENEFICIARY, []);
+  const data = useMemo(() => MOCK_DUMMY_CONTRIBUTION, []);
 
   const transactionData = useMemo(() => [...data], [data]);
 
   const transactionColumns = useMemo(
     () =>
       data[0]
-        ? Object.keys(data[0]).map((key) => {
-            return {
-              Header: key,
-              accessor: key,
-            };
-          })
+        ? Object.keys(data[0])
+            .filter(
+              (key) =>
+                key !== "id" 
+            )
+            .map((key) => {
+              if (key === "STATUS") {
+                return {
+                  Header: key,
+                  accessor: key,
+                  Cell: ({ value }) => {
+                    return (
+                      <span
+                        className={`text-xs p-1 rounded-lg font-medium ${
+                          value === "Pending"
+                            ? "bg-[#FDF6B2] text-[#723B13]"
+                            : value === "Success"
+                            ? "bg-[#DEF7EC] p-2 text-[#03543F]"
+                            : value === "Declined"
+                            ? "bg-[#F3F4F6] text-[#111928]"
+                            : value === "Failed"
+                            ? "bg-[#FDE8E8] text-[#9B1C1C]"
+                            : ""
+                        }`}>
+                        {value}
+                      </span>
+                    );
+                  },
+                };
+              }
+              return {
+                Header: key,
+                accessor: key,
+              };
+            })
         : [],
     [data]
   );
@@ -51,35 +74,12 @@ const BeneficiaryTable = ({}) => {
     setConfirmModal(!confirmModal);
   };
 
-  const tableHooks = (hooks) => {
-    hooks.visibleColumns.push((columns) => {
-      return [
-        ...columns,
-        {
-          id: "ACTION",
-          Header: "ACTION",
-          Cell: ({ row }) => (
-            <div className="flex">
-              <h1
-                className="text-xs text-[#E24D4D]"
-                onClick={() => handleDelete(row.values)}
-              >
-                Delete Account
-              </h1>
-            </div>
-          ),
-        },
-      ];
-    });
-  };
-
   const tableInstance = useTable(
     {
       columns: transactionColumns,
       data: transactionData,
     },
     useGlobalFilter,
-    tableHooks,
     usePagination
   );
 
@@ -112,19 +112,6 @@ const BeneficiaryTable = ({}) => {
 
   return (
     <>
-      {confirmModal && (
-        <ConfirmModal
-          handleClick={handleDelete}
-          confirmModal={confirmModal}
-          subTitle={"Are you sure you want to delete this account?"}
-        />
-      )}
-      {addModal && (
-        <AddBeneficiaryModal
-          handleAddModal={handleAddModal}
-          addModal={addModal}
-        />
-      )}
       {transactionData.length > 0 ? (
         <div>
           <p className="text-[#1D0218] text-sm font-bold mb-4">
@@ -199,15 +186,13 @@ const BeneficiaryTable = ({}) => {
         </div>
       ) : (
         <EmptyState
-          title={"No Beneficiaries added"}
-          subTitle={"Click “Add Beneficiary” to add a beneficiary to account"}
+          title={"You have no contribution"}
+          subTitle={"No contribution’s from members recorded yet."}
           icon={<ImDatabase className="text-4xl text-[#C2C9D1]" />}
-          buttonTitle={"Add Beneficiary"}
-          onClick={handleAddModal}
         />
       )}
     </>
   );
 };
 
-export default BeneficiaryTable;
+export default ContributionTable;

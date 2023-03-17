@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { AiFillCaretRight } from "react-icons/ai";
-import { RiLogoutBoxFill } from "react-icons/ri";
 import { IoIosColorFilter } from "react-icons/io";
 
 import LoanIcon from "public/icons/loan";
@@ -54,6 +53,10 @@ const SideBar = ({ setOpenSideBar }) => {
         {
           title: "Beneficiary",
           url: "/transaction/beneficiary",
+        },
+        {
+          title: "Contribution",
+          url: "/transaction/contribution",
         },
       ],
     },
@@ -126,7 +129,8 @@ const SideBar = ({ setOpenSideBar }) => {
         open ? "w-72" : "w-20"
       } duration-300 relative`}>
       <BsArrowLeftShort
-        className={`z-50 text-white text-3xl rounded-full absolute left-[230px] top-9  cursor-pointer ${
+        className={`z-50 text-white text-3xl rounded-full absolute left-[230px] top-9 cursor-pointer 
+        hover:-translate-x-1 hover:scale-110 ${
           !open && "rotate-180"
         }`}
         onClick={() => handleDrawer()}

@@ -1,8 +1,8 @@
 import Head from "next/head";
 
-import { BeneficiaryContainer, Header } from "../../components";
+import { ContributionContainer, Header } from "../../components";
 
-const Beneficiary = () => {
+const Contribution = () => {
   return (
     <div className="w-full">
       <Head>
@@ -12,11 +12,11 @@ const Beneficiary = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="w-full">
-        <Header pageName={"Transactions"} subPageName={"Beneficiary"} />
-        <BeneficiaryContainer />
+        <Header pageName={"Transactions"} subPageName={"Contribution"} />
+        <ContributionContainer />
       </div>
     </div>
   );
 };
 
-export default Beneficiary;
+export default Contribution;

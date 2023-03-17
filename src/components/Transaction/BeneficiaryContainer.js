@@ -4,7 +4,7 @@ import GlobalContainer from "../ui/GlobalContainer";
 import BeneficiaryTable from "../Tables/BeneficiaryTable";
 import AddBeneficiaryModal from "../Modals/AddBeneficiaryModal";
 
-const BeneficiaryHistoryContainer = () => {
+const BeneficiaryContainer = () => {
   const [addModal, setAddModal] = useState(false);
 
   const handleAddModal = () => {
@@ -26,7 +26,7 @@ const BeneficiaryHistoryContainer = () => {
           buttonTitle={"Add Beneficiary"}
         />
         <div className="p-2 mx-6 bg-white rounded-b-lg border border-gray-200">
-          <div className="p-1 h-screen">
+          <div className="p-1">
             <BeneficiaryTable handleAddModal={handleAddModal} />
           </div>
         </div>
@@ -35,4 +35,4 @@ const BeneficiaryHistoryContainer = () => {
   );
 };
 
-export default BeneficiaryHistoryContainer;
+export default BeneficiaryContainer;
