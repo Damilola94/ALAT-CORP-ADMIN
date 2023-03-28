@@ -14,10 +14,12 @@ const ForgotPasswordSuccess = () => {
       </Head>
       <main className="flex flex-col w-full flex-1">
         <div className="flex w-full justify-center relative">
-          <img
+          <Image
             src="/new-bg.png"
             alt="Alat for Cooperative"
-            className="w-full object-cover absolute bg-dark-purple"
+            className="w-full object-fill absolute bg-dark-purple"
+            width={1000}
+            height={1000}
           />
           <div className="flex p-16 flex-col absolute w-5/12 text-center justify-center items-center">
             <Image
@@ -38,7 +40,8 @@ const ForgotPasswordSuccess = () => {
               </div>
               <Link
                 href="/login"
-                className="bg-light-purple text-gray-300 rounded-md w-full px-8 py-2 text-center mt-9 inline-block font-semibold hover:bg-dark-purple hover:text-white">
+                className="bg-light-purple text-gray-300 rounded-md w-full px-8 py-2 text-center mt-9 inline-block font-semibold hover:bg-dark-purple hover:text-white"
+              >
                 Return to Login
               </Link>
             </div>
@@ -51,7 +54,6 @@ const ForgotPasswordSuccess = () => {
 
 export default ForgotPasswordSuccess;
 
-
-ForgotPasswordSuccess.getLayout = function PageLayout(page){
-  return <>{page}</> 
-}
+ForgotPasswordSuccess.getLayout = function PageLayout(page) {
+  return <>{page}</>;
+};

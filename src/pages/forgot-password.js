@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Image from "next/image";
-import { AiOutlineMail } from "react-icons/ai";
 import Link from "next/link";
 
 const ForgotPassword = () => {
@@ -14,10 +13,12 @@ const ForgotPassword = () => {
       </Head>
       <main className="flex flex-col w-full flex-1">
         <div className="flex w-full justify-center relative">
-          <img
+          <Image
             src="/new-bg.png"
             alt="Alat for Cooperative"
-            className="w-full object-cover absolute bg-dark-purple"
+            className="w-full object-fill absolute bg-dark-purple"
+            width={1000}
+            height={1000}
           />
           <div className="flex p-16 flex-col absolute w-5/12 text-center justify-center items-center">
             <Image
@@ -38,23 +39,24 @@ const ForgotPassword = () => {
               <div className="mt-6">
                 <label className="font-semibold w-full">Email Address</label>
                 <div className="p-2 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
-                  <AiOutlineMail className="text-gray-400 m-2" />
                   <input
                     type="email"
                     name="email"
                     placeholder="Email Address"
-                    className="bg-input-fill outline-none text-sm flex-1"
+                    className="bg-input-fill outline-none text-sm flex-1 h-8"
                   />
                 </div>
               </div>
               <Link
                 className="bg-light-purple text-gray-300 rounded-md w-full px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white"
-                href="/forgot-password-success">
+                href="/forgot-password-success"
+              >
                 Reset Password
               </Link>
               <Link
                 href="/login"
-                className="text-gray-300 rounded-md w-full px-12 py-2 text-center mt-5 inline-block font-semibold hover:text-dark-purple">
+                className="text-gray-300 rounded-md w-full px-12 py-2 text-center mt-5 inline-block font-semibold hover:text-dark-purple"
+              >
                 Back to Login
               </Link>
             </div>
@@ -67,7 +69,6 @@ const ForgotPassword = () => {
 
 export default ForgotPassword;
 
-
-ForgotPassword.getLayout = function PageLayout(page){
-  return <>{page}</> 
-}
+ForgotPassword.getLayout = function PageLayout(page) {
+  return <>{page}</>;
+};

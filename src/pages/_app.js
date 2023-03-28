@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }) {
               <SideBar setOpenSideBar={setOpenSideBar} />
             </div>
             <div
-              className={`sticky w-screen h-[100%]overflow-y-hidden  ${!openSideBar ? "ml-72" : "ml-20"}`}
+              className={`sticky w-screen  ${!openSideBar ? "ml-72" : "ml-20"}`}
             >
               <Component {...pageProps} />
             </div>

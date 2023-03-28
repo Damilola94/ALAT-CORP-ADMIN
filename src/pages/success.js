@@ -14,11 +14,13 @@ const Success = () => {
       <main className="flex flex-col w-full flex-1">
         <div className="flex w-full h-screen">
           <div className="w-3/6 bg-gradient-to-b from-transparent to-dark-purple relative">
-            <img
-              src="/bg.jpg"
-              alt="Alat for Cooperative"
-              className="w-full h-full object-cover absolute mix-blend-overlay bg-opacity-5"
-            />
+          <Image
+          src="/new-bg.png"
+          alt="Alat for Cooperative"
+          className="w-full object-fill absolute bg-dark-purple"
+          width={1000}
+          height={1000}
+        />
             <div className="p-16">
               <Image
                 src="/logo.png"

@@ -15,10 +15,12 @@ const Home = () => {
       <main className="flex flex-col w-full flex-1">
         <div className="flex w-full h-screen">
           <div className="w-3/6 bg-gradient-to-b from-transparent to-dark-purple relative">
-            <img
+            <Image
               src="/bg.jpg"
               alt="Alat for Cooperative"
               className="w-full h-full object-cover absolute mix-blend-overlay bg-opacity-5"
+              width={1000}
+              height={1000}
             />
             <div className="p-16">
               <Image
@@ -48,18 +50,18 @@ const Home = () => {
             <div>
               <label className="font-semibold">Wema Account Number</label>
               <div className="bg-input-fill w-3/4 p-2 flex rounded-md items-center mb-3 mt-4 border border-input-outline">
-                <MdConfirmationNumber className="text-gray-400 m-2" />
                 <input
                   type="text"
                   name="number"
                   placeholder="Enter account number"
-                  className="bg-input-fill outline-none text-sm flex-1"
+                  className="bg-input-fill outline-none text-sm flex-1 h-8"
                 />
               </div>
             </div>
             <Link
               href="/success"
-              className="bg-light-purple text-[#1D0218] rounded-md w-3/4 px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white">
+              className="bg-light-purple text-[#1D0218] rounded-md w-3/4 px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white"
+            >
               Verify Account
             </Link>
             <p className="mt-3 font-semibold text-xs">
