@@ -12,7 +12,7 @@ const EmptyState = ({ title, buttonTitle, icon, subTitle, onClick,beneficiariesM
         <p className=" font-normal text-base my-5">{subTitle} </p>
         {buttonTitle && (
           <button
-            className="bg-dark-purple text-white uppercase px-10 py-2 rounded-lg font-semibold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out"
+            className="bg-dark-purple text-white  px-10 py-2 rounded-lg font-semibold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out"
             onClick={onClick}
           >
             {buttonTitle}

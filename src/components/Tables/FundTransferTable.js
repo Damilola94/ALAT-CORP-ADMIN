@@ -207,7 +207,7 @@ const FundTransferTable = ({
           <h2>{`${selectedFlatRows.length} recipients selected`}:</h2>
           <button
             onClick={() => handleMultipleDelete()}
-            className="bg-[#E24D4D] text-white uppercase px-10 py-2 rounded-lg font-semibold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out">
+            className="bg-[#E24D4D] text-white px-10 py-2 rounded-lg font-semibold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out">
             Delete
           </button>
         </div>

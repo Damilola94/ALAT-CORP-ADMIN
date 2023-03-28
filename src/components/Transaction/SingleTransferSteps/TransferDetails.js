@@ -154,7 +154,7 @@ const TransferDetails = ({ handleEditModal }) => {
         </div>
         <div className="block">
           <Switch />
-          <span className="flex text-center justify-center bg-light-purple text-dark-purple uppercase mt-7 p-2 rounded-lg font-bold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out items-center space-x-4 w-1/5">
+          <span className="flex text-center justify-center bg-light-purple text-dark-purple  mt-7 p-2 rounded-lg font-bold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out items-center space-x-4 w-1/5">
             <AiOutlinePlusCircle />
             <button onClick={() => handleAddMore()}>Add More</button>
           </span>

@@ -85,12 +85,12 @@ const AddBeneficiaryModal = ({ handleAddModal, addModal, editModalId }) => {
                       <div className="container flex justify-end mt-8 space-x-4">
                         <button
                           onClick={() => handleAddModal()}
-                          className={`bg-white text-dark-purple uppercase py- px-4 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out`}>
+                          className={`bg-white text-dark-purple py- px-4 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out`}>
                           Cancel
                         </button>
                         <button
                           onClick={() => handleAddModal()}
-                          className="bg-dark-purple text-white uppercase px-12 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out">
+                          className="bg-dark-purple text-white px-12 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out">
                           Save
                         </button>
                       </div>

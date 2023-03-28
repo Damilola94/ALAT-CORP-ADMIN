@@ -38,13 +38,13 @@ const ConfirmModal = ({ handleClick, confirmModal, subTitle, uploadCheck, cancel
                     <div className="container flex  justify-center mt-8 space-x-4">
                       <button
                         onClick={() => handleClick()}
-                        className="bg-dark-purple text-white uppercase px-3 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out"
+                        className="bg-dark-purple text-white px-3 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out"
                       >
                         Yes, I’m sure
                       </button>
                       <button
                         onClick={() => handleClick()}
-                        className={`bg-white text-dark-purple uppercase py-2 px-3 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out`}
+                        className={`bg-white text-dark-purple py-2 px-3 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out`}
                       >
                         No, cancel
                       </button>
@@ -81,13 +81,13 @@ const ConfirmModal = ({ handleClick, confirmModal, subTitle, uploadCheck, cancel
                     <div className="container flex  justify-center mt-8 space-x-4">
                       <button
                         onClick={() => onClickModal()}
-                        className="bg-dark-purple text-white uppercase px-3 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out"
+                        className="bg-dark-purple text-white px-3 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out"
                       >
                         Yes, I’m sure
                       </button>
                       <button
                         onClick={() => handleClick()}
-                        className={`bg-white text-dark-purple uppercase py-2 px-3 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out`}
+                        className={`bg-white text-dark-purple py-2 px-3 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out`}
                       >
                         No, cancel
                       </button>
