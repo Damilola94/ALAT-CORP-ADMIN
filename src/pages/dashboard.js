@@ -24,7 +24,7 @@ const Dashboard = () => {
         <DashboardContainer />
         {walkthroughModal && <Walkthrough />}
       </div>
-    </div>
+    </div>  
   );
 };
 
