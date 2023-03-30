@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 
-
 const Login = () => {
   const [inputType, setInputType] = useState("password");
-  const [cookie,, removeCookie] = useCookies(['err']);
+  const [cookie, , removeCookie] = useCookies(["err"]);
 
   useEffect(() => {
     if (cookie?.err) {
-      notification({ title: 'Unauthorized Access', message: cookie?.err, type: 'danger' });
-      removeCookie('err');
+      notification({
+        title: "Unauthorized Access",
+        message: cookie?.err,
+        type: "danger",
+      });
+      removeCookie("err");
     }
   }, [cookie, removeCookie]);
-
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-center">
@@ -90,14 +92,12 @@ const Login = () => {
               </div>
               <Link
                 className="text-dark-purple w-full  inline-block font-semibold text-sm"
-                href="/forgot-password"
-              >
+                href="/forgot-password">
                 Forgot Password?
               </Link>
               <Link
                 className="bg-light-purple text-gray-300 rounded-md w-full px-12 py-2 text-center mt-8 inline-block font-semibold hover:bg-dark-purple hover:text-white"
-                href="/dashboard"
-              >
+                href="/dashboard">
                 Login
               </Link>
               <p className="mt-3 font-semibold text-xs text-center">

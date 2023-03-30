@@ -2,16 +2,16 @@ import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { useGlobalFilter, useTable, usePagination } from "react-table";
 import { ImDatabase } from "react-icons/im";
+import { RiDeleteBin7Line } from "react-icons/ri";
+import { AiOutlineEdit } from "react-icons/ai";
 
 import GlobalFilter from "./GlobalFilter";
 import Pagination from "./Pagination";
-import RightSideModal from "../Modals/RightSideModal";
-import { MOCK_DUMMY } from "../DummyData";
+import { MOCK_DUMMY_ANNOUNCEMENT } from "../DummyData";
 import EmptyState from "../EmptyState";
 
-const TransactionHistoryTable = () => {
+const ScheduleAnnouncementTable = ({ handleCreateAnnouncement }) => {
   const [products, setProducts] = useState([]);
-  const [content, setContent] = useState("");
 
   const fetchProducts = async () => {
     const response = await axios
@@ -24,57 +24,59 @@ const TransactionHistoryTable = () => {
     }
   };
 
-  const data = useMemo(() => MOCK_DUMMY, []);
+  const data = useMemo(() => MOCK_DUMMY_ANNOUNCEMENT, []);
 
   const transactionData = useMemo(() => [...data], [data]);
 
   const transactionColumns = useMemo(
     () =>
       data[0]
-        ? Object.keys(data[0])
-            .filter(
-              (key) =>
-                key !== "id" && key !== "TRANSACTION ID" && key !== "RAISED BY"
-            )
-            .map((key) => {
-              if (key === "STATUS") {
-                return {
-                  Header: key,
-                  accessor: key,
-                  Cell: ({ value }) => {
-                    return (
-                      <span
-                        className={`text-xs p-1 rounded-lg font-medium ${
-                          value === "Pending"
-                            ? "bg-[#FDF6B2] text-[#723B13]"
-                            : value === "Success"
-                            ? "bg-[#DEF7EC] p-2 text-[#03543F]"
-                            : value === "Declined"
-                            ? "bg-[#F3F4F6] text-[#111928]"
-                            : value === "Failed"
-                            ? "bg-[#FDE8E8] text-[#9B1C1C]"
-                            : ""
-                        }`}>
-                        {value}
-                      </span>
-                    );
-                  },
-                };
-              }
-              return {
-                Header: key,
-                accessor: key,
-              };
-            })
+        ? Object.keys(data[0]).map((key) => {
+            return {
+              Header: key,
+              accessor: key,
+            };
+          })
         : [],
     [data]
   );
+
+  const tableHooks = (hooks) => {
+    hooks.visibleColumns.push((columns) => {
+      return [
+        ...columns,
+        {
+          id: "ACTION",
+          Header: "ACTION",
+          Cell: ({ row }) => (
+            <div className="flex">
+              <button
+                className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
+                onMouseMove={() => {
+                  handleMouseOver();
+                }}
+                onClick={() => handleEditModal(row.values)}>
+                <AiOutlineEdit />
+              </button>
+              <button
+                className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
+                onClick={() => handleRemove(row.values)}>
+                <RiDeleteBin7Line />
+              </button>
+            </div>
+          ),
+        },
+      ];
+    });
+  };
+
   const tableInstance = useTable(
     {
       columns: transactionColumns,
       data: transactionData,
     },
     useGlobalFilter,
+    tableHooks,
     usePagination
   );
 
@@ -89,9 +91,9 @@ const TransactionHistoryTable = () => {
     canNextPage,
     canPreviousPage,
     pageOptions,
+    prepareRow,
     gotoPage,
     pageCount,
-    prepareRow,
     preGlobalFilteredRows,
     setGlobalFilter,
     state,
@@ -105,20 +107,10 @@ const TransactionHistoryTable = () => {
     fetchProducts();
   }, []);
 
-  const closeModalHandler = () => {
-    setContent("");
-  };
-
-  const rightSideModalHandler = (row) => {
-    const { values } = row;
-    setContent(<RightSideModal values={values} onClick={closeModalHandler} />);
-  };
-
   return (
     <>
       {transactionData?.length > 0 ? (
         <div>
-          {content}
           <p className="text-[#1D0218] text-sm font-bold mb-4">
             Showing 1 - 50 of 100 Transactions
           </p>
@@ -161,9 +153,6 @@ const TransactionHistoryTable = () => {
                 return (
                   <tr
                     {...row.getRowProps()}
-                    onClick={() => {
-                      rightSideModalHandler(row);
-                    }}
                     className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}>
                     {row.cells.map((cell) => (
                       <td
@@ -185,22 +174,20 @@ const TransactionHistoryTable = () => {
               canNextPage={canNextPage}
               pageIndex={pageIndex}
               pageOptions={pageOptions}
-              gotoPage={gotoPage}
-              pageCount={pageCount}
             />
           </div>
         </div>
       ) : (
         <EmptyState
-          title={"You have no transactions"}
-          subTitle={
-            "You haven’t made any transactions yet. when you do, they’ll appear here "
-          }
-          icon={<ImDatabase lassName="text-4xl text-[#C2C9D1]" />}
+          title={"No announcement created yet "}
+          subTitle={"Click “Create Announcement” to send announcement"}
+          icon={<ImDatabase className="text-4xl text-[#C2C9D1]" />}
+          buttonTitle={"Create Announcement"}
+          onClick={handleCreateAnnouncement}
         />
       )}
     </>
   );
 };
 
-export default TransactionHistoryTable;
+export default ScheduleAnnouncementTable;
