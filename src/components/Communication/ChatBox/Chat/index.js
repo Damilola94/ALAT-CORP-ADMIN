@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 
-const Communication = () => {
+const Chat = () => {
   const [value, setValue] = useState("");
 
   return (
@@ -29,4 +29,4 @@ const Communication = () => {
   );
 };
 
-export default Communication;
+export default Chat;

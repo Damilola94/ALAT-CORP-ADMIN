@@ -108,7 +108,7 @@ const ContributionTable = ({ handleAddModal }) => {
 
   return (
     <>
-      {!transactionData.length > 0 ? (
+      {transactionData?.length > 0 ? (
         <div>
           <p className="text-[#1D0218] text-sm font-bold mb-4">
             Showing 1 - 50 of 100 Transactions

@@ -1,11 +1,23 @@
 import React from "react";
+import { MdOutlineKeyboardBackspace } from "react-icons/md";
 
-const GlobalContainer = ({ pageName, buttonTitle, handleAddModal }) => {
+const GlobalContainer = ({
+  pageName,
+  buttonTitle,
+  handleAddModal,
+  backButton,
+}) => {
   return (
     <div
       className="flex space-x-3 mx-6 mt-6  justify-between
       bg-white rounded-t-lg border border-gray-200 p-2">
-      <div className="p-2 ">
+      <div className="p-2 flex space-x-4 items-center">
+        {backButton && (
+          <MdOutlineKeyboardBackspace
+            onClick={handleAddModal}
+            className="text-gray-500  text-2xl cursor-pointer"
+          />
+        )}
         <p className="text-base font-normal mb-2 text-[rgb(29,2,24)] ">
           {pageName}
         </p>

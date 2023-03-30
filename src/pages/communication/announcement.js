@@ -1,8 +1,19 @@
+import { useState } from "react";
 import Head from "next/head";
 
-import { BeneficiaryContainer, Header } from "../../components";
+import {
+  AnnouncementContainer,
+  EditorCointainer,
+  Header,
+} from "../../components";
 
 const Announcement = () => {
+  const [createAnnouncement, setCreateAnnouncement] = useState(false);
+
+  const handleCreateAnnouncement = () => {
+    setCreateAnnouncement(!createAnnouncement);
+  };
+
   return (
     <div className="w-full">
       <Head>
@@ -13,7 +24,15 @@ const Announcement = () => {
       </Head>
       <div className="w-full">
         <Header pageName={"Communication"} subPageName={"Announcements"} />
-        <BeneficiaryContainer />
+        {!createAnnouncement ? (
+          <AnnouncementContainer
+            handleCreateAnnouncement={handleCreateAnnouncement}
+          />
+        ) : (
+          <EditorCointainer
+            handleCreateAnnouncement={handleCreateAnnouncement}
+          />
+        )}
       </div>
     </div>
   );

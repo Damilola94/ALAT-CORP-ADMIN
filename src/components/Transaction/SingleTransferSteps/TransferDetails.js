@@ -39,15 +39,18 @@ const TransferDetails = ({ handleEditModal }) => {
     );
     setMoreBeneficiary(removedBeneficiary);
   };
-  
-  const handleBeneficiaryModal = () =>{
-    setBeneficiariesModal(!beneficiariesModal)
-  }
+
+  const handleBeneficiaryModal = () => {
+    setBeneficiariesModal(!beneficiariesModal);
+  };
 
   return (
     <>
       {beneficiariesModal && (
-        <BeneficiariesModal beneficiariesModal={beneficiariesModal} handleBeneficiaryModal={handleBeneficiaryModal} />
+        <BeneficiariesModal
+          beneficiariesModal={beneficiariesModal}
+          handleBeneficiaryModal={handleBeneficiaryModal}
+        />
       )}
       <div className="w-full">
         <div className="w-full">
@@ -69,8 +72,9 @@ const TransferDetails = ({ handleEditModal }) => {
             ""
           )}
           <div className="w-3/4">
-            <span className="font-bold text-dark-purple my-10 cursor-pointer text-lg"
-            onClick={() => handleBeneficiaryModal()}>
+            <span
+              className="font-bold text-dark-purple my-10 cursor-pointer text-lg"
+              onClick={() => handleBeneficiaryModal()}>
               Choose Beneficiary
             </span>
             <div className="flex justify-between space-x-16 mt-5">
@@ -153,7 +157,7 @@ const TransferDetails = ({ handleEditModal }) => {
           </div>
         </div>
         <div className="block">
-          <Switch />
+          <Switch title="Add to Beneficiary" />
           <span className="flex text-center justify-center bg-light-purple text-dark-purple  mt-7 p-2 rounded-lg font-bold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out items-center space-x-4 w-1/5">
             <AiOutlinePlusCircle />
             <button onClick={() => handleAddMore()}>Add More</button>

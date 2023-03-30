@@ -55,8 +55,7 @@ const BeneficiariesModal = ({ handleBeneficiaryModal, beneficiariesModal }) => {
           <div className="fixed inset-0 z-10">
             <div
               className="fixed inset-0 w-full h-full bg-black opacity-40"
-              onClick={() => handleBeneficiaryModal()}
-            ></div>
+              onClick={() => handleBeneficiaryModal()}></div>
             <div className="flex items-center min-h-screen justify-center">
               <div className="relative w-full max-w-sm mx-auto bg-white shadow-lg flex h-fit">
                 <div className="sm:flex lg:block w-full">
@@ -75,8 +74,7 @@ const BeneficiariesModal = ({ handleBeneficiaryModal, beneficiariesModal }) => {
                       <div
                         className="p-5 h-[450px] overflow-y-auto  overflow-x-hidden scrollbar scrollbar-thumb-dark-purple scrollbar-track-gray-200
                         scrollbar-thumb-rounded  rounded-md
-                      "
-                      >
+                      ">
                         <div className="w-full">
                           <div className="p-2 flex rounded-md border border-input-outline bg-input-fill w-full h-9 items-center">
                             <BsSearch className="text-gray-400 text-sm" />
@@ -92,7 +90,7 @@ const BeneficiariesModal = ({ handleBeneficiaryModal, beneficiariesModal }) => {
                           </div>
                           <div className="flex-row justify-between w-full">
                             {beneficiaryList.map((item, _) => (
-                              <BeneficiariesCard item={item} id={_} />
+                              <BeneficiariesCard item={item} id={_} key={_} />
                             ))}
                           </div>
                         </div>
