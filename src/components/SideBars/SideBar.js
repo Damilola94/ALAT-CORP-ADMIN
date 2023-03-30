@@ -67,13 +67,15 @@ const SideBar = ({ setOpenSideBar }) => {
       icon: <LoanIcon />,
     },
     {
-      title: "Communications",
+      title: "Communication",
       url: "#",
       icon: <CommunicationIcon />,
       submenu2: true,
       submenuItems: [
-        { title: "Communications 1", url: "/communications/email" },
-        { title: "Communications 2", url: "/communications/message" },
+        { title: "Chat", url: "/communication/chat" },
+        { title: "Events", url: "/communication/events" },
+        { title: "Calendar", url: "/communication/calendar" },
+        { title: "Announcement", url: "/communication/announcement" },
       ],
     },
     {
@@ -111,9 +113,9 @@ const SideBar = ({ setOpenSideBar }) => {
   const dropDownHandler = (value) => {
     if (value === "Transactions") {
       setSubmenuOpen1(!submenuOpen1);
-    } else if (value === "Communications") {
+    } else if (value === "Communication") {
       setSubmenuOpen2(!submenuOpen2);
-    } else {
+    } else if (value === "Users") {
       setSubmenuOpen3(!submenuOpen3);
     }
   };
@@ -130,9 +132,7 @@ const SideBar = ({ setOpenSideBar }) => {
       } duration-300 relative`}>
       <BsArrowLeftShort
         className={`z-50 text-white text-3xl rounded-full absolute left-[230px] top-9 cursor-pointer 
-        hover:-translate-x-1 hover:scale-110 ${
-          !open && "rotate-180"
-        }`}
+        hover:-translate-x-1 hover:scale-110 ${!open && "rotate-180"}`}
         onClick={() => handleDrawer()}
       />
       <div className="inline-flex">
@@ -189,6 +189,19 @@ const SideBar = ({ setOpenSideBar }) => {
               )}
             </Link>
             {menu.submenu1 && submenuOpen1 && open ? (
+              <ul className="">
+                {menu.submenuItems.map((submenuItem, index) => (
+                  <Link
+                    href={submenuItem.url}
+                    key={index}
+                    className={`text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-14 font-medium ${getActive(
+                      submenuItem.url
+                    )}`}>
+                    {submenuItem.title}
+                  </Link>
+                ))}
+              </ul>
+            ) : menu.submenu2 && submenuOpen2 && open ? (
               <ul>
                 {menu.submenuItems.map((submenuItem, index) => (
                   <Link
@@ -201,24 +214,30 @@ const SideBar = ({ setOpenSideBar }) => {
                   </Link>
                 ))}
               </ul>
-            ) : menu.submenu2 && submenuOpen2 && open ? (
-              <ul>
-                {menu.submenuItems.map((submenuItem, index) => (
-                  <li
-                    key={index}
-                    className="text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-8 font-medium">
-                    {submenuItem.title}
-                  </li>
-                ))}
-              </ul>
             ) : menu.submenu3 && submenuOpen3 && open ? (
               <ul>
                 {menu.submenuItems.map((submenuItem, index) => (
-                  <li
+                  <Link
+                    href={submenuItem.url}
                     key={index}
-                    className="text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-8 font-medium">
+                    className={`text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-8 font-medium ${getActive(
+                      submenuItem.url
+                    )}`}>
                     {submenuItem.title}
-                  </li>
+                  </Link>
+                ))}
+              </ul>
+            ) : menu.submenu4 && submenuOpen4 && open ? (
+              <ul>
+                {menu.submenuItems.map((submenuItem, index) => (
+                  <Link
+                    href={submenuItem.url}
+                    key={index}
+                    className={`text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-8 font-medium ${getActive(
+                      submenuItem.url
+                    )}`}>
+                    {submenuItem.title}
+                  </Link>
                 ))}
               </ul>
             ) : (

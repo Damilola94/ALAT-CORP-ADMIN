@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { useGlobalFilter, useTable, usePagination } from "react-table";
+import { ImDatabase } from "react-icons/im";
+
 import GlobalFilter from "./GlobalFilter";
 import Pagination from "./Pagination";
 import RightSideModal from "../Modals/RightSideModal";
@@ -52,8 +54,7 @@ const TransactionHistoryTable = () => {
                             : value === "Failed"
                             ? "bg-[#FDE8E8] text-[#9B1C1C]"
                             : ""
-                        }`}
-                      >
+                        }`}>
                         {value}
                       </span>
                     );
@@ -140,16 +141,14 @@ const TransactionHistoryTable = () => {
           </div>
           <table
             {...getTableProps()}
-            className=" text-base text-gray-900 p-4 w-full"
-          >
+            className=" text-base text-gray-900 p-4 w-full">
             <thead className="p-4">
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()} className="">
                   {headerGroup.headers.map((column) => (
                     <th
                       className="text-left text-xs p-4 bg-[#F9FAFB] text-[#1D0218]"
-                      {...column.getHeaderProps()}
-                    >
+                      {...column.getHeaderProps()}>
                       {column.render("Header")}
                     </th>
                   ))}
@@ -165,13 +164,11 @@ const TransactionHistoryTable = () => {
                     onClick={() => {
                       rightSideModalHandler(row);
                     }}
-                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}
-                  >
+                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}>
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]"
-                      >
+                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]">
                         {cell.render("Cell")}
                       </td>
                     ))}
@@ -195,11 +192,11 @@ const TransactionHistoryTable = () => {
         </div>
       ) : (
         <EmptyState
-          title={"No Beneficiaries added"}
-          subTitle={"Click “Add Beneficiary” to add a beneficiary to account"}
-          icon={<ImDatabase className="text-4xl text-[#C2C9D1]" />}
-          buttonTitle={"Add Beneficiary"}
-          onClick={handleAddModal}
+          title={"You have no transactions"}
+          subTitle={
+            "You haven’t made any transactions yet. when you do, they’ll appear here "
+          }
+          icon={<ImDatabase lassName="text-4xl text-[#C2C9D1]" />}
         />
       )}
     </>

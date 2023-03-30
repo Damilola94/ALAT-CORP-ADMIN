@@ -5,6 +5,12 @@ export { default as TransactionHistoryContainer } from "./Transaction/Transactio
 export { default as FundTransferContainer } from "./Transaction/FundTransferContainer";
 export { default as BeneficiaryContainer } from "./Transaction/BeneficiaryContainer";
 export { default as ContributionContainer } from "./Transaction/ContributionContainer";
+
+// export { default as TransactionHistoryContainer } from "./Transaction/TransactionHistoryContainer";
+// export { default as FundTransferContainer } from "./Transaction/FundTransferContainer";
+// export { default as ContributionContainer } from "./Transaction/ContributionContainer";
+export { default as ChatContainer } from "./Communication";
+
 export { default as Header } from "./Header";
 export { default as Middle } from "./Middle";
 export { default as RightBar } from "./SideBars/RightBar";

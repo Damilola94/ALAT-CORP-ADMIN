@@ -1,8 +1,13 @@
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 const ChangePassword = () => {
+  const [newPasswordType, setNewPasswordType] = useState("password");
+  const [confirmPasswordType, setConfirmPasswordType] = useState("password");
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen  text-center">
       <Head>
@@ -39,30 +44,55 @@ const ChangePassword = () => {
               </div>
               <div className="mt-6">
                 <label className="font-semibold w-full">New Password</label>
-                <div className="p-2 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
+                <div className="p-2 flex mb-3 mt-3 rounded-md border justify-between items-center  border-input-outline bg-input-fill">
                   <input
-                    type="password"
+                    type={newPasswordType}
                     name="password"
                     placeholder="Password"
                     className="bg-input-fill outline-none text-sm flex-1 h-8"
                   />
+                  <span className=" text-gray-700">
+                    {newPasswordType === "password" ? (
+                      <BsEye
+                        className="w-5 h-auto cursor-pointer items-center text-[#B5B6B6]"
+                        onClick={() => setNewPasswordType("text")}
+                      />
+                    ) : (
+                      <BsEyeSlash
+                        className="w-5 h-auto cursor-pointer"
+                        onClick={() => setNewPasswordType("password")}
+                      />
+                    )}
+                  </span>
                 </div>
               </div>
               <div className="mt-6">
                 <label className="font-semibold w-full">Confirm Password</label>
-                <div className="p-2 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
+                <div className="p-2 flex mb-3 mt-3 rounded-md border justify-between items-center  border-input-outline bg-input-fill">
                   <input
-                    type="password"
+                    type={confirmPasswordType}
                     name="password"
                     placeholder="Password"
                     className="bg-input-fill outline-none text-sm flex-1 h-8"
                   />
+                  <span className=" text-gray-700">
+                    {confirmPasswordType === "password" ? (
+                      <BsEye
+                        className="w-5 h-auto cursor-pointer items-center text-[#B5B6B6]"
+                        onClick={() => setConfirmPasswordType("text")}
+                      />
+                    ) : (
+                      <BsEyeSlash
+                        className="w-5 h-auto cursor-pointer"
+                        onClick={() => setConfirmPasswordType("password")}
+                      />
+                    )}
+                  </span>
                 </div>
               </div>
               <Link
                 href="/change-pwd-success"
-                className="bg-light-purple text-gray-300 rounded-md w-full px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white"
-              >
+                className="bg-light-purple text-gray-300 rounded-md w-full px-12 py-2 text-center mt-5 inline-block font-semibold hover:bg-dark-purple hover:text-white">
                 Change Password
               </Link>
             </div>

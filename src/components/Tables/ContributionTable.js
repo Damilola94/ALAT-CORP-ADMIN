@@ -8,7 +8,6 @@ import Pagination from "./Pagination";
 import { MOCK_DUMMY_CONTRIBUTION } from "../DummyData";
 import EmptyState from "../EmptyState";
 
-
 const ContributionTable = ({ handleAddModal }) => {
   const [products, setProducts] = useState([]);
   const [confirmModal, setConfirmModal] = useState(false);
@@ -32,10 +31,7 @@ const ContributionTable = ({ handleAddModal }) => {
     () =>
       data[0]
         ? Object.keys(data[0])
-            .filter(
-              (key) =>
-                key !== "id" 
-            )
+            .filter((key) => key !== "id")
             .map((key) => {
               if (key === "STATUS") {
                 return {
@@ -112,7 +108,7 @@ const ContributionTable = ({ handleAddModal }) => {
 
   return (
     <>
-      {transactionData.length > 0 ? (
+      {!transactionData.length > 0 ? (
         <div>
           <p className="text-[#1D0218] text-sm font-bold mb-4">
             Showing 1 - 50 of 100 Transactions
@@ -136,16 +132,14 @@ const ContributionTable = ({ handleAddModal }) => {
           </div>
           <table
             {...getTableProps()}
-            className=" text-base text-gray-900 p-4 w-full"
-          >
+            className=" text-base text-gray-900 p-4 w-full">
             <thead className="p-4">
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()} className="">
                   {headerGroup.headers.map((column) => (
                     <th
                       className="text-left text-xs p-4 bg-[#F9FAFB] text-[#1D0218]"
-                      {...column.getHeaderProps()}
-                    >
+                      {...column.getHeaderProps()}>
                       {column.render("Header")}
                     </th>
                   ))}
@@ -158,13 +152,11 @@ const ContributionTable = ({ handleAddModal }) => {
                 return (
                   <tr
                     {...row.getRowProps()}
-                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}
-                  >
+                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}>
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]"
-                      >
+                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]">
                         {cell.render("Cell")}
                       </td>
                     ))}
