@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from 'react-cookie';
 import Head from "next/head";
 import Image from "next/image";
