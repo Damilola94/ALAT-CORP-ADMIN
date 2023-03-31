@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { ContributionContainer, Header } from "../../components";
+import { ChatContainer, Header } from "../../components";
 
 const Events = () => {
   return (
@@ -13,7 +13,7 @@ const Events = () => {
       </Head>
       <div className="w-full">
         <Header pageName={"Transactions"} subPageName={"Contribution"} />
-        <ContributionContainer />
+        <ChatContainer />
       </div>
     </div>
   );

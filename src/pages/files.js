@@ -1,8 +1,8 @@
 import Head from "next/head";
 
-import { ChatContainer, Header } from "../../components";
+import { ChatContainer, Header } from "../components";
 
-const Calendar = () => {
+const Files = () => {
   return (
     <div className="w-full">
       <Head>
@@ -12,11 +12,14 @@ const Calendar = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="w-full">
-        <Header pageName={"Transactions"} subPageName={"Fund Transfer"} />
-        <ChatContainer />
+        <Header pageName={"Files"} subPageName={"Files"} />
+        {/* <ChatContainer /> */}
+        <div className="h-screen flex items-center justify-center">
+          Files Coming Soon
+        </div>
       </div>
     </div>
   );
 };
 
-export default Calendar;
+export default Files;

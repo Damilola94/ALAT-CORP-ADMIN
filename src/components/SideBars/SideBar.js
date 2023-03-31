@@ -85,14 +85,8 @@ const SideBar = ({ setOpenSideBar }) => {
     },
     {
       title: "Users",
-      url: "#",
+      url: "/users",
       icon: <UserIcon />,
-      submenu3: true,
-      submenuItems: [
-        { title: "Initiator", url: "/initiator" },
-        { title: "Verifier", url: "/verifier" },
-        { title: "Approval", url: "/approval" },
-      ],
     },
     {
       title: "Files",
@@ -115,9 +109,7 @@ const SideBar = ({ setOpenSideBar }) => {
       setSubmenuOpen1(!submenuOpen1);
     } else if (value === "Communication") {
       setSubmenuOpen2(!submenuOpen2);
-    } else if (value === "Users") {
-      setSubmenuOpen3(!submenuOpen3);
-    }
+    } 
   };
 
   const handleDrawer = () => {
@@ -214,33 +206,7 @@ const SideBar = ({ setOpenSideBar }) => {
                   </Link>
                 ))}
               </ul>
-            ) : menu.submenu3 && submenuOpen3 && open ? (
-              <ul>
-                {menu.submenuItems.map((submenuItem, index) => (
-                  <Link
-                    href={submenuItem.url}
-                    key={index}
-                    className={`text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-8 font-medium ${getActive(
-                      submenuItem.url
-                    )}`}>
-                    {submenuItem.title}
-                  </Link>
-                ))}
-              </ul>
-            ) : menu.submenu4 && submenuOpen4 && open ? (
-              <ul>
-                {menu.submenuItems.map((submenuItem, index) => (
-                  <Link
-                    href={submenuItem.url}
-                    key={index}
-                    className={`text-gray-300 text-sm flex items-center cursor-pointer p-2 px-5 hover:bg-gray-50 hover:opacity-25 hover:text-gray-900 rounded-md ml-8 font-medium ${getActive(
-                      submenuItem.url
-                    )}`}>
-                    {submenuItem.title}
-                  </Link>
-                ))}
-              </ul>
-            ) : (
+            ) :  (
               ""
             )}
           </div>

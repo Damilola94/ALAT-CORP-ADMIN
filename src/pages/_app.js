@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
+      <Hydrate state={pageProps?.dehydratedState}>
         <ReactNotifications />
         <Provider store={store}>
           <div className="flex relative  bg-[#FAFAFA] h-fit">

@@ -15,12 +15,12 @@ const Success = () => {
         <div className="flex w-full h-screen">
           <div className="w-3/6 bg-gradient-to-b from-transparent to-dark-purple relative">
           <Image
-          src="/new-bg.png"
-          alt="Alat for Cooperative"
-          className="w-full object-fill absolute bg-dark-purple"
-          width={1000}
-          height={1000}
-        />
+              src="/bg.jpg"
+              alt="Alat for Cooperative"
+              className="w-full h-full object-cover absolute mix-blend-overlay bg-opacity-5"
+              width={1000}
+              height={1000}
+            />
             <div className="p-16">
               <Image
                 src="/logo.png"
@@ -45,8 +45,10 @@ const Success = () => {
             </h2>
             <p className="w-full text-gray-500 text-center">
               An email has been sent to{" "}
-              <span className="font-bold text-dark-alat-purple">lapo@gmail.com.</span> Kindly check
-              and follow the steps to activate your account.
+              <span className="font-bold text-dark-alat-purple">
+                lapo@gmail.com.
+              </span>{" "}
+              Kindly check and follow the steps to activate your account.
             </p>
           </div>
         </div>
@@ -57,6 +59,6 @@ const Success = () => {
 
 export default Success;
 
-Success.getLayout = function PageLayout(page){
-  return <>{page}</> 
-}
+Success.getLayout = function PageLayout(page) {
+  return <>{page}</>;
+};

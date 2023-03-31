@@ -5,13 +5,11 @@ export { default as TransactionHistoryContainer } from "./Transaction/Transactio
 export { default as FundTransferContainer } from "./Transaction/FundTransferContainer";
 export { default as BeneficiaryContainer } from "./Transaction/BeneficiaryContainer";
 export { default as ContributionContainer } from "./Transaction/ContributionContainer";
-
 export { default as EditorCointainer } from "./Communication/Announcement/EditorCointainer";
 export { default as AnnouncementContainer } from "./Communication/Announcement/AnnouncementContainer";
 export { default as ChatContainer } from "./Communication/ChatBox";
-
 export { default as SettingContainer } from "./SettingContainer";
-
+export { default as UsersContainer } from "./Users/UsersContainer";
 export { default as Header } from "./Header";
 export { default as Middle } from "./Middle";
 export { default as RightBar } from "./SideBars/RightBar";
