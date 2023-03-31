@@ -13,7 +13,10 @@ const Events = () => {
       </Head>
       <div className="w-full">
         <Header pageName={"Transactions"} subPageName={"Contribution"} />
-        <ChatContainer />
+        {/* <ChatContainer /> */}
+        <div className="h-screen flex items-center justify-center">
+          Events Coming Soon
+        </div>
       </div>
     </div>
   );

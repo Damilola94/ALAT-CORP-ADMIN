@@ -13,7 +13,11 @@ const Calendar = () => {
       </Head>
       <div className="w-full">
         <Header pageName={"Transactions"} subPageName={"Fund Transfer"} />
-        <ChatContainer />
+        {/* <ChatContainer />
+         */}
+         <div className="h-screen flex items-center justify-center">
+        Calendar Coming Soon
+        </div>
       </div>
     </div>
   );
