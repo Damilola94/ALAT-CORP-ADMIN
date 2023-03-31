@@ -98,7 +98,7 @@ const SideBar = ({ setOpenSideBar }) => {
     { title: "Quicklinks", url: "/quicklinks", icon: <QuickLinkIcon /> },
     {
       title: "Logout",
-      url: "/logout",
+      url: "#",
       icon: <LogoutIcon />,
       logoutSpacing: true,
     },
