@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { FiUploadCloud } from "react-icons/fi";
 import { ImDatabase } from "react-icons/im";
 
-import FundTransferTable from "@/components/Tables/FundTransferTable";
-import { addBeneficiary, selectValue } from "@/redux/beneficiarySlice";
+import FundTransferTable from "@/components/Tables/Transaction/FundTransferTable";
+import { addBeneficiary, beneficiaryListValue } from "@/redux/beneficiarySlice";
 
 const BulkTransferDetails = ({ handleEditModal }) => {
   const dispatch = useDispatch();
-  const tableData = useSelector(selectValue);
+  const tableData = useSelector(beneficiaryListValue);
 
   const [progress, setProgress] = useState(0);
   const [moreBeneficiary, setMoreBeneficiary] = useState([]);
@@ -158,12 +158,13 @@ const BulkTransferDetails = ({ handleEditModal }) => {
             Upload an excel file containing transaction details
           </h1>
         </div>
-        {tableData.length > 0 ? (
+        {tableData?.length > 0 ? (
           <FundTransferTable
             beneficiaryData={moreBeneficiary}
             handleEditModal={handleEditModal}
             handleRemove={handleRemove}
             bulkTransferDetails
+            setExcelFileName={setExcelFileName}
           />
         ) : (
           <div className="w-3/4">

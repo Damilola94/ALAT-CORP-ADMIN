@@ -2,79 +2,99 @@ import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { useGlobalFilter, useTable, usePagination } from "react-table";
 import { ImDatabase } from "react-icons/im";
+import _ from "lodash";
 
-import GlobalFilter from "./GlobalFilter";
-import Pagination from "./Pagination";
-import RightSideModal from "../Modals/RightSideModal";
-import { MOCK_DUMMY } from "../DummyData";
-import EmptyState from "../EmptyState";
+import GlobalFilter from "../GlobalFilter";
+import Pagination from "../Pagination";
+import { MOCK_DUMMY_BENEFICIARY } from "../../DummyData";
+import EmptyState from "../../EmptyState";
+import ConfirmModal from "../../Modals/ConfirmModal";
+import AddBeneficiaryModal from "../../Modals/AddBeneficiaryModal";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  savedBeneficiaryListValue,
+  savedBeneficiary,
+} from "@/redux/beneficiarySlice";
 
-const TransactionHistoryTable = () => {
+const BeneficiaryTable = ({}) => {
   const [products, setProducts] = useState([]);
-  const [content, setContent] = useState("");
+  const [confirmModal, setConfirmModal] = useState(false);
+  const [addModal, setAddModal] = useState(false);
+  const dispatch = useDispatch();
+  const [deleteId, setDeleteId] = useState("");
+  const beneficiaryData = useSelector(savedBeneficiaryListValue);
+
+  // const
+
+  useEffect(() => {
+    dispatch(savedBeneficiary(MOCK_DUMMY_BENEFICIARY));
+  }, []);
+
+  const handleAddModal = () => {
+    setAddModal(!addModal);
+  };
 
   const fetchProducts = async () => {
     const response = await axios
       .get("https://fakestoreapi.com/products")
       .catch((err) => console.log(err));
-
     if (response) {
       const products = response.data;
       setProducts(products);
     }
   };
 
-  const data = useMemo(() => MOCK_DUMMY, []);
+  const data = useMemo(() => beneficiaryData, [beneficiaryData]);
 
   const transactionData = useMemo(() => [...data], [data]);
 
   const transactionColumns = useMemo(
     () =>
       data[0]
-        ? Object.keys(data[0])
-            .filter(
-              (key) =>
-                key !== "id" && key !== "TRANSACTION ID" && key !== "RAISED BY"
-            )
-            .map((key) => {
-              if (key === "STATUS") {
-                return {
-                  Header: key,
-                  accessor: key,
-                  Cell: ({ value }) => {
-                    return (
-                      <span
-                        className={`text-xs p-1 rounded-lg font-medium ${
-                          value === "Pending"
-                            ? "bg-[#FDF6B2] text-[#723B13]"
-                            : value === "Success"
-                            ? "bg-[#DEF7EC] p-2 text-[#03543F]"
-                            : value === "Declined"
-                            ? "bg-[#F3F4F6] text-[#111928]"
-                            : value === "Failed"
-                            ? "bg-[#FDE8E8] text-[#9B1C1C]"
-                            : ""
-                        }`}>
-                        {value}
-                      </span>
-                    );
-                  },
-                };
-              }
-              return {
-                Header: key,
-                accessor: key,
-              };
-            })
+        ? Object.keys(data[0]).map((key) => {
+            return {
+              Header: key,
+              accessor: key,
+            };
+          })
         : [],
     [data]
   );
+
+  const handleDelete = (value) => {
+    setConfirmModal(!confirmModal);
+    setDeleteId(value);
+  };
+
+  const tableHooks = (hooks) => {
+    hooks.visibleColumns.push((columns) => {
+      return [
+        ...columns,
+        {
+          id: "ACTION",
+          Header: "ACTION",
+          Cell: ({ row }) => (
+            <div className="flex">
+              <h1
+                className="text-xs text-[#E24D4D]"
+                onClick={() => handleDelete(row.values)}
+              >
+                Delete Account
+              </h1>
+            </div>
+          ),
+        },
+      ];
+    });
+  };
+
   const tableInstance = useTable(
     {
       columns: transactionColumns,
       data: transactionData,
     },
     useGlobalFilter,
+    tableHooks,
     usePagination
   );
 
@@ -89,9 +109,9 @@ const TransactionHistoryTable = () => {
     canNextPage,
     canPreviousPage,
     pageOptions,
+    prepareRow,
     gotoPage,
     pageCount,
-    prepareRow,
     preGlobalFilteredRows,
     setGlobalFilter,
     state,
@@ -105,20 +125,24 @@ const TransactionHistoryTable = () => {
     fetchProducts();
   }, []);
 
-  const closeModalHandler = () => {
-    setContent("");
-  };
-
-  const rightSideModalHandler = (row) => {
-    const { values } = row;
-    setContent(<RightSideModal values={values} onClick={closeModalHandler} />);
-  };
-
   return (
     <>
+      {confirmModal && (
+        <ConfirmModal
+          deleteId={deleteId}
+          handleClick={handleDelete}
+          confirmModal={confirmModal}
+          subTitle={"Are you sure you want to delete this account?"}
+        />
+      )}
+      {addModal && (
+        <AddBeneficiaryModal
+          handleAddModal={handleAddModal}
+          addModal={addModal}
+        />
+      )}
       {transactionData?.length > 0 ? (
         <div>
-          {content}
           <p className="text-[#1D0218] text-sm font-bold mb-4">
             Showing 1 - 50 of 100 Transactions
           </p>
@@ -141,14 +165,16 @@ const TransactionHistoryTable = () => {
           </div>
           <table
             {...getTableProps()}
-            className=" text-base text-gray-900 p-4 w-full">
+            className=" text-base text-gray-900 p-4 w-full"
+          >
             <thead className="p-4">
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()} className="">
                   {headerGroup.headers.map((column) => (
                     <th
                       className="text-left text-xs p-4 bg-[#F9FAFB] text-[#1D0218]"
-                      {...column.getHeaderProps()}>
+                      {...column.getHeaderProps()}
+                    >
                       {column.render("Header")}
                     </th>
                   ))}
@@ -161,14 +187,13 @@ const TransactionHistoryTable = () => {
                 return (
                   <tr
                     {...row.getRowProps()}
-                    onClick={() => {
-                      rightSideModalHandler(row);
-                    }}
-                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}>
+                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}
+                  >
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]">
+                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]"
+                      >
                         {cell.render("Cell")}
                       </td>
                     ))}
@@ -185,22 +210,20 @@ const TransactionHistoryTable = () => {
               canNextPage={canNextPage}
               pageIndex={pageIndex}
               pageOptions={pageOptions}
-              gotoPage={gotoPage}
-              pageCount={pageCount}
             />
           </div>
         </div>
       ) : (
         <EmptyState
-          title={"You have no transactions"}
-          subTitle={
-            "You haven’t made any transactions yet. when you do, they’ll appear here "
-          }
-          icon={<ImDatabase lassName="text-4xl text-[#C2C9D1]" />}
+          title={"No Beneficiaries added"}
+          subTitle={"Click “Add Beneficiary” to add a beneficiary to account"}
+          icon={<ImDatabase className="text-4xl text-[#C2C9D1]" />}
+          buttonTitle={"Add Beneficiary"}
+          onClick={handleAddModal}
         />
       )}
     </>
   );
 };
 
-export default TransactionHistoryTable;
+export default BeneficiaryTable;

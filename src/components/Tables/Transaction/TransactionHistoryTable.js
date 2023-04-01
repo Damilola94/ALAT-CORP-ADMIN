@@ -3,14 +3,15 @@ import axios from "axios";
 import { useGlobalFilter, useTable, usePagination } from "react-table";
 import { ImDatabase } from "react-icons/im";
 
-import GlobalFilter from "./GlobalFilter";
-import Pagination from "./Pagination";
-import { MOCK_DUMMY_CONTRIBUTION } from "../DummyData";
-import EmptyState from "../EmptyState";
+import GlobalFilter from "../GlobalFilter";
+import Pagination from "../Pagination";
+import RightSideModal from "../../Modals/RightSideModal";
+import { MOCK_DUMMY } from "../../DummyData";
+import EmptyState from "../../EmptyState";
 
-const ContributionTable = ({ handleAddModal }) => {
+const TransactionHistoryTable = () => {
   const [products, setProducts] = useState([]);
-  const [confirmModal, setConfirmModal] = useState(false);
+  const [content, setContent] = useState("");
 
   const fetchProducts = async () => {
     const response = await axios
@@ -23,7 +24,7 @@ const ContributionTable = ({ handleAddModal }) => {
     }
   };
 
-  const data = useMemo(() => MOCK_DUMMY_CONTRIBUTION, []);
+  const data = useMemo(() => MOCK_DUMMY, []);
 
   const transactionData = useMemo(() => [...data], [data]);
 
@@ -31,7 +32,10 @@ const ContributionTable = ({ handleAddModal }) => {
     () =>
       data[0]
         ? Object.keys(data[0])
-            .filter((key) => key !== "id")
+            .filter(
+              (key) =>
+                key !== "id" && key !== "TRANSACTION ID" && key !== "RAISED BY"
+            )
             .map((key) => {
               if (key === "STATUS") {
                 return {
@@ -65,11 +69,6 @@ const ContributionTable = ({ handleAddModal }) => {
         : [],
     [data]
   );
-
-  const handleDelete = () => {
-    setConfirmModal(!confirmModal);
-  };
-
   const tableInstance = useTable(
     {
       columns: transactionColumns,
@@ -90,9 +89,9 @@ const ContributionTable = ({ handleAddModal }) => {
     canNextPage,
     canPreviousPage,
     pageOptions,
-    prepareRow,
     gotoPage,
     pageCount,
+    prepareRow,
     preGlobalFilteredRows,
     setGlobalFilter,
     state,
@@ -106,10 +105,20 @@ const ContributionTable = ({ handleAddModal }) => {
     fetchProducts();
   }, []);
 
+  const closeModalHandler = () => {
+    setContent("");
+  };
+
+  const rightSideModalHandler = (row) => {
+    const { values } = row;
+    setContent(<RightSideModal values={values} onClick={closeModalHandler} />);
+  };
+
   return (
     <>
       {transactionData?.length > 0 ? (
         <div>
+          {content}
           <p className="text-[#1D0218] text-sm font-bold mb-4">
             Showing 1 - 50 of 100 Transactions
           </p>
@@ -152,6 +161,9 @@ const ContributionTable = ({ handleAddModal }) => {
                 return (
                   <tr
                     {...row.getRowProps()}
+                    onClick={() => {
+                      rightSideModalHandler(row);
+                    }}
                     className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}>
                     {row.cells.map((cell) => (
                       <td
@@ -173,18 +185,22 @@ const ContributionTable = ({ handleAddModal }) => {
               canNextPage={canNextPage}
               pageIndex={pageIndex}
               pageOptions={pageOptions}
+              gotoPage={gotoPage}
+              pageCount={pageCount}
             />
           </div>
         </div>
       ) : (
         <EmptyState
-          title={"You have no contribution"}
-          subTitle={"No contribution’s from members recorded yet."}
-          icon={<ImDatabase className="text-4xl text-[#C2C9D1]" />}
+          title={"You have no transactions"}
+          subTitle={
+            "You haven’t made any transactions yet. when you do, they’ll appear here "
+          }
+          icon={<ImDatabase lassName="text-4xl text-[#C2C9D1]" />}
         />
       )}
     </>
   );
 };
 
-export default ContributionTable;
+export default TransactionHistoryTable;

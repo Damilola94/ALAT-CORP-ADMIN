@@ -2,15 +2,36 @@ import React, { useEffect, useState } from "react";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { ImCancelCircle } from "react-icons/im";
 import UploadModal from "./UploadModal";
+import { useDispatch, useSelector } from "react-redux";
+import { savedBeneficiary, savedBeneficiaryListValue } from "@/redux/beneficiarySlice";
+import notification from "@/utilities/notification";
 
-const ConfirmModal = ({ handleClick, confirmModal, subTitle, uploadCheck, cancelModal }) => {
+const ConfirmModal = ({
+  handleClick,
+  confirmModal,
+  subTitle,
+  uploadCheck,
+  cancelModal,
+  deleteId,
+}) => {
   const [upload, setUpload] = useState(true);
-  const [checkModal, setCheckModal] = useState(true)
+  const beneficiaryData = useSelector(savedBeneficiaryListValue);
+  const dispatch = useDispatch();
 
-  const onClickModal = () => {
-    handleClick();
+
+  const handleRemove = () => {
+    const removedBeneficiary = beneficiaryData.filter(
+      (item) => item["S/N"] !== deleteId["S/N"]
+    );
+    dispatch(savedBeneficiary(removedBeneficiary))
+    notification({
+      title: "Deleted Beneficiary",
+      message: `You have succesfully deleted ${deleteId["ACCOUNT NAME"]} from your beneficiary directory`,
+      type: "danger",
+    });
+    handleClick()
   };
-  
+
   return (
     <>
       {cancelModal ? (
@@ -80,7 +101,7 @@ const ConfirmModal = ({ handleClick, confirmModal, subTitle, uploadCheck, cancel
                     <h2 className="text-sm mb-8 text-[#6B7280]">{subTitle}</h2>
                     <div className="container flex  justify-center mt-8 space-x-4">
                       <button
-                        onClick={() => onClickModal()}
+                        onClick={() => handleRemove()}
                         className="bg-dark-purple text-white px-3 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out"
                       >
                         Yes, I’m sure
@@ -99,7 +120,9 @@ const ConfirmModal = ({ handleClick, confirmModal, subTitle, uploadCheck, cancel
           </div>
         </>
       ) : null}
-      {upload && confirmModal && uploadCheck && <UploadModal upload={upload} onClickModal={onClickModal} />}
+      {upload && confirmModal && uploadCheck && (
+        <UploadModal upload={upload} onClickModal={onClickModal} />
+      )}
     </>
   );
 };

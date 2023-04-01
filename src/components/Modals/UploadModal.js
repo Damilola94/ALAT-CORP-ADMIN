@@ -4,14 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { FiUploadCloud } from "react-icons/fi";
 import { ImDatabase, ImCancelCircle } from "react-icons/im";
 
-import { addBeneficiary, selectValue } from "@/redux/beneficiarySlice";
+import { addBeneficiary, beneficiaryListValue } from "@/redux/beneficiarySlice";
+import notification from '../../utilities/notification';
+
 
 const UploadModal = ({ onClickModal, upload }) => {
   const dispatch = useDispatch();
-  const tableData = useSelector(selectValue);
+  const tableData = useSelector(beneficiaryListValue);
 
   const [progress, setProgress] = useState(0);
-  const [moreBeneficiary, setMoreBeneficiary] = useState([]);
+  const [addAnotherBeneficiary, setAddAnotherBeneficiary] = useState(tableData);
   const [excelFileName, setExcelFileName] = useState("");
   const [excelData, setExcelData] = useState([]);
   const [excelFileError, setExcelFileError] = useState(null);
@@ -133,11 +135,19 @@ const UploadModal = ({ onClickModal, upload }) => {
     }
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      // dispatch(addBeneficiary(excelData));
-    }, 5000);
-  }, [excelData]);
+  const handleAddMore = () => {
+    if (excelData.length === 0) {
+      notification({
+        title: "Invalid Selection",
+        message: "Please select a valid file before merging",
+        type: "danger",
+      });
+    } else{
+      const AddMore = [...addAnotherBeneficiary, ...excelData];
+      dispatch(addBeneficiary(AddMore));
+      onClickModal();
+    }
+  };
 
   return (
     <>
@@ -146,7 +156,8 @@ const UploadModal = ({ onClickModal, upload }) => {
           <div className="fixed inset-0 z-10">
             <div
               className="fixed inset-0 w-full h-full bg-black opacity-5"
-              onClick={() => onClickModal()}></div>
+              onClick={() => onClickModal()}
+            ></div>
             <div className="flex items-center min-h-screen justify-center">
               <div className="relative w-full max-w-3xl mx-auto bg-white shadow-lg  flex h-fit">
                 <div className="sm:flex lg:block w-full">
@@ -238,7 +249,7 @@ const UploadModal = ({ onClickModal, upload }) => {
                               </button>
                               <button
                                 className="bg-dark-purple text-white px-4 py-2 rounded-lg font-semibold cursor-pointer hover:bg-white hover:text-dark-purple hover:border hover:border-dark-purple translate duration-200 ease-in-out"
-                                onClick={() => {}}
+                                onClick={() => handleAddMore()}
                               >
                                 Merge file
                               </button>

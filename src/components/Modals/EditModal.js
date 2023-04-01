@@ -3,10 +3,10 @@ import { ImCancelCircle } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
 
 import Switch from "@/components/ui/Switch";
-import { addBeneficiary, selectValue } from "@/redux/beneficiarySlice";
+import { addBeneficiary, beneficiaryListValue } from "@/redux/beneficiarySlice";
 
 const EditModal = ({ handleEditModal, editModal, editModalId }) => {
-  const tableData = useSelector(selectValue);
+  const tableData = useSelector(beneficiaryListValue);
   const dispatch = useDispatch();
   const [editData, setEditData] = useState("");
 

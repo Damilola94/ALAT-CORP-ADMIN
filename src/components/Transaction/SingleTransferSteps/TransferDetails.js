@@ -4,8 +4,8 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 
 import { StepperContext } from "@/contexts/StepperContex";
 import Switch from "@/components/ui/Switch";
-import FundTransferTable from "@/components/Tables/FundTransferTable";
-import { addBeneficiary, selectValue } from "@/redux/beneficiarySlice";
+import FundTransferTable from "@/components/Tables/Transaction/FundTransferTable";
+import { addBeneficiary, beneficiaryListValue, selectedBeneficiaryListValue } from "@/redux/beneficiarySlice";
 import BeneficiariesModal from "@/components/Modals/BeneficiariesModal";
 
 const TransferDetails = ({ handleEditModal }) => {
@@ -13,7 +13,8 @@ const TransferDetails = ({ handleEditModal }) => {
   const { userData, setUserData } = useContext(StepperContext);
   const [moreBeneficiary, setMoreBeneficiary] = useState([]);
   const [beneficiariesModal, setBeneficiariesModal] = useState(false);
-  const tableData = useSelector(selectValue);
+  const tableData = useSelector(beneficiaryListValue);
+  const selectedData = useSelector(selectedBeneficiaryListValue);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -85,7 +86,7 @@ const TransferDetails = ({ handleEditModal }) => {
                 <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                   <input
                     onChange={handleChange}
-                    value={userData["Bank Name"] || ""}
+                    value={userData["Bank Name"] || selectedData?.bankName || "" }
                     name="Bank Name"
                     placeholder="Select Bank"
                     className="bg-input-fill outline-none text-sm flex-1"
@@ -99,7 +100,7 @@ const TransferDetails = ({ handleEditModal }) => {
                 <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                   <input
                     onChange={handleChange}
-                    value={userData["Account Number"] || ""}
+                    value={userData["Account Number"] ||selectedData?.accountNumber || "" }
                     name="Account Number"
                     placeholder="Account number"
                     className="bg-input-fill outline-none text-sm flex-1"
@@ -115,7 +116,7 @@ const TransferDetails = ({ handleEditModal }) => {
                 <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                   <input
                     onChange={handleChange}
-                    value={userData["Account Name"] || ""}
+                    value={userData["Account Name"] || selectedData?.accountName || ""}
                     name="Account Name"
                     placeholder="Account Name"
                     className="bg-input-fill outline-none text-sm flex-1"

@@ -7,15 +7,16 @@ import {
   useRowSelect,
 } from "react-table";
 import { RiDeleteBin7Line } from "react-icons/ri";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineEdit } from "react-icons/ai";
 
-import { selectValue } from "../../redux/beneficiarySlice";
-import Checkbox from "../Transaction/CheckBox";
-import GlobalFilter from "./GlobalFilter";
-import Pagination from "./Pagination";
-import UploadAction from "../Transaction/BulkTransferSteps/UploadAction";
-import ConfirmModal from "../Modals/ConfirmModal";
+import { addBeneficiary, beneficiaryListValue } from "../../../redux/beneficiarySlice";
+import Checkbox from "../../Transaction/CheckBox";
+import GlobalFilter from "../GlobalFilter";
+import Pagination from "../Pagination";
+import UploadAction from "../../Transaction/BulkTransferSteps/UploadAction";
+import ConfirmModal from "../../Modals/ConfirmModal";
+import notification from '../../../utilities/notification';
 
 const FundTransferTable = ({
   handleEditModal,
@@ -23,9 +24,11 @@ const FundTransferTable = ({
   confirmDetails,
   setMoreBeneficiary,
   bulkTransferDetails,
+  setExcelFileName,
 }) => {
   const [products, setProducts] = useState([]);
-  const tableData = useSelector(selectValue);
+  const dispatch = useDispatch();
+  const tableData = useSelector(beneficiaryListValue);
   const [hoverState, setHoverState] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
@@ -78,12 +81,14 @@ const FundTransferTable = ({
                 onMouseMove={() => {
                   handleMouseOver();
                 }}
-                onClick={() => handleEditModal(row.values)}>
+                onClick={() => handleEditModal(row.values)}
+              >
                 <AiOutlineEdit />
               </button>
               <button
                 className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
-                onClick={() => handleRemove(row.values)}>
+                onClick={() => handleRemove(row.values)}
+              >
                 <RiDeleteBin7Line />
               </button>
             </div>
@@ -129,7 +134,7 @@ const FundTransferTable = ({
   const rowdata = page.length !== 9 ? page : row;
 
   const handleMultipleDelete = () => {
-    const result = tableData.filter((val) => {
+    const result = tableData?.filter((val) => {
       return !selectedFlatRows.find((a) => {
         return val["s/n"] === a.values["s/n"];
       });
@@ -147,6 +152,16 @@ const FundTransferTable = ({
 
   const handleCancelModal = () => {
     setCancelModal(!cancelModal);
+  };
+
+  const handleClearUpload = () => {
+    dispatch(addBeneficiary([]));
+    setExcelFileName("")
+    notification({
+      title: "Clear Upload",
+      message: "You have succesfully empty your bulk upload table",
+      type: "success",
+    });
   };
 
   useEffect(() => {
@@ -175,7 +190,7 @@ const FundTransferTable = ({
       {bulkTransferDetails && (
         <UploadAction
           handleUploadModal={handleUploadModal}
-          handleCancelModal={handleCancelModal}
+          handleClearUpload={handleClearUpload}
         />
       )}
       {bulkTransferDetails && (
@@ -207,21 +222,24 @@ const FundTransferTable = ({
           <h2>{`${selectedFlatRows.length} recipients selected`}:</h2>
           <button
             onClick={() => handleMultipleDelete()}
-            className="bg-[#E24D4D] text-white px-10 py-2 rounded-lg font-semibold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out">
+            className="bg-[#E24D4D] text-white px-10 py-2 rounded-lg font-semibold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out"
+          >
             Delete
           </button>
         </div>
       )}
       <table
         {...getTableProps()}
-        className=" text-base text-gray-900 p-4 w-full">
+        className=" text-base text-gray-900 p-4 w-full"
+      >
         <thead className="p-4">
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()} className="">
               {headerGroup.headers.map((column) => (
                 <th
                   className="text-left text-xs p-4 bg-[#F9FAFB] text-[#1D0218]"
-                  {...column.getHeaderProps()}>
+                  {...column.getHeaderProps()}
+                >
                   {column.render("Header")}
                 </th>
               ))}
@@ -235,11 +253,13 @@ const FundTransferTable = ({
               <tr
                 {...row.getRowProps()}
                 onClick={() => {}}
-                className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}>
+                className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}
+              >
                 {row.cells.map((cell) => (
                   <td
                     {...cell.getCellProps()}
-                    className="border-b border-[#E1E5EE] text-xs p-4 font-medium text-[#808080]">
+                    className="border-b border-[#E1E5EE] text-xs p-4 font-medium text-[#808080]"
+                  >
                     {cell.render("Cell")}
                   </td>
                 ))}

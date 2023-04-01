@@ -3,21 +3,13 @@ import axios from "axios";
 import { useGlobalFilter, useTable, usePagination } from "react-table";
 import { ImDatabase } from "react-icons/im";
 
-import GlobalFilter from "./GlobalFilter";
-import Pagination from "./Pagination";
-import { MOCK_DUMMY_BENEFICIARY } from "../DummyData";
-import EmptyState from "../EmptyState";
-import ConfirmModal from "../Modals/ConfirmModal";
-import AddBeneficiaryModal from "../Modals/AddBeneficiaryModal";
+import GlobalFilter from "../GlobalFilter";
+import Pagination from "../Pagination";
+import { MOCK_DUMMY_ANNOUNCEMENT } from "../../DummyData";
+import EmptyState from "../../EmptyState";
 
-const BeneficiaryTable = ({}) => {
+const SentAnnouncementTable = ({ handleCreateAnnouncement }) => {
   const [products, setProducts] = useState([]);
-  const [confirmModal, setConfirmModal] = useState(false);
-  const [addModal, setAddModal] = useState(false);
-
-  const handleAddModal = () => {
-    setAddModal(!addModal);
-  };
 
   const fetchProducts = async () => {
     const response = await axios
@@ -30,7 +22,7 @@ const BeneficiaryTable = ({}) => {
     }
   };
 
-  const data = useMemo(() => MOCK_DUMMY_BENEFICIARY, []);
+  const data = useMemo(() => MOCK_DUMMY_ANNOUNCEMENT, []);
 
   const transactionData = useMemo(() => [...data], [data]);
 
@@ -47,39 +39,12 @@ const BeneficiaryTable = ({}) => {
     [data]
   );
 
-  const handleDelete = () => {
-    setConfirmModal(!confirmModal);
-  };
-
-  const tableHooks = (hooks) => {
-    hooks.visibleColumns.push((columns) => {
-      return [
-        ...columns,
-        {
-          id: "ACTION",
-          Header: "ACTION",
-          Cell: ({ row }) => (
-            <div className="flex">
-              <h1
-                className="text-xs text-[#E24D4D]"
-                onClick={() => handleDelete(row.values)}
-              >
-                Delete Account
-              </h1>
-            </div>
-          ),
-        },
-      ];
-    });
-  };
-
   const tableInstance = useTable(
     {
       columns: transactionColumns,
       data: transactionData,
     },
     useGlobalFilter,
-    tableHooks,
     usePagination
   );
 
@@ -112,19 +77,6 @@ const BeneficiaryTable = ({}) => {
 
   return (
     <>
-      {confirmModal && (
-        <ConfirmModal
-          handleClick={handleDelete}
-          confirmModal={confirmModal}
-          subTitle={"Are you sure you want to delete this account?"}
-        />
-      )}
-      {addModal && (
-        <AddBeneficiaryModal
-          handleAddModal={handleAddModal}
-          addModal={addModal}
-        />
-      )}
       {transactionData?.length > 0 ? (
         <div>
           <p className="text-[#1D0218] text-sm font-bold mb-4">
@@ -149,16 +101,14 @@ const BeneficiaryTable = ({}) => {
           </div>
           <table
             {...getTableProps()}
-            className=" text-base text-gray-900 p-4 w-full"
-          >
+            className=" text-base text-gray-900 p-4 w-full">
             <thead className="p-4">
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()} className="">
                   {headerGroup.headers.map((column) => (
                     <th
                       className="text-left text-xs p-4 bg-[#F9FAFB] text-[#1D0218]"
-                      {...column.getHeaderProps()}
-                    >
+                      {...column.getHeaderProps()}>
                       {column.render("Header")}
                     </th>
                   ))}
@@ -171,13 +121,11 @@ const BeneficiaryTable = ({}) => {
                 return (
                   <tr
                     {...row.getRowProps()}
-                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}
-                  >
+                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}>
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]"
-                      >
+                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]">
                         {cell.render("Cell")}
                       </td>
                     ))}
@@ -199,15 +147,15 @@ const BeneficiaryTable = ({}) => {
         </div>
       ) : (
         <EmptyState
-          title={"No Beneficiaries added"}
-          subTitle={"Click “Add Beneficiary” to add a beneficiary to account"}
+          title={"No announcement created yet "}
+          subTitle={"Click “Create Announcement” to send announcement"}
           icon={<ImDatabase className="text-4xl text-[#C2C9D1]" />}
-          buttonTitle={"Add Beneficiary"}
-          onClick={handleAddModal}
+          buttonTitle={"Create Announcement"}
+          onClick={handleCreateAnnouncement}
         />
       )}
     </>
   );
 };
 
-export default BeneficiaryTable;
+export default SentAnnouncementTable;

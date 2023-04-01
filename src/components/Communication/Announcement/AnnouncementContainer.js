@@ -1,6 +1,6 @@
 import GlobalContainer from "../../ui/GlobalContainer";
-import SentAnnouncementTable from "../../Tables/SentAnnouncementTable";
-import ScheduleAnnouncementTable from "../../Tables/ScheduleAnnouncementTable";
+import SentAnnouncementTable from "../../Tables/Communication/SentAnnouncementTable";
+import ScheduleAnnouncementTable from "../../Tables/Communication/ScheduleAnnouncementTable";
 import { useState } from "react";
 
 const AnnouncementContainer = ({ handleCreateAnnouncement }) => {

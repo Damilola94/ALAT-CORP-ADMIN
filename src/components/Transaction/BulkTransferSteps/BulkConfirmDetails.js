@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 
 import { StepperContext } from "@/contexts/StepperContex";
-import { selectValue } from "@/redux/beneficiarySlice";
-import FundTransferTable from "@/components/Tables/FundTransferTable";
+import { beneficiaryListValue } from "@/redux/beneficiarySlice";
+import FundTransferTable from "@/components/Tables/Transaction/FundTransferTable";
 
 const BulkConfirmDetails = () => {
   const { userData } = useContext(StepperContext);
-  const tableData = useSelector(selectValue);
+  const tableData = useSelector(beneficiaryListValue);
 
   const sumAmount = tableData.reduce((accumulator, object) => {
     return accumulator + Number(object.Amount);

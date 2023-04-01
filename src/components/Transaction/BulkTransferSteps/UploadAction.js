@@ -1,7 +1,7 @@
 import React from "react";
 import { IoIosWarning } from "react-icons/io";
 
-const UploadAction = ({ handleUploadModal, handleCancelModal }) => {
+const UploadAction = ({ handleUploadModal, handleClearUpload }) => {
   return (
     <div className="flex justify-between items-center w-full my-8">
       <div className="flex items-center">
@@ -23,7 +23,7 @@ const UploadAction = ({ handleUploadModal, handleCancelModal }) => {
         </button>
         <button
           className="bg-white border border-dark-purple text-dark-purple px-4 rounded-lg font-semibold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out"
-          onClick={() => handleCancelModal()}>
+          onClick={() => handleClearUpload()}>
           Clear Upload
         </button>
       </div>

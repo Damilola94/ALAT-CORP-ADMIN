@@ -13,10 +13,16 @@ import Pagination from "../Pagination";
 import { MOCK_ADMIN } from "../../DummyData";
 import EmptyState from "../../EmptyState";
 import Checkbox from "../../Transaction/CheckBox";
+import MoreAction from "@/components/common/moreAction";
 
 const MembersTable = () => {
   const [products, setProducts] = useState([]);
   const [content, setContent] = useState("");
+  const [moreActionModal, setmoreActionModal] = useState(false);
+
+  const handleMoreActionModal = () => {
+    setmoreActionModal(!moreActionModal);
+  };
 
   const fetchProducts = async () => {
     const response = await axios
@@ -31,7 +37,7 @@ const MembersTable = () => {
 
   const data = useMemo(() => MOCK_ADMIN, []);
 
-  const transactionData = useMemo(() => [...data], [data]);
+  const adminUserData = useMemo(() => [...data], [data]);
 
   const transactionColumns = useMemo(
     () =>
@@ -90,10 +96,16 @@ const MembersTable = () => {
             <div className="flex">
               <button
                 className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
-                onClick={() => {}}
+                onClick={() => handleMoreActionModal()}
               >
                 <BsThreeDots />
               </button>
+              {moreActionModal &&
+                <div>
+                  <span>View User</span>
+                  <span>Invite User</span>
+                </div>
+              }
             </div>
           ),
         },
@@ -104,7 +116,7 @@ const MembersTable = () => {
   const tableInstance = useTable(
     {
       columns: transactionColumns,
-      data: transactionData,
+      data: adminUserData,
     },
     useGlobalFilter,
     tableHooks,
@@ -146,7 +158,7 @@ const MembersTable = () => {
 
   return (
     <>
-      {transactionData?.length > 0 ? (
+      {adminUserData?.length > 0 ? (
         <div>
           {content}
           <p className="text-[#1D0218] text-sm font-bold mb-4">

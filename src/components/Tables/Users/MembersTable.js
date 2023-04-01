@@ -31,7 +31,7 @@ const MembersTable = () => {
 
   const data = useMemo(() => MOCK_MEMBERS, []);
 
-  const transactionData = useMemo(() => [...data], [data]);
+  const membersData = useMemo(() => [...data], [data]);
 
   const transactionColumns = useMemo(
     () =>
@@ -104,7 +104,7 @@ const MembersTable = () => {
   const tableInstance = useTable(
     {
       columns: transactionColumns,
-      data: transactionData,
+      data: membersData,
     },
     useGlobalFilter,
     tableHooks,
@@ -142,7 +142,7 @@ const MembersTable = () => {
  
   return (
     <>
-      {transactionData?.length > 0 ? (
+      {membersData?.length > 0 ? (
         <div>
           {content}
           <p className="text-[#1D0218] text-sm font-bold mb-4">

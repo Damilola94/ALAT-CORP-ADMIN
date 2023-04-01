@@ -5,16 +5,43 @@ import GlobalContainer from "../ui/GlobalContainer";
 import AdminsTable from "../Tables/Users/AdminsTable";
 import MembersTable from "../Tables/Users/MembersTable";
 import InvitedTable from "../Tables/Users/InvitedTable";
+import InviteMemberModal from "../Modals/InviteMemberModal";
+import InviteSuccessModal from "../Modals/InviteSuccessModal";
 
 const UsersContainer = ({  }) => {
   const [toggle, setToggle] = useState(1);
+  const [addModal, setAddModal] = useState(false);
+  const [modal, setModal] = useState(false);
+
+
+  const handleAddModal = () => {
+    setAddModal(!addModal);
+  };
+
+  const handleSuccesInvite = () => {
+    setModal(!modal);
+  };
+
   return (
     <>
+      {/* {addModal && (
+        <InviteMemberModal
+          handleAddModal={handleAddModal}
+          addModal={addModal}
+        />
+      )} */}
+      {modal && (
+        <InviteSuccessModal
+          handleAddModal={handleSuccesInvite}
+          modal={modal}
+        />
+      )}
       <div className="h-fit mb-4">
         <GlobalContainer
           pageName={"Users Overview"}
           buttonTitle={"Download User List"}
           inviteButton={"Invite New User"}
+          handleAddModal={handleAddModal}
         >
           <div className="grid lg:grid-cols-5 gap-4 p-2">
             <Card title="TOTAL USERS" data={"250"} icon={0} />
@@ -33,7 +60,7 @@ const UsersContainer = ({  }) => {
                     toggle === 1 && "text-dark-purple"
                   }`}
                 >
-                  All Users
+                 Members
                 </h1>
                 {toggle === 1 && (
                   <hr className="border-b-2 border-dark-purple" />

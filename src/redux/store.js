@@ -4,7 +4,7 @@ import beneficiaryReducer from './beneficiarySlice'
 
 const store = configureStore({
   reducer: {
-    counter: beneficiaryReducer
+    beneficiary: beneficiaryReducer
   },
 })
 

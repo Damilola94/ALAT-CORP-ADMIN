@@ -2,13 +2,15 @@ import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import { useGlobalFilter, useTable, usePagination } from "react-table";
 import { ImDatabase } from "react-icons/im";
+import { RiDeleteBin7Line } from "react-icons/ri";
+import { AiOutlineEdit } from "react-icons/ai";
 
-import GlobalFilter from "./GlobalFilter";
-import Pagination from "./Pagination";
-import { MOCK_DUMMY_ANNOUNCEMENT } from "../DummyData";
-import EmptyState from "../EmptyState";
+import GlobalFilter from "../GlobalFilter";
+import Pagination from "../Pagination";
+import { MOCK_DUMMY_ANNOUNCEMENT } from "../../DummyData";
+import EmptyState from "../../EmptyState";
 
-const SentAnnouncementTable = ({ handleCreateAnnouncement }) => {
+const ScheduleAnnouncementTable = ({ handleCreateAnnouncement }) => {
   const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
@@ -39,12 +41,42 @@ const SentAnnouncementTable = ({ handleCreateAnnouncement }) => {
     [data]
   );
 
+  const tableHooks = (hooks) => {
+    hooks.visibleColumns.push((columns) => {
+      return [
+        ...columns,
+        {
+          id: "ACTION",
+          Header: "ACTION",
+          Cell: ({ row }) => (
+            <div className="flex">
+              <button
+                className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
+                onMouseMove={() => {
+                  handleMouseOver();
+                }}
+                onClick={() => handleEditModal(row.values)}>
+                <AiOutlineEdit />
+              </button>
+              <button
+                className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
+                onClick={() => handleRemove(row.values)}>
+                <RiDeleteBin7Line />
+              </button>
+            </div>
+          ),
+        },
+      ];
+    });
+  };
+
   const tableInstance = useTable(
     {
       columns: transactionColumns,
       data: transactionData,
     },
     useGlobalFilter,
+    tableHooks,
     usePagination
   );
 
@@ -158,4 +190,4 @@ const SentAnnouncementTable = ({ handleCreateAnnouncement }) => {
   );
 };
 
-export default SentAnnouncementTable;
+export default ScheduleAnnouncementTable;

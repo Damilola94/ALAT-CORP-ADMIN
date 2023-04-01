@@ -1,7 +1,7 @@
 import React from "react";
 
 import GlobalContainer from "../ui/GlobalContainer";
-import ContributionTable from "../Tables/ContributionTable";
+import ContributionTable from "../Tables/Transaction/ContributionTable";
 
 const ContributionContainer = () => {
    return (

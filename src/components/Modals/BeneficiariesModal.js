@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { ImCancelCircle, ImDatabase } from "react-icons/im";
 import { BsSearch } from "react-icons/bs";
 import EmptyState from "../EmptyState";
+import { useDispatch } from "react-redux";
+import { selectBeneficiary } from "@/redux/beneficiarySlice";
 
 const BeneficiariesModal = ({ handleBeneficiaryModal, beneficiariesModal }) => {
   const [editData, setEditData] = useState("");
   const [value, setValue] = useState("");
-
+  const dispatch = useDispatch()
+  
   const onChange = () => {};
 
   const beneficiaryList = [
@@ -32,15 +35,15 @@ const BeneficiariesModal = ({ handleBeneficiaryModal, beneficiariesModal }) => {
     },
   ];
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEditData({ ...editData, [name]: value });
+  const handleSelectedValue = (item) => {
+   dispatch(selectBeneficiary(item));
+   handleBeneficiaryModal();
   };
 
   const BeneficiariesCard = ({ item, id }) => {
     const { bankName, accountName, accountNumber } = item;
     return (
-      <div key={id} className=" bg-white w-full shadow-md my-6 p-3">
+      <div key={id} className=" bg-white w-full shadow-md my-6 p-3 cursor-pointer hover:border-red-900 hover:border" onClick={() => handleSelectedValue(item)}>
         <h1 className="font-bold text-base">{accountName}</h1>
         <p className="text-gray-500 text-xs my-1">{bankName}</p>
         <p className="text-dark-purple text-sm">{accountNumber}</p>
@@ -73,7 +76,7 @@ const BeneficiariesModal = ({ handleBeneficiaryModal, beneficiariesModal }) => {
                     {beneficiaryList.length > 0 ? (
                       <div
                         className="p-5 h-[450px] overflow-y-auto  overflow-x-hidden scrollbar scrollbar-thumb-dark-purple scrollbar-track-gray-200
-                        scrollbar-thumb-rounded  rounded-md
+                        scrollbar-thumb-rounded  rounded-md 
                       ">
                         <div className="w-full">
                           <div className="p-2 flex rounded-md border border-input-outline bg-input-fill w-full h-9 items-center">

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import GlobalContainer from "../ui/GlobalContainer";
-import BeneficiaryTable from "../Tables/BeneficiaryTable";
+import BeneficiaryTable from "../Tables/Transaction/BeneficiaryTable";
 import AddBeneficiaryModal from "../Modals/AddBeneficiaryModal";
 
 const BeneficiaryContainer = () => {

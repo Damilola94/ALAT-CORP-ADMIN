@@ -2,7 +2,7 @@ import React from "react";
 
 import Card from "../Cards/Card";
 import GlobalContainer from "../ui/GlobalContainer";
-import TransactionHistoryTable from "../Tables/TransactionHistoryTable";
+import TransactionHistoryTable from "../Tables/Transaction/TransactionHistoryTable";
 
 const TransactionHistoryContainer = () => {
   return (
