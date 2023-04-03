@@ -15,7 +15,7 @@ const DeleteMemberModal = ({ handleDelete, modal }) => {
               <div className="relative w-96 max-w-xl mx-auto bg-white shadow-lg rounded-lg flex h-96 justify-center items-center">
                 <div className="sm:flex lg:block w-full">
                   <div className="lg:text-center sm:ml-4 sm:text-left m-6 md:text-center">
-                    <RiErrorWarningLine className="text-orange-500 w-full text-5xl mb-8" />
+                    <RiErrorWarningLine className="text-[#E24D4D] w-full text-5xl mb-8" />
                     <h2 className="text-xl font-normal mb-12">
                       Are you sure you want to delete this user?
                     </h2>

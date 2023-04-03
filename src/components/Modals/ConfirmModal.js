@@ -3,7 +3,10 @@ import { RiErrorWarningLine } from "react-icons/ri";
 import { ImCancelCircle } from "react-icons/im";
 import UploadModal from "./UploadModal";
 import { useDispatch, useSelector } from "react-redux";
-import { savedBeneficiary, savedBeneficiaryListValue } from "@/redux/beneficiarySlice";
+import {
+  savedBeneficiary,
+  savedBeneficiaryListValue,
+} from "@/redux/beneficiarySlice";
 import notification from "@/utilities/notification";
 
 const ConfirmModal = ({
@@ -18,18 +21,22 @@ const ConfirmModal = ({
   const beneficiaryData = useSelector(savedBeneficiaryListValue);
   const dispatch = useDispatch();
 
+  const onClickModal = () => {
+    setUpload(!upload);
+    handleClick()
+  };
 
   const handleRemove = () => {
     const removedBeneficiary = beneficiaryData.filter(
       (item) => item["S/N"] !== deleteId["S/N"]
     );
-    dispatch(savedBeneficiary(removedBeneficiary))
+    dispatch(savedBeneficiary(removedBeneficiary));
     notification({
       title: "Deleted Beneficiary",
       message: `You have succesfully deleted ${deleteId["ACCOUNT NAME"]} from your beneficiary directory`,
       type: "danger",
     });
-    handleClick()
+    handleClick();
   };
 
   return (

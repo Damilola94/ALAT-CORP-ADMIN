@@ -3,11 +3,12 @@ import { useSelector } from "react-redux";
 
 import { StepperContext } from "@/contexts/StepperContex";
 import FundTransferTable from "@/components/Tables/Transaction/FundTransferTable";
-import { beneficiaryListValue } from "@/redux/beneficiarySlice";
+import { beneficiaryListValue,selectedBeneficiaryListValue } from "@/redux/beneficiarySlice";
 
 const ConfirmDetails = ({}) => {
   const { userData } = useContext(StepperContext);
   const tableData = useSelector(beneficiaryListValue);
+  const selectedData = useSelector(selectedBeneficiaryListValue);
 
   const sumAmount = tableData.reduce((accumulator, object) => {
     return accumulator + Number(object.Amount);
@@ -45,7 +46,7 @@ const ConfirmDetails = ({}) => {
                 Bank Name
               </div>
               <h1 className="mb-3 mt-3 font-bold text-base">
-                {userData["Bank Name"]}
+                {userData["Bank Name"] || selectedData?.bankName || ""}
               </h1>
             </div>
             <div className="mx-2 w-full flex-1">
@@ -53,7 +54,9 @@ const ConfirmDetails = ({}) => {
                 Account Number
               </div>
               <h1 className="mb-3 mt-3 font-bold text-base">
-                {userData["Account Number"]}
+                {userData["Account Number"] ||
+                  selectedData?.accountNumber ||
+                  ""}
               </h1>
             </div>
           </div>
@@ -63,7 +66,7 @@ const ConfirmDetails = ({}) => {
                 Account Name
               </div>
               <h1 className="mb-3 mt-3 font-bold text-base">
-                {userData["Account Name"]}
+                {userData["Account Name"] || selectedData?.accountName || ""}
               </h1>
             </div>
             <div className="mx-2 w-full flex-1">

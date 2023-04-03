@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-
 
 const InviteMemberModal = ({
   handleAddModal,
@@ -10,38 +9,73 @@ const InviteMemberModal = ({
 }) => {
   const [addData, setAddData] = useState("");
   const [options, setOptions] = useState(1);
+  const [invitedUsersData, setInvitedUsersData] = useState([]);
+  const [userType, setUserType] = useState("Member");
 
-  const invitedUsers = [
-    { email: "lapojohn@gmail.com" },
-    { email: "lapojohn@gmail.com" },
-    { email: "lapojohn@gmail.com" },
-    { email: "lapojohn@gmail.com" },
-    { email: "lapojohn@gmail.com" },
-    { email: "lapojohn@gmail.com" },
-    { email: "lapojohn@gmail.com" },
-    { email: "lapojohn@gmail.com" },
-    { email: "lapojohn@gmail.com" },
-  ];
+  const displaySetting = (options) => {
+    switch (options) {
+      case 1:
+        return setUserType("Member");
+      case 2:
+        return setUserType("Initiator");
+      case 3:
+        return setUserType("Verifier");
+      case 4:
+        return setUserType("Approver");
+      default:
+    }
+  };
 
-  const InvitedUsersCard = ({ item, id }) => {
+  useEffect(() => {
+    displaySetting(options)   
+  }, [options]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setAddData({ ...addData, [name]: value, userType });
+    // displaySetting(options)   
+  };
+
+  const truncateString = (str, num) => {
+    if (str?.length > num) {
+      return str.slice(0, num) + "...";
+    } else {
+      return str;
+    }
+  };
+
+  const handleAddMore = () => {
+    if (addData?.email?.length > 0) {
+      const addMoreData = [];
+      addMoreData.push(addData);
+      setInvitedUsersData((prevState) => {
+        return [...prevState, ...addMoreData];
+      });
+      setAddData("");
+    }
+  };
+
+  const handleRemove = (email) => {
+    const removedUserData = invitedUsersData.filter(
+      (item) => item.email !== email
+    );
+    setInvitedUsersData(removedUserData);
+  };
+
+  const InvitedUsersCard = ({ item, index }) => {
     const { email } = item;
     return (
       <div
-        key={id}
-        className=" bg-gray-200 m-1 rounded-md p-1  flex items-center space-x-1 justify-between"
+        key={index}
+        className="bg-gray-200 m-1 rounded-md p-1  flex items-center space-x-1 justify-between"
         onClick={() => {}}
       >
-        <h1 className="font-sans text-[10px]"> {email}</h1>
-        <div onClick={() => {}}>
+        <h1 className="font-sans text-[10px]"> {truncateString(email, 10)}</h1>
+        <div onClick={() => handleRemove(email)}>
           <ImCancelCircle className="= text-[10px] cursor-pointer" />
         </div>
       </div>
     );
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setAddData({ ...addData, [name]: value });
   };
 
   const handleSendInvite = () => {
@@ -79,7 +113,7 @@ const InviteMemberModal = ({
                       </div>
                     </div>
                     <div
-                      className="p-4 h-[500px] overflow-y-auto  overflow-x-hidden scrollbar scrollbar-thumb-dark-purple scrollbar-track-gray-200
+                      className="p-6 h-[450px] overflow-y-auto  overflow-x-hidden scrollbar scrollbar-thumb-dark-purple scrollbar-track-gray-200
                         scrollbar-thumb-rounded"
                     >
                       <div className="w-full">
@@ -91,8 +125,8 @@ const InviteMemberModal = ({
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
                                 onChange={handleChange}
-                                value={addData?.["Email Address"] || ""}
-                                name="Email Address"
+                                value={addData.email || ""}
+                                name="email"
                                 placeholder="name@example.com"
                                 type="email"
                                 className="bg-input-fill outline-none text-sm flex-1"
@@ -108,7 +142,7 @@ const InviteMemberModal = ({
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill w-full">
                               <input
                                 onChange={handleChange}
-                                value={addData?.["fName"] || ""}
+                                value={addData.fName || ""}
                                 name="fName"
                                 placeholder="First Name"
                                 className="bg-input-fill outline-none text-sm flex-1 w-full"
@@ -122,7 +156,7 @@ const InviteMemberModal = ({
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
                                 onChange={handleChange}
-                                value={addData?.["lName"] || ""}
+                                value={addData.lName || ""}
                                 name="lName"
                                 placeholder="Last Name"
                                 className="bg-input-fill outline-none text-sm flex-1 w-full"
@@ -138,7 +172,7 @@ const InviteMemberModal = ({
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
                                 onChange={handleChange}
-                                value={addData?.["pNumber"] || ""}
+                                value={addData.pNumber || ""}
                                 name="pNumber"
                                 placeholder="Account number"
                                 className="bg-input-fill outline-none text-sm flex-1"
@@ -258,15 +292,15 @@ const InviteMemberModal = ({
                           </div>
                         </div>
                       </div>
-                      <hr className="my-5" />
+                      <hr className="my-4" />
                       <div className="flex flex-wrap w-full">
-                        {invitedUsers.map((item, _) => (
+                        {invitedUsersData.map((item, _) => (
                           <InvitedUsersCard item={item} id={_} key={_} />
                         ))}
                       </div>
-                      <div className=" bg-light-purple text-dark-purple px-5 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out flex w-3/5 my-12 items-center space-x-5">
+                      <div className=" bg-light-purple text-dark-purple px-5 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out flex w-3/5 my-3 items-center space-x-5">
                         <AiOutlinePlusCircle />
-                        <button onClick={() => handleSavedValue()} className="">
+                        <button onClick={() => handleAddMore()} className="">
                           Invite another user
                         </button>
                       </div>

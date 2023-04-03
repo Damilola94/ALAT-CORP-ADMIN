@@ -15,7 +15,6 @@ import { MOCK_ADMIN } from "../../../DummyData";
 import EmptyState from "../../../EmptyState";
 import Checkbox from "../../../common/CheckBox";
 
-
 const MembersTable = () => {
   const [products, setProducts] = useState([]);
   const [modal, setModal] = useState(false);
@@ -79,9 +78,7 @@ const MembersTable = () => {
     [data]
   );
 
-  const actionOptions = [
-   
-  ];
+  const actionOptions = [];
 
   const handleOnchange = (event, row) => {
     const selectedOption = event.target.value;
@@ -98,12 +95,14 @@ const MembersTable = () => {
         <select
           defaultValue=""
           onChange={handleOnchange}
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-dark-purple w-11 focus:border-dark-purple block p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring--dark-purple dark:focus:border-dark-purple">
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-dark-purple w-11 focus:border-dark-purple block p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring--dark-purple dark:focus:border-dark-purple"
+        >
           <option
             value=""
             disabled
             hidden
-            className="font-bold text-dark-purple">
+            className="font-bold text-dark-purple"
+          >
             ...
           </option>
           {actionOptions.map((option) => (
@@ -184,23 +183,13 @@ const MembersTable = () => {
       {adminUserData?.length > 0 ? (
         <div>
           <p className="text-[#1D0218] text-sm font-bold mb-4">
-            Showing 1 - 50 of 100 Transactions
+            Showing 3 Admins
           </p>
           <div className="flex mt-2 mb-6 items-center">
             <GlobalFilter
               preGlobalFilteredRows={preGlobalFilteredRows}
               setGlobalFilter={setGlobalFilter}
               globalFilter={state.globalFilter}
-            />
-            <Pagination
-              previousPage={previousPage}
-              nextPage={nextPage}
-              canPreviousPage={canPreviousPage}
-              canNextPage={canNextPage}
-              pageIndex={pageIndex}
-              pageOptions={pageOptions}
-              gotoPage={gotoPage}
-              pageCount={pageCount}
             />
           </div>
           <table
@@ -242,22 +231,10 @@ const MembersTable = () => {
               })}
             </tbody>
           </table>
-          <div className="flex justify-between my-7 ">
-            <Pagination
-              previousPage={previousPage}
-              nextPage={nextPage}
-              canPreviousPage={canPreviousPage}
-              canNextPage={canNextPage}
-              pageIndex={pageIndex}
-              pageOptions={pageOptions}
-              gotoPage={gotoPage}
-              pageCount={pageCount}
-            />
-          </div>
         </div>
       ) : (
         <EmptyState
-          title={"You have no transactions"}
+          title={"You have no admin"}
           subTitle={
             "You haven’t made any transactions yet. when you do, they’ll appear here "
           }

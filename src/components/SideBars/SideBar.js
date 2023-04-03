@@ -10,9 +10,7 @@ import TransactionIcon from "public/icons/transaction";
 import CommunicationIcon from "public/icons/communication";
 import ReportAnalyticsIcon from "public/icons/reportAnalytics";
 import UserIcon from "public/icons/user";
-import FilesIcon from "public/icons/files";
 import SettingIcon from "public/icons/settings";
-import QuickLinkIcon from "public/icons/quicklink";
 import DashboardIcon from "public/icons/dashboard";
 import LogoutIcon from "public/icons/logout";
 
@@ -88,13 +86,7 @@ const SideBar = ({ setOpenSideBar }) => {
       url: "/users",
       icon: <UserIcon />,
     },
-    {
-      title: "Files",
-      url: "/files",
-      spacing: true,
-      icon: <FilesIcon />,
-    },
-    { title: "Setting", url: "/setting", icon: <SettingIcon /> },
+    { title: "Settings", url: "/settings", icon: <SettingIcon /> },
     {
       title: "Logout",
       url: "#",
@@ -168,11 +160,6 @@ const SideBar = ({ setOpenSideBar }) => {
               ) : menu.submenu2 && open ? (
                 <AiFillCaretRight
                   className={`${submenuOpen2 && "rotate-180"}`}
-                  onClick={() => dropDownHandler(menu.title)}
-                />
-              ) : menu.submenu3 && open ? (
-                <AiFillCaretRight
-                  className={`${submenuOpen3 && "rotate-180"}`}
                   onClick={() => dropDownHandler(menu.title)}
                 />
               ) : (

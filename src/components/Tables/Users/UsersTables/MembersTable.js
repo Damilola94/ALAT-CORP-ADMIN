@@ -184,7 +184,7 @@ const MembersTable = () => {
       {membersData?.length > 0 ? (
         <div>
           <p className="text-[#1D0218] text-sm font-bold mb-4">
-            Showing 1 - 50 of 100 Transactions
+            Showing 1 - 50 of 100 Members
           </p>
           <div className="flex mt-2 mb-6 items-center">
             <GlobalFilter
