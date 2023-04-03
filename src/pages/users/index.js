@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { UsersContainer, Header } from "../components";
+import { UsersContainer, Header } from "../../components";
 
 const UsersManagement = () => {
   return (

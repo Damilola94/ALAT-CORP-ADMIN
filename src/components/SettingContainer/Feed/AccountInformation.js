@@ -41,6 +41,7 @@ const AccountInformation = () => {
               <div className="p-2 flex mb-5 mt-5 rounded-md border justify-between items-center border-input-outline bg-input-fill">
                 <input
                   type="text"
+                  disabled
                   name="fName"
                   placeholder="Lapo"
                   className="bg-input-fill outline-none text-sm flex-1 h-8"
@@ -52,6 +53,7 @@ const AccountInformation = () => {
               <div className="p-2 flex mb-5 mt-5 rounded-md border justify-between items-center border-input-outline bg-input-fill">
                 <input
                   type="text"
+                  disabled
                   name="lName"
                   placeholder="John"
                   className="bg-input-fill outline-none text-sm flex-1 h-8"

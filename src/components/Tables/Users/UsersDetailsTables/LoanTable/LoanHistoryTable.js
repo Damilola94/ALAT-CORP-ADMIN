@@ -6,18 +6,15 @@ import {
   usePagination,
   useRowSelect,
 } from "react-table";
-import { BsThreeDots } from "react-icons/bs";
 
-import GlobalFilter from "../GlobalFilter";
-import Pagination from "../Pagination";
-import { MOCK_INVITED } from "../../DummyData";
-import EmptyState from "../../EmptyState";
-import Checkbox from "../../Transaction/CheckBox";
+import GlobalFilter from "../../../GlobalFilter";
+import Pagination from "../../../Pagination";
+import { MOCK_DUMMY_LOAN_HISTORY } from "../../../../DummyData";
+import EmptyState from "../../../../EmptyState";
 
-const MembersTable = () => {
+const LoanHistoryTable = () => {
   const [products, setProducts] = useState([]);
-  const [content, setContent] = useState("");
-
+ 
   const fetchProducts = async () => {
     const response = await axios
       .get("https://fakestoreapi.com/products")
@@ -29,9 +26,9 @@ const MembersTable = () => {
     }
   };
 
-  const data = useMemo(() => MOCK_INVITED, []);
+  const data = useMemo(() => MOCK_DUMMY_LOAN_HISTORY, []);
 
-  const invitedUserData = useMemo(() => [...data], [data]);
+  const membersData = useMemo(() => [...data], [data]);
 
   const transactionColumns = useMemo(
     () =>
@@ -50,13 +47,16 @@ const MembersTable = () => {
                     return (
                       <span
                         className={`text-xs p-1 rounded-lg font-medium ${
-                          value === "Active"
-                            ? "bg-[#DEF7EC] text-[#03543F]"
-                            : value === "Disabled"
+                          value === "In Review"
+                            ? "bg-[#FDF6B2] text-[#723B13]"
+                            : value === "Success"
+                            ? "bg-[#DEF7EC] p-2 text-[#03543F]"
+                            : value === "Declined"
+                            ? "bg-[#F3F4F6] text-[#111928]"
+                            : value === "Failed"
                             ? "bg-[#FDE8E8] text-[#9B1C1C]"
                             : ""
-                        }`}
-                      >
+                        }`}>
                         {value}
                       </span>
                     );
@@ -72,44 +72,13 @@ const MembersTable = () => {
     [data]
   );
 
-  const tableHooks = (hooks) => {
-    hooks.visibleColumns.push((columns) => {
-      return [
-        {
-          id: "selection",
-          Header: ({ getToggleAllRowsSelectedProps }) => (
-            <Checkbox {...getToggleAllRowsSelectedProps()} />
-          ),
-          Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />,
-        },
-        ...columns,
-        {
-          id: "ACTION",
-          Header: "ACTION",
-          Cell: ({ row }) => (
-            <div className="flex">
-              <button
-                className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
-                onClick={() => {}}
-              >
-                <BsThreeDots />
-              </button>
-            </div>
-          ),
-        },
-      ];
-    });
-  };
-
   const tableInstance = useTable(
     {
       columns: transactionColumns,
-      data: invitedUserData,
+      data: membersData,
     },
     useGlobalFilter,
-    tableHooks,
     usePagination,
-    useRowSelect
   );
 
   const {
@@ -142,9 +111,8 @@ const MembersTable = () => {
 
   return (
     <>
-      {invitedUserData?.length > 0 ? (
+      {membersData?.length > 0 ? (
         <div>
-          {content}
           <p className="text-[#1D0218] text-sm font-bold mb-4">
             Showing 1 - 50 of 100 Transactions
           </p>
@@ -230,4 +198,4 @@ const MembersTable = () => {
   );
 };
 
-export default MembersTable;
+export default LoanHistoryTable;

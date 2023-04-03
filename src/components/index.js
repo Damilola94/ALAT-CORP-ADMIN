@@ -10,6 +10,7 @@ export { default as AnnouncementContainer } from "./Communication/Announcement/A
 export { default as ChatContainer } from "./Communication/ChatBox";
 export { default as SettingContainer } from "./SettingContainer";
 export { default as UsersContainer } from "./Users/UsersContainer";
+export { default as UsersDetailsContainer } from "./Users/UsersDetailsContainer";
 export { default as Header } from "./Header";
 export { default as Middle } from "./Middle";
 export { default as RightBar } from "./SideBars/RightBar";
@@ -20,4 +21,3 @@ export { default as SuccessModal } from "./Modals/SuccessModal";
 export { default as SideBar } from "./SideBars/SideBar";
 export { default as RightSideModal } from "./Modals/RightSideModal";
 export { default as ApproveModal } from "./Modals/ApproveModal";
-export { default as MOCK_DATA } from "./MOCK_DATA";

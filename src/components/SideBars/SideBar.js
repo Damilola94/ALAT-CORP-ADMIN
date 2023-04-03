@@ -95,7 +95,6 @@ const SideBar = ({ setOpenSideBar }) => {
       icon: <FilesIcon />,
     },
     { title: "Setting", url: "/setting", icon: <SettingIcon /> },
-    { title: "Quicklinks", url: "/quicklinks", icon: <QuickLinkIcon /> },
     {
       title: "Logout",
       url: "#",

@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
-import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
-import {
-  savedBeneficiary,
-  savedBeneficiaryListValue,
-} from "@/redux/beneficiarySlice";
-import notification from "../../utilities/notification";
 
-const InviteMemberModal = ({ handleAddModal, addModal }) => {
+const InviteMemberModal = ({
+  handleAddModal,
+  addModal,
+  handleSuccesInvite,
+}) => {
   const [addData, setAddData] = useState("");
-  const dispatch = useDispatch();
-  const beneficiaryData = useSelector(savedBeneficiaryListValue);
   const [options, setOptions] = useState(1);
 
   const invitedUsers = [
@@ -32,7 +28,7 @@ const InviteMemberModal = ({ handleAddModal, addModal }) => {
     return (
       <div
         key={id}
-        className=" bg-gray-300 m-1 rounded-md p-1  flex items-center space-x-1 justify-between"
+        className=" bg-gray-200 m-1 rounded-md p-1  flex items-center space-x-1 justify-between"
         onClick={() => {}}
       >
         <h1 className="font-sans text-[10px]"> {email}</h1>
@@ -48,20 +44,9 @@ const InviteMemberModal = ({ handleAddModal, addModal }) => {
     setAddData({ ...addData, [name]: value });
   };
 
-  const handleSavedValue = () => {
-    const serialNumber = beneficiaryData.length + 1;
-    dispatch(
-      savedBeneficiary([
-        ...beneficiaryData,
-        { ...addData, "S/N": serialNumber },
-      ])
-    );
-    notification({
-      title: "Saved Beneficiary",
-      message: `You have succesfully saved ${addData["ACCOUNT NAME"]} to your beneficiary directory`,
-      type: "success",
-    });
+  const handleSendInvite = () => {
     handleAddModal();
+    handleSuccesInvite();
   };
 
   return (
@@ -88,7 +73,6 @@ const InviteMemberModal = ({ handleAddModal, addModal }) => {
                             or specific sections of the platform.
                           </p>
                         </div>
-
                         <div onClick={() => handleAddModal()}>
                           <ImCancelCircle className="text-gray-500 w-full text-lg cursor-pointer" />
                         </div>
@@ -208,7 +192,7 @@ const InviteMemberModal = ({ handleAddModal, addModal }) => {
                                     ? "accent-dark-purple"
                                     : "accent-gray-400"
                                 }`}
-                                onClick={() => setOptions(1)}
+                                onClick={() => setOptions(2)}
                               />
                               <h3 className="ml-3">Initiator</h3>
                             </div>
@@ -223,7 +207,7 @@ const InviteMemberModal = ({ handleAddModal, addModal }) => {
                           <div>
                             <div
                               className={`${
-                                options === 2
+                                options === 3
                                   ? " text-dark-purple"
                                   : " text-gray-400"
                               }  mt-5 rounded-md font-semibold cursor-pointer flex  text-base`}
@@ -235,7 +219,7 @@ const InviteMemberModal = ({ handleAddModal, addModal }) => {
                                     ? "accent-dark-purple"
                                     : "accent-gray-400"
                                 }`}
-                                onClick={() => setOptions(1)}
+                                onClick={() => setOptions(3)}
                               />
                               <h3 className="ml-3">Verifier</h3>
                             </div>
@@ -258,11 +242,11 @@ const InviteMemberModal = ({ handleAddModal, addModal }) => {
                               <input
                                 type="radio"
                                 className={`${
-                                  options === 1
+                                  options === 4
                                     ? "accent-dark-purple"
                                     : "accent-gray-400"
                                 }`}
-                                onClick={() => setOptions(1)}
+                                onClick={() => setOptions(4)}
                               />
                               <h3 className="ml-3">Approver</h3>
                             </div>
@@ -294,7 +278,7 @@ const InviteMemberModal = ({ handleAddModal, addModal }) => {
                           Cancel
                         </button>
                         <button
-                          onClick={() => handleSavedValue()}
+                          onClick={() => handleSendInvite()}
                           className="bg-dark-purple text-white px-12 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out"
                         >
                           Send Invite

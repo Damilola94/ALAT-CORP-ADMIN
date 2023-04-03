@@ -29,6 +29,7 @@ const GeneralSettings = () => {
             <div className="p-2 flex mb-5 mt-5 rounded-md border justify-between items-center border-input-outline bg-input-fill">
               <input
                 type="text"
+                disabled
                 name="companyName"
                 placeholder="ABC Cooperatives"
                 className="bg-input-fill outline-none text-sm flex-1 h-8"
@@ -42,6 +43,7 @@ const GeneralSettings = () => {
             <div className="p-2 flex mb-5 mt-5 rounded-md border justify-between items-center border-input-outline bg-input-fill">
               <input
                 type="text"
+                disabled
                 name="companyName"
                 placeholder="07080000040"
                 className="bg-input-fill outline-none text-sm flex-1 h-8"
@@ -55,6 +57,7 @@ const GeneralSettings = () => {
             <div className="p-2 flex mb-5 mt-5 rounded-md border justify-between items-center border-input-outline bg-input-fill">
               <input
                 type="text"
+                disabled
                 name="companyName"
                 placeholder="abccooperatives@gmail.com"
                 className="bg-input-fill outline-none text-sm flex-1 h-8"
@@ -68,6 +71,7 @@ const GeneralSettings = () => {
             <div className="p-2 flex mb-5 mt-5 rounded-md border justify-between items-center border-input-outline bg-input-fill">
               <input
                 type="text"
+                disabled
                 name="companyName"
                 placeholder="12 Marina Rd."
                 className="bg-input-fill outline-none text-sm flex-1 h-8"
@@ -80,6 +84,7 @@ const GeneralSettings = () => {
               <div className="p-2 flex mb-5 mt-5 rounded-md border justify-between items-center border-input-outline bg-input-fill">
                 <input
                   type="text"
+                  disabled
                   name="country"
                   placeholder="Nigeria"
                   className="bg-input-fill outline-none text-sm flex-1 h-8"
@@ -91,6 +96,7 @@ const GeneralSettings = () => {
               <div className="p-2 flex mb-5 mt-5 rounded-md border justify-between items-center border-input-outline bg-input-fill">
                 <input
                   type="text"
+                  disabled
                   name="companyName"
                   placeholder="Lagos"
                   className="bg-input-fill outline-none text-sm flex-1 h-8"
@@ -105,6 +111,7 @@ const GeneralSettings = () => {
             <div className="p-2 flex mb-5 mt-5 rounded-md border justify-between items-center border-input-outline bg-input-fill">
               <input
                 type="text"
+                disabled
                 name="companyName"
                 placeholder="12th January 2000"
                 className="bg-input-fill outline-none text-sm flex-1 h-8"

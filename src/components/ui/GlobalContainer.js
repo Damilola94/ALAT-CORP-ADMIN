@@ -8,6 +8,8 @@ const GlobalContainer = ({
   handleAddModal,
   backButton,
   children,
+  chatButton,
+  chatIcon
 }) => {
   return (
     <div
@@ -29,13 +31,24 @@ const GlobalContainer = ({
             {pageName}
           </p>
         </div>
+        {chatButton && (
+          <div className="flex items-center space-x-2">
+          <button
+            onClick={handleAddModal}
+            className="bg-dark-purple  text-white px-8 rounded-lg font-semibold py-2 cursor-pointer hover:border-dark-purple hover:bg-white hover:border hover:text-dark-purple translate duration-200 ease-in-out"
+          >
+            {chatButton}
+          </button>
+          {chatIcon}
+          </div>
+        )}
         {buttonTitle && (
           <div className="space-x-4">
             <button
               onClick={handleAddModal}
               className="bg-white border border-dark-purple text-dark-purple px-8 rounded-lg font-semibold py-2 cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out"
             >
-              {buttonTitle}
+              {buttonTitle} 
             </button>
             {inviteButton && (
               <button

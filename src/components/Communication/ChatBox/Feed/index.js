@@ -11,7 +11,7 @@ const Feed = () => {
           subTitle={
             "Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur"
           }
-          icon={<ImDatabase lassName="text-4xl text-[#C2C9D1]" />}
+          icon={<ImDatabase className="text-4xl text-[#C2C9D1]" />}
         />
       </div>
     </>

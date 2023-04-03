@@ -2,17 +2,28 @@ import { useState } from "react";
 
 import Card from "../Cards/Card";
 import GlobalContainer from "../ui/GlobalContainer";
-import AdminsTable from "../Tables/Users/AdminsTable";
-import MembersTable from "../Tables/Users/MembersTable";
-import InvitedTable from "../Tables/Users/InvitedTable";
+import AdminsTable from "../Tables/Users/UsersTables/AdminsTable";
+import MembersTable from "../Tables/Users/UsersTables/MembersTable";
+import InvitedTable from "../Tables/Users/UsersTables/InvitedTable";
 import InviteMemberModal from "../Modals/InviteMemberModal";
 import InviteSuccessModal from "../Modals/InviteSuccessModal";
 
-const UsersContainer = ({  }) => {
+const UsersContainer = ({}) => {
   const [toggle, setToggle] = useState(1);
   const [addModal, setAddModal] = useState(false);
   const [modal, setModal] = useState(false);
 
+  const displayTable = (step) => {
+    switch (step) {
+      case 1:
+        return <MembersTable />;
+      case 2:
+        return <AdminsTable />;
+      case 3:
+        return <InvitedTable />;
+      default:
+    }
+  };
 
   const handleAddModal = () => {
     setAddModal(!addModal);
@@ -24,15 +35,16 @@ const UsersContainer = ({  }) => {
 
   return (
     <>
-      {/* {addModal && (
+      {addModal && (
         <InviteMemberModal
           handleAddModal={handleAddModal}
           addModal={addModal}
+          handleSuccesInvite={handleSuccesInvite}
         />
-      )} */}
+      )}
       {modal && (
         <InviteSuccessModal
-          handleAddModal={handleSuccesInvite}
+          handleSuccesInvite={handleSuccesInvite}
           modal={modal}
         />
       )}
@@ -51,7 +63,7 @@ const UsersContainer = ({  }) => {
             <Card title="DISABLED USERS" data={254} icon={3} />
           </div>
         </GlobalContainer>
-        <div className="p-2 mx-6 mt-6 bg-white rounded-lg border border-gray-200">
+        <div className="p-2 mx-6  bg-white rounded-b-lg border border-gray-200">
           <div className="border-b-2 border-gray-300 mb-[18px]">
             <div className="ml-2 flex space-x-6">
               <button onClick={() => setToggle(1)} className="">
@@ -60,7 +72,7 @@ const UsersContainer = ({  }) => {
                     toggle === 1 && "text-dark-purple"
                   }`}
                 >
-                 Members
+                  Members
                 </h1>
                 {toggle === 1 && (
                   <hr className="border-b-2 border-dark-purple" />
@@ -92,20 +104,7 @@ const UsersContainer = ({  }) => {
               </button>
             </div>
           </div>
-          <div className="p-1">
-            {toggle === 1 && (
-              <MembersTable
-              />
-            )}
-            {toggle === 2 && (
-              <AdminsTable
-              />
-            )}
-            {toggle === 3 && (
-              <InvitedTable
-              />
-            )}
-          </div>
+          <div className="p-1">{displayTable(toggle)}</div>
         </div>
       </div>
     </>

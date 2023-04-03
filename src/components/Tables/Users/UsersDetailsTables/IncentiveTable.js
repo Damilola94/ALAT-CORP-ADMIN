@@ -4,25 +4,15 @@ import {
   useGlobalFilter,
   useTable,
   usePagination,
-  useRowSelect,
 } from "react-table";
-import { BsThreeDots } from "react-icons/bs";
 
-import GlobalFilter from "../GlobalFilter";
-import Pagination from "../Pagination";
-import { MOCK_ADMIN } from "../../DummyData";
-import EmptyState from "../../EmptyState";
-import Checkbox from "../../Transaction/CheckBox";
-import MoreAction from "@/components/common/moreAction";
+import GlobalFilter from "../../GlobalFilter";
+import Pagination from "../../Pagination";
+import { MOCK_DUMMY_INCENTIVES } from "../../../DummyData";
+import EmptyState from "../../../EmptyState";
 
-const MembersTable = () => {
+const IncentiveTable = () => {
   const [products, setProducts] = useState([]);
-  const [content, setContent] = useState("");
-  const [moreActionModal, setmoreActionModal] = useState(false);
-
-  const handleMoreActionModal = () => {
-    setmoreActionModal(!moreActionModal);
-  };
 
   const fetchProducts = async () => {
     const response = await axios
@@ -35,9 +25,9 @@ const MembersTable = () => {
     }
   };
 
-  const data = useMemo(() => MOCK_ADMIN, []);
+  const data = useMemo(() => MOCK_DUMMY_INCENTIVES, []);
 
-  const adminUserData = useMemo(() => [...data], [data]);
+  const invitedUserData = useMemo(() => [...data], [data]);
 
   const transactionColumns = useMemo(
     () =>
@@ -52,17 +42,20 @@ const MembersTable = () => {
                 return {
                   Header: key,
                   accessor: key,
-                  Cell: ({ value }) => {
+                  Cell: ({ value }) => {7
                     return (
                       <span
                         className={`text-xs p-1 rounded-lg font-medium ${
-                          value === "Active"
-                            ? "bg-[#DEF7EC] text-[#03543F]"
-                            : value === "Disabled"
+                          value === "Pending"
+                            ? "bg-[#FDF6B2] text-[#723B13]"
+                            : value === "Success"
+                            ? "bg-[#DEF7EC] p-2 text-[#03543F]"
+                            : value === "Declined"
+                            ? "bg-[#F3F4F6] text-[#111928]"
+                            : value === "Failed"
                             ? "bg-[#FDE8E8] text-[#9B1C1C]"
                             : ""
-                        }`}
-                      >
+                        }`}>
                         {value}
                       </span>
                     );
@@ -78,50 +71,13 @@ const MembersTable = () => {
     [data]
   );
 
-  const tableHooks = (hooks) => {
-    hooks.visibleColumns.push((columns) => {
-      return [
-        {
-          id: "selection",
-          Header: ({ getToggleAllRowsSelectedProps }) => (
-            <Checkbox {...getToggleAllRowsSelectedProps()} />
-          ),
-          Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />,
-        },
-        ...columns,
-        {
-          id: "ACTION",
-          Header: "ACTION",
-          Cell: ({ row }) => (
-            <div className="flex">
-              <button
-                className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
-                onClick={() => handleMoreActionModal()}
-              >
-                <BsThreeDots />
-              </button>
-              {moreActionModal &&
-                <div>
-                  <span>View User</span>
-                  <span>Invite User</span>
-                </div>
-              }
-            </div>
-          ),
-        },
-      ];
-    });
-  };
-
   const tableInstance = useTable(
     {
       columns: transactionColumns,
-      data: adminUserData,
+      data: invitedUserData,
     },
     useGlobalFilter,
-    tableHooks,
     usePagination,
-    useRowSelect
   );
 
   const {
@@ -138,7 +94,6 @@ const MembersTable = () => {
     gotoPage,
     pageCount,
     prepareRow,
-    selectedFlatRows,
     preGlobalFilteredRows,
     setGlobalFilter,
     state,
@@ -152,15 +107,10 @@ const MembersTable = () => {
     fetchProducts();
   }, []);
 
-  const closeModalHandler = () => {
-    setContent("");
-  };
-
   return (
     <>
-      {adminUserData?.length > 0 ? (
+      {invitedUserData?.length > 0 ? (
         <div>
-          {content}
           <p className="text-[#1D0218] text-sm font-bold mb-4">
             Showing 1 - 50 of 100 Transactions
           </p>
@@ -235,7 +185,7 @@ const MembersTable = () => {
         </div>
       ) : (
         <EmptyState
-          title={"You have no transactions"}
+          title={"You have no incentive"}
           subTitle={
             "You haven’t made any transactions yet. when you do, they’ll appear here "
           }
@@ -246,4 +196,4 @@ const MembersTable = () => {
   );
 };
 
-export default MembersTable;
+export default IncentiveTable;

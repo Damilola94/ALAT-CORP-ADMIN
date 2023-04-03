@@ -10,13 +10,16 @@ import { RiDeleteBin7Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineEdit } from "react-icons/ai";
 
-import { addBeneficiary, beneficiaryListValue } from "../../../redux/beneficiarySlice";
-import Checkbox from "../../Transaction/CheckBox";
+import {
+  addBeneficiary,
+  beneficiaryListValue,
+} from "../../../redux/beneficiarySlice";
+import Checkbox from "../../common/CheckBox";
 import GlobalFilter from "../GlobalFilter";
 import Pagination from "../Pagination";
 import UploadAction from "../../Transaction/BulkTransferSteps/UploadAction";
 import ConfirmModal from "../../Modals/ConfirmModal";
-import notification from '../../../utilities/notification';
+import notification from "../../../utilities/notification";
 
 const FundTransferTable = ({
   handleEditModal,
@@ -29,7 +32,6 @@ const FundTransferTable = ({
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const tableData = useSelector(beneficiaryListValue);
-  const [hoverState, setHoverState] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
 
@@ -78,9 +80,6 @@ const FundTransferTable = ({
             <div className="flex">
               <button
                 className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
-                onMouseMove={() => {
-                  handleMouseOver();
-                }}
                 onClick={() => handleEditModal(row.values)}
               >
                 <AiOutlineEdit />
@@ -142,10 +141,6 @@ const FundTransferTable = ({
     setMoreBeneficiary(result);
   };
 
-  const handleMouseOver = () => {
-    setHoverState(!hoverState);
-  };
-
   const handleUploadModal = () => {
     setConfirmModal(!confirmModal);
   };
@@ -156,7 +151,7 @@ const FundTransferTable = ({
 
   const handleClearUpload = () => {
     dispatch(addBeneficiary([]));
-    setExcelFileName("")
+    setExcelFileName("");
     notification({
       title: "Clear Upload",
       message: "You have succesfully empty your bulk upload table",

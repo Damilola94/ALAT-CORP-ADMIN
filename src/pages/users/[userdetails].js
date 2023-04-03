@@ -1,8 +1,8 @@
 import Head from "next/head";
 
-import { ChatContainer, Header } from "../components";
+import { UsersDetailsContainer, Header } from "../../components";
 
-const QuickLink = () => {
+const UsersManagement = () => {
   return (
     <div className="w-full">
       <Head>
@@ -12,14 +12,11 @@ const QuickLink = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="w-full">
-        <Header pageName={"Files"} subPageName={"Files"} />
-        {/* <ChatContainer /> */}
-        <div className="h-screen flex items-center justify-center">
-        Quick Links Coming Soon
-        </div>
+        <Header pageName={"Users"} subPageName={"User Details"} />
+        <UsersDetailsContainer />
       </div>
     </div>
   );
 };
 
-export default QuickLink;
+export default UsersManagement;

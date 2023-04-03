@@ -1,7 +1,7 @@
 import React from "react";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
-const InviteSuccessModal = ({ handleLastClick, modal }) => {
+const InviteSuccessModal = ({ handleSuccesInvite, modal }) => {
   return (
     <>
       {modal ? (
@@ -9,7 +9,7 @@ const InviteSuccessModal = ({ handleLastClick, modal }) => {
           <div className="fixed inset-0 z-10 overflow-y-auto">
             <div
               className="fixed inset-0 w-full h-full bg-black opacity-40"
-              onClick={() => handleLastClick()}></div>
+              onClick={() => handleSuccesInvite()}></div>
             <div className="flex items-center min-h-screen justify-center ">
               <div className="relative w-96 max-w-xl mx-auto bg-white shadow-lg rounded-lg flex h-96 justify-center items-center">
                 <div className="sm:flex lg:block w-full">
@@ -19,10 +19,14 @@ const InviteSuccessModal = ({ handleLastClick, modal }) => {
                       Success!
                     </h2>
                     <p className="mt-2 text-[15px] leading-relaxed text-gray-500">
-                      A transaction of <strong>₦200,000</strong> pending
-                      approval Transaction ID:{" "}
-                      <strong>TR-6371539938101562</strong>
+                    Your invitation has been sent successfully 
                     </p>
+                    <button
+                          onClick={() => handleSuccesInvite()}
+                          className="mt-10 bg-dark-purple text-white px-12 py-2 w-full rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out"
+                        >
+                          Okay
+                        </button>
                   </div>
                 </div>
               </div>

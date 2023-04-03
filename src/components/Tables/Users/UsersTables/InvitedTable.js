@@ -8,11 +8,11 @@ import {
 } from "react-table";
 import { BsThreeDots } from "react-icons/bs";
 
-import GlobalFilter from "../GlobalFilter";
-import Pagination from "../Pagination";
-import { MOCK_MEMBERS } from "../../DummyData";
-import EmptyState from "../../EmptyState";
-import Checkbox from "../../Transaction/CheckBox";
+import GlobalFilter from "../../GlobalFilter";
+import Pagination from "../../Pagination";
+import { MOCK_INVITED } from "../../../DummyData";
+import EmptyState from "../../../EmptyState";
+import Checkbox from "../../../common/CheckBox";
 
 const MembersTable = () => {
   const [products, setProducts] = useState([]);
@@ -29,9 +29,9 @@ const MembersTable = () => {
     }
   };
 
-  const data = useMemo(() => MOCK_MEMBERS, []);
+  const data = useMemo(() => MOCK_INVITED, []);
 
-  const membersData = useMemo(() => [...data], [data]);
+  const invitedUserData = useMemo(() => [...data], [data]);
 
   const transactionColumns = useMemo(
     () =>
@@ -104,7 +104,7 @@ const MembersTable = () => {
   const tableInstance = useTable(
     {
       columns: transactionColumns,
-      data: membersData,
+      data: invitedUserData,
     },
     useGlobalFilter,
     tableHooks,
@@ -139,10 +139,10 @@ const MembersTable = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
- 
+
   return (
     <>
-      {membersData?.length > 0 ? (
+      {invitedUserData?.length > 0 ? (
         <div>
           {content}
           <p className="text-[#1D0218] text-sm font-bold mb-4">
