@@ -6,7 +6,6 @@ import {
   usePagination,
   useRowSelect,
 } from "react-table";
-import { BsThreeDots } from "react-icons/bs";
 import { useRouter } from "next/router";
 
 import GlobalFilter from "../../GlobalFilter";
@@ -77,13 +76,13 @@ const MembersTable = () => {
         : [],
     [data]
   );
+  
   const actionOptions = [
     { label: "View Details", value: "view" },
     { label: "Delete User", value: "delete" },
   ];
 
   const handleOnchange = (event, row) => {
-    console.log(event, "events");
     const selectedOption = event.target.value;
     if (selectedOption === "view") {
       router.push("/users/11");
@@ -131,7 +130,7 @@ const MembersTable = () => {
           id: "ACTION",
           Header: "ACTION",
           Cell: ({ row }) => (
-            <div className="flex relative">
+            <div className="flex">
               <ActionDropdown row={row} />
             </div>
           ),

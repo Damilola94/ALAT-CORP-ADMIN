@@ -6,17 +6,23 @@ import {
   usePagination,
   useRowSelect,
 } from "react-table";
-import { BsThreeDots } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 import GlobalFilter from "../../GlobalFilter";
 import Pagination from "../../Pagination";
 import { MOCK_INVITED } from "../../../DummyData";
 import EmptyState from "../../../EmptyState";
 import Checkbox from "../../../common/CheckBox";
+import DeleteMemberModal from "@/components/Modals/DeleteMemberModal";
 
 const MembersTable = () => {
   const [products, setProducts] = useState([]);
-  const [content, setContent] = useState("");
+  const [modal, setModal] = useState(false)
+  const router = useRouter();
+
+  const handleDelete = () => {
+    setModal(!modal);
+  };
 
   const fetchProducts = async () => {
     const response = await axios
@@ -72,6 +78,45 @@ const MembersTable = () => {
     [data]
   );
 
+  const actionOptions = [
+    { label: "Resend Invite", value: "resendInvite" },
+    { label: "Copy Link", value: "copyLink" },
+    { label: "Revoke Invite", value: "revoke" },
+
+  ];
+
+  const handleOnchange = (event, row) => {
+    // const selectedOption = event.target.value;
+    // if (selectedOption === "view") {
+    //   router.push("/users/11");
+    // } else {
+    //   setModal(!modal);
+    // }
+  };
+
+  const ActionDropdown = ({ row }) => {
+    return (
+      <>
+        <select
+          defaultValue=""
+          onChange={handleOnchange}
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-dark-purple w-11 focus:border-dark-purple block p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring--dark-purple dark:focus:border-dark-purple">
+          <option
+            value=""
+            disabled
+            hidden
+            className="font-bold text-dark-purple">
+            ...
+          </option>
+          {actionOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </>
+    );
+  };
   const tableHooks = (hooks) => {
     hooks.visibleColumns.push((columns) => {
       return [
@@ -88,12 +133,7 @@ const MembersTable = () => {
           Header: "ACTION",
           Cell: ({ row }) => (
             <div className="flex">
-              <button
-                className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
-                onClick={() => {}}
-              >
-                <BsThreeDots />
-              </button>
+              <ActionDropdown row={row} />
             </div>
           ),
         },
@@ -142,9 +182,9 @@ const MembersTable = () => {
 
   return (
     <>
+    {modal && <DeleteMemberModal handleDelete={handleDelete} modal={modal} />}
       {invitedUserData?.length > 0 ? (
         <div>
-          {content}
           <p className="text-[#1D0218] text-sm font-bold mb-4">
             Showing 1 - 50 of 100 Transactions
           </p>

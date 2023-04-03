@@ -6,6 +6,7 @@ import {
   usePagination,
   useRowSelect,
 } from "react-table";
+import { useRouter } from "next/router";
 import { BsThreeDots } from "react-icons/bs";
 
 import GlobalFilter from "../../GlobalFilter";
@@ -17,10 +18,11 @@ import Checkbox from "../../../common/CheckBox";
 
 const MembersTable = () => {
   const [products, setProducts] = useState([]);
-  const [moreActionModal, setmoreActionModal] = useState(false);
+  const [modal, setModal] = useState(false);
+  const router = useRouter();
 
-  const handleMoreActionModal = () => {
-    setmoreActionModal(!moreActionModal);
+  const handleDelete = () => {
+    setModal(!modal);
   };
 
   const fetchProducts = async () => {
@@ -77,6 +79,43 @@ const MembersTable = () => {
     [data]
   );
 
+  const actionOptions = [
+   
+  ];
+
+  const handleOnchange = (event, row) => {
+    const selectedOption = event.target.value;
+    if (selectedOption === "view") {
+      router.push("/users/11");
+    } else {
+      setModal(!modal);
+    }
+  };
+
+  const ActionDropdown = ({ row }) => {
+    return (
+      <>
+        <select
+          defaultValue=""
+          onChange={handleOnchange}
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-dark-purple w-11 focus:border-dark-purple block p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring--dark-purple dark:focus:border-dark-purple">
+          <option
+            value=""
+            disabled
+            hidden
+            className="font-bold text-dark-purple">
+            ...
+          </option>
+          {actionOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </>
+    );
+  };
+
   const tableHooks = (hooks) => {
     hooks.visibleColumns.push((columns) => {
       return [
@@ -93,18 +132,7 @@ const MembersTable = () => {
           Header: "ACTION",
           Cell: ({ row }) => (
             <div className="flex">
-              <button
-                className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
-                onClick={() => handleMoreActionModal()}
-              >
-                <BsThreeDots />
-              </button>
-              {moreActionModal &&
-                <div>
-                  <span>View User</span>
-                  <span>Invite User</span>
-                </div>
-              }
+              <ActionDropdown row={row} />
             </div>
           ),
         },
