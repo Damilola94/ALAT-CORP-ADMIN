@@ -8,7 +8,6 @@ import ContributionDetailsTable from "../Tables/Users/UsersDetailsTables/Contrib
 import IncentiveTable from "../Tables/Users/UsersDetailsTables/IncentiveTable";
 import LoanContainer from "../Users/UsersDetailsLoanContainer";
 
-
 const UsersDetailsContainer = ({}) => {
   const [toggle, setToggle] = useState(1);
   const router = useRouter();
@@ -31,13 +30,19 @@ const UsersDetailsContainer = ({}) => {
     router.push("/communication/chat");
   };
 
+  const handleBack = () => {
+    router.back();
+  };
+
   return (
     <>
       <div className="h-fit mb-4">
         <GlobalContainer
           pageName={"Lapo John"}
           backButton
+          userBackButton
           chatButton={"Chat"}
+          handleBack={handleBack}
           handleAddModal={handleCommunication}
           chatIcon={
             <BsThreeDotsVertical className="text-dark-purple text-xl" />
@@ -50,8 +55,7 @@ const UsersDetailsContainer = ({}) => {
                 <h1
                   className={`my-2 font-semibold ${
                     toggle === 1 && "text-dark-purple"
-                  }`}
-                >
+                  }`}>
                   Member Details
                 </h1>
                 {toggle === 1 && (
@@ -62,8 +66,7 @@ const UsersDetailsContainer = ({}) => {
                 <h1
                   className={`my-2 font-semibold ${
                     toggle === 2 && "text-dark-purple"
-                  }`}
-                >
+                  }`}>
                   Contribution History
                 </h1>
                 {toggle === 2 && (
@@ -74,8 +77,7 @@ const UsersDetailsContainer = ({}) => {
                 <h1
                   className={`my-2 font-semibold ${
                     toggle === 3 && "text-dark-purple"
-                  }`}
-                >
+                  }`}>
                   Loans
                 </h1>
                 {toggle === 3 && (
@@ -86,8 +88,7 @@ const UsersDetailsContainer = ({}) => {
                 <h1
                   className={`my-2 font-semibold ${
                     toggle === 4 && "text-dark-purple"
-                  }`}
-                >
+                  }`}>
                   Incentives
                 </h1>
                 {toggle === 4 && (

@@ -18,27 +18,11 @@ import DeleteMemberModal from "../../../Modals/DeleteMemberModal";
 
 const MembersTable = () => {
   const [products, setProducts] = useState([]);
-  const [content, setContent] = useState("");
   const [modal, setModal] = useState(false);
-  const [moreActionModal, setmoreActionModal] = useState(false);
   const router = useRouter();
 
   const handleDelete = () => {
     setModal(!modal);
-  };
-
-  const handleUserDetails = (userId) => {
-    router.push("/users/11");
-  };
-
-  const handleMoreActionModal = () => {
-    setmoreActionModal(!moreActionModal);
-    setContent(
-      <div className="flex p-2 w-full flex-col absolute  bg-white border shadow-sm text-xs space-y-1">
-        <span onClick={()=>handleUserDetails()}>View User</span>
-        <span onClick={()=>handleDelete()}>Delet User</span>
-      </div>
-    );
   };
 
   const fetchProducts = async () => {
@@ -78,8 +62,7 @@ const MembersTable = () => {
                             : value === "Disabled"
                             ? "bg-[#FDE8E8] text-[#9B1C1C]"
                             : ""
-                        }`}
-                      >
+                        }`}>
                         {value}
                       </span>
                     );
@@ -94,6 +77,44 @@ const MembersTable = () => {
         : [],
     [data]
   );
+  const actionOptions = [
+    { label: "View Details", value: "view" },
+    { label: "Delete User", value: "delete" },
+  ];
+
+  const handleOnchange = (event, row) => {
+    console.log(event, "events");
+    const selectedOption = event.target.value;
+    if (selectedOption === "view") {
+      router.push("/users/11");
+    } else {
+      setModal(!modal);
+    }
+  };
+
+  const ActionDropdown = ({ row }) => {
+    return (
+      <>
+        <select
+          defaultValue=""
+          onChange={handleOnchange}
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-dark-purple w-11 focus:border-dark-purple block p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring--dark-purple dark:focus:border-dark-purple">
+          <option
+            value=""
+            disabled
+            hidden
+            className="font-bold text-dark-purple">
+            ...
+          </option>
+          {actionOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </>
+    );
+  };
 
   const tableHooks = (hooks) => {
     hooks.visibleColumns.push((columns) => {
@@ -111,13 +132,7 @@ const MembersTable = () => {
           Header: "ACTION",
           Cell: ({ row }) => (
             <div className="flex relative">
-              <button
-                className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
-                onClick={() => handleMoreActionModal()}
-              >
-                <BsThreeDots />
-              </button>
-              {moreActionModal && content}
+              <ActionDropdown row={row} />
             </div>
           ),
         },
@@ -166,12 +181,7 @@ const MembersTable = () => {
 
   return (
     <>
-      {modal && (
-        <DeleteMemberModal
-          handleDelete={handleDelete}
-          modal={modal}
-        />
-      )}
+      {modal && <DeleteMemberModal handleDelete={handleDelete} modal={modal} />}
       {membersData?.length > 0 ? (
         <div>
           <p className="text-[#1D0218] text-sm font-bold mb-4">
@@ -196,16 +206,14 @@ const MembersTable = () => {
           </div>
           <table
             {...getTableProps()}
-            className=" text-base text-gray-900 p-4 w-full"
-          >
+            className=" text-base text-gray-900 p-4 w-full">
             <thead className="p-4">
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()} className="">
                   {headerGroup.headers.map((column) => (
                     <th
                       className="text-left text-xs p-4 bg-[#F9FAFB] text-[#1D0218]"
-                      {...column.getHeaderProps()}
-                    >
+                      {...column.getHeaderProps()}>
                       {column.render("Header")}
                     </th>
                   ))}
@@ -218,13 +226,11 @@ const MembersTable = () => {
                 return (
                   <tr
                     {...row.getRowProps()}
-                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}
-                  >
+                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}>
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]"
-                      >
+                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]">
                         {cell.render("Cell")}
                       </td>
                     ))}
