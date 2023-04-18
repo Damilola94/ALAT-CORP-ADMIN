@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { ImCancelCircle } from "react-icons/im";
+import { useMutation,useQueryClient } from "react-query";
+
 import UploadModal from "./UploadModal";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  savedBeneficiary,
-  savedBeneficiaryListValue,
-} from "@/redux/beneficiarySlice";
 import notification from "@/utilities/notification";
+import handleFetch from "@/services/api/handleFetch";
 
 const ConfirmModal = ({
   handleClick,
@@ -18,26 +16,54 @@ const ConfirmModal = ({
   deleteId,
 }) => {
   const [upload, setUpload] = useState(true);
-  const beneficiaryData = useSelector(savedBeneficiaryListValue);
-  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   const onClickModal = () => {
     setUpload(!upload);
-    handleClick()
-  };
-
-  const handleRemove = () => {
-    const removedBeneficiary = beneficiaryData.filter(
-      (item) => item["S/N"] !== deleteId["S/N"]
-    );
-    dispatch(savedBeneficiary(removedBeneficiary));
-    notification({
-      title: "Deleted Beneficiary",
-      message: `You have succesfully deleted ${deleteId["ACCOUNT NAME"]} from your beneficiary directory`,
-      type: "danger",
-    });
     handleClick();
   };
+
+  const deleteMutation = useMutation(handleFetch, {
+    onSuccess: (res) => {
+      if (res?.statusCode === 200) {
+        notification({
+          title: "Deleted Beneficiary",
+          message: `You have succesfully deleted ${deleteId?.accountName} from your beneficiary directory`,
+          type: "danger",
+        });
+        handleClick();
+        queryClient.invalidateQueries(['beneficiaries']);
+      }
+    },
+    onError: (err) => {
+      notification({
+        title: "Error",
+        message: err?.toString() || "Something went wrong.",
+        type: "danger",
+      });
+    },
+  });
+
+  const handleRemove = (e) => {
+    e.preventDefault();
+    if (deleteId?.id === null) {
+      notification({
+        title: "Error",
+        message: "Please try again",
+        type: "danger",
+      });
+      return;
+    }
+    deleteMutation.mutate({
+      endpoint: "Transactions",
+      extra: "delete-beneficiary",
+      method: "DELETE",
+      pQuery: { id: deleteId?.id },
+      auth: true,
+    });
+  };
+
+  const { isLoading } = deleteMutation;
 
   return (
     <>
@@ -65,10 +91,11 @@ const ConfirmModal = ({
                     <h2 className="text-sm mb-8 text-[#6B7280]">{subTitle}</h2>
                     <div className="container flex  justify-center mt-8 space-x-4">
                       <button
+                        type="submit"
                         onClick={() => handleClick()}
                         className="bg-dark-purple text-white px-3 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out"
                       >
-                        Yes, I’m sure
+                        {isLoading ? "Loading" : "Yes, I’m sure"}
                       </button>
                       <button
                         onClick={() => handleClick()}
@@ -108,10 +135,11 @@ const ConfirmModal = ({
                     <h2 className="text-sm mb-8 text-[#6B7280]">{subTitle}</h2>
                     <div className="container flex  justify-center mt-8 space-x-4">
                       <button
-                        onClick={() => handleRemove()}
+                        type="submit"
+                        onClick={handleRemove}
                         className="bg-dark-purple text-white px-3 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out"
                       >
-                        Yes, I’m sure
+                        {isLoading ? "Loading" : "Yes, I’m sure"}
                       </button>
                       <button
                         onClick={() => handleClick()}

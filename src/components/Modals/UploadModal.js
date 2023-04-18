@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FiUploadCloud } from "react-icons/fi";
 import { ImDatabase, ImCancelCircle } from "react-icons/im";
 
-import { addBeneficiary, beneficiaryListValue } from "@/redux/beneficiarySlice";
+import { addBeneficiary, beneficiaryListValue } from "@/redux/transactionSlice";
 import notification from '../../utilities/notification';
 
 

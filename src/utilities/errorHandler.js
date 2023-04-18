@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { logger } from './general';
 import { logout } from '../services/auth';
 
-const errorHandler = (error: any, auth: boolean) => {
+const errorHandler = (error, auth) => {
   let message = '';
 
   logger(error);

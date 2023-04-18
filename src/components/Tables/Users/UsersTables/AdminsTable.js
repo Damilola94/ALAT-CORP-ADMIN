@@ -95,7 +95,7 @@ const MembersTable = () => {
         <select
           defaultValue=""
           onChange={handleOnchange}
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-dark-purple w-11 focus:border-dark-purple block p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring--dark-purple dark:focus:border-dark-purple"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-dark-purple w-11 focus:border-dark-purple block p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring--dark-purple dark:focus:border-dark-purple"
         >
           <option
             value=""
@@ -238,7 +238,7 @@ const MembersTable = () => {
           subTitle={
             "You haven’t made any transactions yet. when you do, they’ll appear here "
           }
-          icon={<ImDatabase lassName="text-4xl text-[#C2C9D1]" />}
+          icon={<ImDatabase className="text-4xl text-[#C2C9D1]" />}
         />
       )}
     </>

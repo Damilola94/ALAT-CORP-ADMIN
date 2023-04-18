@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 
 import { StepperContext } from "@/contexts/StepperContex";
-import { beneficiaryListValue } from "@/redux/beneficiarySlice";
+import { beneficiaryListValue } from "@/redux/transactionSlice";
 import FundTransferTable from "@/components/Tables/Transaction/FundTransferTable";
 
 const BulkConfirmDetails = () => {

@@ -11,7 +11,7 @@ const NotificationSettings = () => {
         <div>
           <h1 className="font-bold text-xl mb-3">Notification</h1>
           <p className="text-gray-500 mb-6">
-            Choose type of notifications you want to receive.
+            Manage your account notifications here
           </p>
         </div>
         <div className="space-y-6 mt-10">

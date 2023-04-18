@@ -16,8 +16,7 @@ const CompleteTransaction = () => {
           <span className="text-black">
             <strong>Step 3: </strong>
           </span>
-          Enter your 4 digit Transaction PIN and 6 digit OTP code sent to your
-          Phone
+          Enter your 4 digit Transaction PIN 
         </h1>
       </div>
       <div className="flex flex-col">
@@ -31,6 +30,8 @@ const CompleteTransaction = () => {
                 onChange={handleChange}
                 value={userData["enterpin"] || ""}
                 name="enterpin"
+                type="password"
+                maxLength={4}
                 placeholder="Enter Pin"
                 className="bg-input-fill outline-none text-sm flex-1"
               />
@@ -38,7 +39,7 @@ const CompleteTransaction = () => {
           </div>
           <div className=" flex-1"></div>
         </div>
-        <div className="flex justify-between space-x-16">
+        {/* <div className="flex justify-between space-x-16">
           <div className="w-full flex-1">
             <div className="mt-3 h-6 text-base font-medium leading-8 text-gray-500">
               Enter OTP
@@ -54,12 +55,12 @@ const CompleteTransaction = () => {
             </div>
           </div>
           <div className=" flex-1"></div>
-        </div>
-        <div
+        </div> */}
+        {/* <div
           onClick={() => handleClick()}
           className={`text-dark-purple font-semibold cursor-pointer mt-9`}>
           Resend OTP
-        </div>
+        </div> */}
       </div>
     </div>
   );

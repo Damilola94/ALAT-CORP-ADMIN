@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-// import rootReducer from './reducers'
-import beneficiaryReducer from './beneficiarySlice'
+import transactionReducer from './transactionSlice'
 
 const store = configureStore({
   reducer: {
-    beneficiary: beneficiaryReducer
+    transaction: transactionReducer
   },
 })
 

@@ -8,7 +8,7 @@ const GeneralSettings = () => {
         <div>
           <h1 className="font-bold text-xl mb-3">General Settings</h1>
           <p className="text-gray-500 mb-6">
-            Lorem ipsum dolor asset ifish juxtereb fghdh hdh hfed
+            View your Cooperative account information here
           </p>
         </div>
         <div>

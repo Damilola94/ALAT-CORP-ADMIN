@@ -6,7 +6,7 @@ const useGetQuery = ({
   queryKey = [], endpoint = '', enabled = true,
   extra = null, auth = true, pQuery = null,
   param = null, responseType = null
-}: any = {}) => useQuery(
+}) => useQuery(
   queryKey,
   async () => handleFetch({
     endpoint, method: 'GET', extra, auth, pQuery, param, responseType

@@ -13,18 +13,20 @@ async function refreshTokenFn() {
   const data = storedData && JSON.parse(storedData);
 
   try {
-    const url = `${endpoints.auth}/refresh-token`;
+    const url = `${endpoints.auth}/create-refreshToken`;
     const headers = { authorization: data?.refreshToken };
     const body = { email: data?.email, refreshToken: data?.refreshToken };
 
-    const response: any = await axios({
+    const response = await axios({
       url, headers, method: 'POST', data: body
     });
 
     logger(response);
 
     const { data: session } = response.data;
-    if (!session?.accessToken) {
+    
+    if (!session?.token
+      ) {
       logout();
     }
 

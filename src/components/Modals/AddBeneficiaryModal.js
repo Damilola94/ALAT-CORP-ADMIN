@@ -1,30 +1,77 @@
 import React, { useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
-import { useDispatch, useSelector } from "react-redux";
+import { useMutation,useQueryClient } from "react-query";
 
-import { savedBeneficiary, savedBeneficiaryListValue } from "@/redux/beneficiarySlice";
-import notification from '../../utilities/notification';
+import notification from "../../utilities/notification";
+import handleFetch from "@/services/api/handleFetch";
 
 const AddBeneficiaryModal = ({ handleAddModal, addModal }) => {
-  const [addData, setAddData] = useState("");
-  const dispatch = useDispatch();
-  const beneficiaryData = useSelector(savedBeneficiaryListValue);
+  const queryClient = useQueryClient();
+  const [accountNumber, setAccountNumber] = useState("");
+  const [accountName, setAccountName] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(true);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setAddData({ ...addData, [name]: value });
+  const handleAccountNumberChange = (event) => {
+    setAccountNumber(event.target.value);
+    setButtonDisabled(!(accountName && bankName && event.target.value));
   };
 
-  const handleSavedValue = () => {
-    const serialNumber = beneficiaryData.length + 1
-    dispatch(savedBeneficiary([...beneficiaryData, {...addData, "S/N":serialNumber}]))
-    notification({
-      title: "Saved Beneficiary",
-      message: `You have succesfully saved ${addData["ACCOUNT NAME"]} to your beneficiary directory`,
-      type: "success",
+  const handleAccountNameChange = (event) => {
+    setAccountName(event.target.value);
+    setButtonDisabled(!(accountNumber && bankName && event.target.value));
+  };
+
+  const handleBankChange = (event) => {
+    setBankName(event.target.value);
+    setButtonDisabled(!(accountNumber && accountName && event.target.value));
+  };
+
+  const savedMutation = useMutation(handleFetch, {
+    onSuccess: (res) => {
+      if (res?.statusCode === 201) {
+        notification({
+          title: "Saved Beneficiary",
+          message: `You have succesfully saved ${accountName} to your beneficiary directory`,
+          type: "success",
+        });
+        handleAddModal();
+        queryClient.invalidateQueries(['beneficiaries']);
+      }
+    },
+    onError: (err) => {
+      notification({
+        title: "Error",
+        message: err?.toString() || "Something went wrong.",
+        type: "danger",
+      });
+    },
+  });
+
+  const handleSavedValue = (e) => {
+    e.preventDefault();
+    if (accountName === "" || accountNumber === "" || bankName  === "") {
+      notification({
+        title: "Form Error",
+        message: "All fields are required",
+        type: "danger",
+      });
+      return;
+    }
+    savedMutation.mutate({
+      endpoint: "Transactions",
+      extra: "create-beneficiary",
+      method: "POST",
+      auth: true,
+      body: {
+        bankName,
+        accountNumber,
+        accountName
+      },
     });
-    handleAddModal()
-  }
+  };
+
+  const { isLoading } = savedMutation;
 
   return (
     <>
@@ -58,9 +105,9 @@ const AddBeneficiaryModal = ({ handleAddModal, addModal }) => {
                             </div>
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
-                                onChange={handleChange}
-                                value={addData?.["BANK NAME"] || ""}
-                                name="BANK NAME"
+                                onChange={handleBankChange}
+                                value={bankName}
+                                name="bank"
                                 placeholder="Select Bank"
                                 className="bg-input-fill outline-none text-sm flex-1"
                               />
@@ -74,9 +121,9 @@ const AddBeneficiaryModal = ({ handleAddModal, addModal }) => {
                             </div>
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
-                                onChange={handleChange}
-                                value={addData?.["ACCOUNT NAME"] || ""}
-                                name="ACCOUNT NAME"
+                                onChange={handleAccountNameChange}
+                                value={accountName}
+                                name="accountName"
                                 placeholder="Account Name"
                                 className="bg-input-fill outline-none text-sm flex-1"
                               />
@@ -90,9 +137,9 @@ const AddBeneficiaryModal = ({ handleAddModal, addModal }) => {
                             </div>
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
-                                onChange={handleChange}
-                                value={addData?.["ACCOUNT NUMBER"] || ""}
-                                name="ACCOUNT NUMBER"
+                                onChange={handleAccountNumberChange}
+                                value={accountNumber}
+                                name="accountNumber"
                                 placeholder="Account number"
                                 className="bg-input-fill outline-none text-sm flex-1"
                               />
@@ -108,10 +155,12 @@ const AddBeneficiaryModal = ({ handleAddModal, addModal }) => {
                           Cancel
                         </button>
                         <button
-                          onClick={() => handleSavedValue()}
-                          className="bg-dark-purple text-white px-12 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out"
+                          className="bg-dark-purple text-white px-12 py-2 rounded-lg font-semibold  translate duration-200 ease-in-out"
+                          type="submit"
+                          disabled={buttonDisabled}
+                          onClick={handleSavedValue}
                         >
-                          Save
+                       {isLoading ? "Loading" :   "Save"}
                         </button>
                       </div>
                     </div>

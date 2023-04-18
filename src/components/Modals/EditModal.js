@@ -3,7 +3,7 @@ import { ImCancelCircle } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
 
 import Switch from "@/components/ui/Switch";
-import { addBeneficiary, beneficiaryListValue } from "@/redux/beneficiarySlice";
+import { addBeneficiary, beneficiaryListValue } from "@/redux/transactionSlice";
 
 const EditModal = ({ handleEditModal, editModal, editModalId }) => {
   const tableData = useSelector(beneficiaryListValue);

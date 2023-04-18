@@ -15,8 +15,7 @@ const UpcomingEvent = () => {
         </p>
         <div className="text-sm text-gray-500">
           <p>
-            Lorem ipsum dolor asset ifish juxtereb fghdh hdh hfedLorem ipsum
-            dolor asset ifish juxtereb fghdh hdh hfed......
+          Monthly Meeting to discuss important issues. Please plan to attend.
           </p>
           <p className="text-sm mt-5 mb-3 text-black">Details</p>
           <div className="space-y-3">

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { StepperContext } from "@/contexts/StepperContex";
 import FundTransferTable from "@/components/Tables/Transaction/FundTransferTable";
-import { beneficiaryListValue,selectedBeneficiaryListValue } from "@/redux/beneficiarySlice";
+import { beneficiaryListValue,selectedBeneficiaryListValue } from "@/redux/transactionSlice";
 
 const ConfirmDetails = ({}) => {
   const { userData } = useContext(StepperContext);

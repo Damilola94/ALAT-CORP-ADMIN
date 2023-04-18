@@ -3,7 +3,7 @@ import { ImCancelCircle, ImDatabase } from "react-icons/im";
 import { BsSearch } from "react-icons/bs";
 import EmptyState from "../EmptyState";
 import { useDispatch } from "react-redux";
-import { selectBeneficiary } from "@/redux/beneficiarySlice";
+import { selectBeneficiary } from "@/redux/transactionSlice";
 
 const BeneficiariesModal = ({ handleBeneficiaryModal, beneficiariesModal }) => {
   const [editData, setEditData] = useState("");

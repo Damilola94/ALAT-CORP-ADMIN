@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useMemo } from "react";
-import axios from "axios";
+import { useCookies } from "react-cookie";
 import { useGlobalFilter, useTable, usePagination } from "react-table";
 import { ImDatabase } from "react-icons/im";
 import _ from "lodash";
 
 import GlobalFilter from "../GlobalFilter";
 import Pagination from "../Pagination";
-import { MOCK_DUMMY_BENEFICIARY } from "../../DummyData";
 import EmptyState from "../../EmptyState";
 import ConfirmModal from "../../Modals/ConfirmModal";
 import AddBeneficiaryModal from "../../Modals/AddBeneficiaryModal";
@@ -14,54 +13,92 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   savedBeneficiaryListValue,
   savedBeneficiary,
-} from "@/redux/beneficiarySlice";
+} from "@/redux/transactionSlice";
+import useGetQuery from "../../../hooks/useGetQuery";
+import { camelCaseToTitleCase } from "@/utilities/general";
 
 const BeneficiaryTable = ({}) => {
-  const [products, setProducts] = useState([]);
+  const [cookie] = useCookies(["data"]);
   const [confirmModal, setConfirmModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
   const dispatch = useDispatch();
   const [deleteId, setDeleteId] = useState("");
   const beneficiaryData = useSelector(savedBeneficiaryListValue);
+  const [newData, setNewData] = useState([]);
 
-  // const
+  const { data: beneData } = useGetQuery({
+    endpoint: "transactions",
+    extra: "get-beneficiaries",
+    pQuery: { cooperativeId: cookie?.data?.cooperativeId },
+    queryKey: ["beneficiaries"],
+    enabled: !!cookie?.data?.token,
+    auth: true,
+  });
 
   useEffect(() => {
-    dispatch(savedBeneficiary(MOCK_DUMMY_BENEFICIARY));
-  }, []);
+    dispatch(savedBeneficiary(beneData?.data?.data || []));
+  }, [beneData]);
 
   const handleAddModal = () => {
     setAddModal(!addModal);
   };
 
-  const fetchProducts = async () => {
-    const response = await axios
-      .get("https://fakestoreapi.com/products")
-      .catch((err) => console.log(err));
-    if (response) {
-      const products = response.data;
-      setProducts(products);
-    }
-  };
+  const data = useMemo(
+    () => beneficiaryData,
+    [beneficiaryData, beneData?.data?.data]
+  );
 
-  const data = useMemo(() => beneficiaryData, [beneficiaryData]);
+  useEffect(() => {
+    const newData = data.map((item) => {
+      const { [Object.keys(item)[0]]: firstProp, ...rest } = item;
+      return { ...rest, [Object.keys(item)[0]]: firstProp };
+    });
+    setNewData(newData);
+  }, [data]);
 
-  const transactionData = useMemo(() => [...data], [data]);
+  const transactionData = useMemo(() => [...newData], [newData]);
 
   const transactionColumns = useMemo(
     () =>
-      data[0]
-        ? Object.keys(data[0]).map((key) => {
-            return {
-              Header: key,
-              accessor: key,
-            };
-          })
+      newData[0]
+        ? Object.keys(newData[0])
+            .filter(
+              (key) =>
+                // key !== "id" &&
+                key !== "cooperativeId"
+            )
+            .map((key) => {
+              if (key === "id") {
+                return {
+                  Header: "",
+                  accessor: key,
+                  isVisible: false,
+                  Cell: ({}) => {
+                    return null;
+                  },
+                  show: false,
+                };
+              }
+              const headerKey = camelCaseToTitleCase(key).toUpperCase();
+              if (key === "id") {
+                return {
+                  Header: headerKey,
+                  accessor: key,
+                  show: false,
+                };
+              } else {
+                return {
+                  Header: headerKey,
+                  accessor: key,
+                };
+              }
+            })
         : [],
-    [data]
+    [newData]
   );
 
   const handleDelete = (value) => {
+    console.log(value);
     setConfirmModal(!confirmModal);
     setDeleteId(value);
   };
@@ -120,10 +157,6 @@ const BeneficiaryTable = ({}) => {
   const { pageIndex } = state;
 
   const rowdata = page.length !== 9 ? page : row;
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   return (
     <>

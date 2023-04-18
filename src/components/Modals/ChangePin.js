@@ -1,22 +1,74 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
+import { useMutation } from "react-query";
 
-const ChangePin = ({ handleChangePin, changePinModal }) => {
-  const [editData, setEditData] = useState("");
+import handleFetch from "@/services/api/handleFetch";
+import notification from "@/utilities/notification";
 
-  const handleEditSaved = () => {
-    const updateObjectInArray = (arr, updatedObj) => {
-      return arr.map((obj) => {
-        if (obj["s/n"] === editData["s/n"]) {
-          return updatedObj;
-        } else {
-          return obj;
-        }
-      });
-    };
-    const updatedArr = updateObjectInArray(tableData, editData);
-    handleChangePin();
+const ChangePin = ({ changePinHandler, changePinModal }) => {
+  const [pin, setPin] = useState("");
+  const [confirmPin, setConfirmPin] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [confirmedpwdError, setConfirmedpwdError] = useState(null);
+
+  const onChangePin = (event) => {
+    setPin(event.target.value);
+    setButtonDisabled(!(event.target.value && confirmPin));
   };
+
+  const onChangeConfirmPin = (event) => {
+    setConfirmPin(event.target.value);
+    setButtonDisabled(!(pin && event.target.value));
+  };
+
+  const validateConfirmedPwd = () => {
+    if (pin !== confirmPin) {
+      setConfirmedpwdError("Pin mismatch");
+    } else {
+      setConfirmedpwdError(null);
+    }
+  };
+
+  const changePinMutation = useMutation(handleFetch, {
+    onSuccess: (res) => {
+      if (res?.statusCode === 201) {
+        changePinHandler();
+        notification({
+          title: "Pin Set",
+          message: "Your pin is set",
+          type: "success",
+        });
+      }
+    },
+    onError: (err) => {
+      notification({
+        title: "Error",
+        message: err?.toString() || "Something went wrong.",
+        type: "danger",
+      });
+    },
+  });
+
+  const handleChangePin = (e) => {
+    e.preventDefault();
+    if (pin.length < 0) {
+      notification({
+        title: "Form Error",
+        message: "Please, enter a 4 digit pin",
+        type: "danger",
+      });
+      return;
+    }
+    changePinMutation.mutate({
+      endpoint: "transactions",
+      extra: "create-pin",
+      method: "POST",
+      auth: true,
+      body: { pin, confirmPin: pin },
+    });
+  };
+
+  const { isLoading } = changePinMutation;
 
   return (
     <>
@@ -25,7 +77,8 @@ const ChangePin = ({ handleChangePin, changePinModal }) => {
           <div className="fixed inset-0 z-10">
             <div
               className="fixed inset-0 w-full h-full bg-black opacity-40"
-              onClick={() => handleChangePin()}></div>
+              onClick={() => changePinHandler()}
+            ></div>
             <div className="flex items-center min-h-screen justify-center">
               <div className="relative w-full max-w-sm mx-auto bg-white shadow-lg  flex h-fit">
                 <div className="sm:flex lg:block w-full">
@@ -35,7 +88,7 @@ const ChangePin = ({ handleChangePin, changePinModal }) => {
                         <h2 className="text-2xl font-bold w-full text-[#333333]">
                           Set Transaction Pin
                         </h2>
-                        <div onClick={() => handleChangePin()}>
+                        <div onClick={() => changePinHandler()}>
                           <ImCancelCircle className="text-gray-500 w-full text-lg cursor-pointer" />
                         </div>
                       </div>
@@ -51,6 +104,9 @@ const ChangePin = ({ handleChangePin, changePinModal }) => {
                               <input
                                 type="password"
                                 name="password"
+                                value={pin}
+                                onChange={onChangePin}
+                                placeholder="Password"
                                 className="bg-input-fill outline-none text-sm flex-1"
                               />
                             </div>
@@ -64,24 +120,37 @@ const ChangePin = ({ handleChangePin, changePinModal }) => {
                             <div className="p-3 flex mb-3 mt-3 rounded-md border border-input-outline bg-input-fill">
                               <input
                                 type="password"
-                                name="password"
+                                name="confirmpassword"
+                                value={confirmPin}
+                                onChange={onChangeConfirmPin}
+                                onBlur={validateConfirmedPwd}
+                                placeholder="Password"
                                 className="bg-input-fill outline-none text-sm flex-1"
                               />
                             </div>
                           </div>
                         </div>
+                        {confirmedpwdError && (
+                          <div className="text-red-800 text-xs font-bold">
+                            {confirmedpwdError}
+                          </div>
+                        )}
                       </div>
-                      {/* Navigation controls */}
+
                       <div className="container flex justify-end mt-8 space-x-4">
                         <button
-                          onClick={() => handleChangePin()}
-                          className={`bg-white text-dark-purple py- px-4 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out`}>
+                          onClick={() => changePinHandler()}
+                          className={`bg-white text-dark-purple py- px-4 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out`}
+                        >
                           Cancel
                         </button>
                         <button
-                          onClick={() => handleEditSaved()}
-                          className="bg-dark-purple text-white px-12 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out">
-                          Save
+                          className="bg-dark-purple text-white px-12 py-2 rounded-lg font-semibold cursor-pointer translate duration-200 ease-in-out"
+                          type="submit"
+                          disabled={buttonDisabled}
+                          onClick={handleChangePin}
+                        >
+                          {isLoading ? "Loading" : "Save"}
                         </button>
                       </div>
                     </div>

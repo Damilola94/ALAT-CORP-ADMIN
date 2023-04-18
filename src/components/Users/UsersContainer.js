@@ -63,7 +63,7 @@ const UsersContainer = ({}) => {
             <Card title="DISABLED USERS" data={254} icon={3} />
           </div>
         </GlobalContainer>
-        <div className="p-2 mx-6  bg-white rounded-b-lg border border-gray-200">
+        <div className="p-2 mx-6  bg-white rounded-b-lg mt-5">
           <div className="border-b-2 border-gray-300 mb-[18px]">
             <div className="ml-2 flex space-x-6">
               <button onClick={() => setToggle(1)} className="">

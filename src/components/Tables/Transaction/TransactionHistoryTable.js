@@ -1,74 +1,145 @@
 import React, { useEffect, useState, useMemo } from "react";
-import axios from "axios";
+import { useCookies } from "react-cookie";
 import { useGlobalFilter, useTable, usePagination } from "react-table";
 import { ImDatabase } from "react-icons/im";
 
 import GlobalFilter from "../GlobalFilter";
 import Pagination from "../Pagination";
 import RightSideModal from "../../Modals/RightSideModal";
-import { MOCK_DUMMY } from "../../DummyData";
 import EmptyState from "../../EmptyState";
+import RejectModal from "../../Modals/RejectModal";
+import useGetQuery from "../../../hooks/useGetQuery";
+import TransactionPinModal from "../../Modals/TransactionPinModal";
+import { camelCaseToTitleCase, capitalize } from "@/utilities/general";
+import moment from "moment-timezone";
 
 const TransactionHistoryTable = () => {
-  const [products, setProducts] = useState([]);
+  const [cookie] = useCookies(["data"]);
   const [content, setContent] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [approveModal, setApproveModal] = useState(false);
+  const [storeData, setStoreData] = useState([]);
+  const [newData, setNewData] = useState([]);
 
-  const fetchProducts = async () => {
-    const response = await axios
-      .get("https://fakestoreapi.com/products")
-      .catch((err) => console.log(err));
+  const { data: transData } = useGetQuery({
+    endpoint: "transactions",
+    pQuery: { pageSize: 1000, cooperativeId: cookie?.data?.cooperativeId },
+    queryKey: ["transactions"],
+    enabled: !!cookie?.data?.token,
+    auth: true,
+  });
 
-    if (response) {
-      const products = response.data;
-      setProducts(products);
+  useEffect(() => {
+    if (transData?.data?.data) {
+      setStoreData(transData?.data?.data);
+    } else {
+      setStoreData([]);
     }
-  };
+  }, [transData?.data?.data]);
 
-  const data = useMemo(() => MOCK_DUMMY, []);
+  const data = useMemo(() => storeData, [storeData]);
 
-  const transactionData = useMemo(() => [...data], [data]);
+  useEffect(() => {
+    const newData = data.map((item) => {
+      const { [Object.keys(item)[0]]: firstProp, ...rest } = item;
+      return { ...rest, [Object.keys(item)[0]]: firstProp };
+    });
+    setNewData(newData);
+  }, [data]);
+
+  const transactionData = useMemo(() => [...newData], [newData]);
 
   const transactionColumns = useMemo(
     () =>
-      data[0]
-        ? Object.keys(data[0])
+    newData[0]
+        ? Object.keys(newData[0])
             .filter(
               (key) =>
-                key !== "id" && key !== "TRANSACTION ID" && key !== "RAISED BY"
+                key !== "description" &&
+                // key !== "id" &&
+                key !== "comment" &&
+                key !== "raisedBy" &&
+                key !== "transactionReference" &&
+                key !== "cooperativeId"
             )
             .map((key) => {
-              if (key === "STATUS") {
+              if(key === "id") {
                 return {
-                  Header: key,
+                  Header: "",
+                  accessor: key,
+                  isVisible: false,
+                  Cell: ({}) => {
+                    return null
+                  },
+                  show: false,
+                }
+              }
+              if (key === "transactionStatus") {
+                return {
+                  Header: "STATUS",
                   accessor: key,
                   Cell: ({ value }) => {
                     return (
                       <span
                         className={`text-xs p-1 rounded-lg font-medium ${
-                          value === "Pending"
+                          value === "pending"
                             ? "bg-[#FDF6B2] text-[#723B13]"
-                            : value === "Success"
+                            : value === "success"
                             ? "bg-[#DEF7EC] p-2 text-[#03543F]"
-                            : value === "Declined"
+                            : value === "declined"
                             ? "bg-[#F3F4F6] text-[#111928]"
-                            : value === "Failed"
+                            : value === "verified"
+                            ? "bg-[#E1EFFE] text-[#1E429F]"
+                            : value === "failed"
                             ? "bg-[#FDE8E8] text-[#9B1C1C]"
                             : ""
-                        }`}>
-                        {value}
+                        }`}
+                      >
+                        {capitalize(value)}
                       </span>
                     );
                   },
                 };
               }
+              if (key === "amount") {
+                return {
+                  Header: "AMOUNT",
+                  accessor: key,
+                  Cell: ({ value }) => {
+                    return `₦${value}`;
+                  },
+                };
+              }
+              if (key === "dateCreated") {
+                return {
+                  Header: "DATE",
+                  accessor: key,
+                  Cell: ({ value }) => {
+                    return moment(value).format('Do MMM, YYYY');
+                  },
+                };
+              }
+              if(key === "timeCreated"){
+                return {
+                  Header: "TIME",
+                  accessor: key,
+                  Cell: ({ value }) => {
+                    return moment(value).format('h:mm a');
+                  },
+                };
+              }
+              const headerKey = camelCaseToTitleCase(key).toUpperCase();
               return {
-                Header: key,
+                Header: headerKey,
                 accessor: key,
               };
             })
         : [],
-    [data]
+    [newData]
   );
+
+
   const tableInstance = useTable(
     {
       columns: transactionColumns,
@@ -101,24 +172,46 @@ const TransactionHistoryTable = () => {
 
   const rowdata = page.length !== 9 ? page : row;
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   const closeModalHandler = () => {
+    setShowModal(!showModal);
     setContent("");
   };
 
+  const handleRejectAction = () => {
+    setModal(!modal);
+  };
+
+  const handleApproveAction = () => {
+    setApproveModal(!approveModal);
+  };
+
   const rightSideModalHandler = (row) => {
+    setShowModal(!showModal);
     const { values } = row;
-    setContent(<RightSideModal values={values} onClick={closeModalHandler} />);
+    setContent(
+      <RightSideModal
+        values={values}
+        onClick={closeModalHandler}
+        transactionHistory
+        showModal={showModal}
+        handleAction={handleRejectAction}
+        handleApproveAction={handleApproveAction}
+      />
+    );
   };
 
   return (
     <>
+      {content}
+      {modal && <RejectModal modal={modal} onClick={handleRejectAction} />}
+      {approveModal && (
+        <TransactionPinModal
+          approveModal={approveModal}
+          onClick={handleApproveAction}
+        />
+      )}
       {transactionData?.length > 0 ? (
         <div>
-          {content}
           <p className="text-[#1D0218] text-sm font-bold mb-4">
             Showing 1 - 50 of 100 Transactions
           </p>
@@ -141,14 +234,16 @@ const TransactionHistoryTable = () => {
           </div>
           <table
             {...getTableProps()}
-            className=" text-base text-gray-900 p-4 w-full">
+            className=" text-base text-gray-900 p-4 w-full"
+          >
             <thead className="p-4">
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()} className="">
                   {headerGroup.headers.map((column) => (
                     <th
-                      className="text-left text-xs p-4 bg-[#F9FAFB] text-[#1D0218]"
-                      {...column.getHeaderProps()}>
+                      className={`text-left text-xs p-4 bg-[#F9FAFB] text-[#1D0218]`}
+                      {...column.getHeaderProps()}
+                    >
                       {column.render("Header")}
                     </th>
                   ))}
@@ -164,11 +259,13 @@ const TransactionHistoryTable = () => {
                     onClick={() => {
                       rightSideModalHandler(row);
                     }}
-                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}>
+                    className={`hover:cursor-pointer hover:bg-[#FBF3F5]`}
+                  >
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]">
+                        className="border-b border-b-[#E1E5EE] text-xs p-4 font-medium text-[#808080]"
+                      >
                         {cell.render("Cell")}
                       </td>
                     ))}
@@ -196,7 +293,7 @@ const TransactionHistoryTable = () => {
           subTitle={
             "You haven’t made any transactions yet. when you do, they’ll appear here "
           }
-          icon={<ImDatabase lassName="text-4xl text-[#C2C9D1]" />}
+          icon={<ImDatabase className="text-4xl text-[#C2C9D1]" />}
         />
       )}
     </>

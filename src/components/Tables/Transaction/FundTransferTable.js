@@ -13,7 +13,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import {
   addBeneficiary,
   beneficiaryListValue,
-} from "../../../redux/beneficiarySlice";
+} from "../../../redux/transactionSlice";
 import Checkbox from "../../common/CheckBox";
 import GlobalFilter from "../GlobalFilter";
 import Pagination from "../Pagination";
@@ -29,21 +29,10 @@ const FundTransferTable = ({
   bulkTransferDetails,
   setExcelFileName,
 }) => {
-  const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const tableData = useSelector(beneficiaryListValue);
   const [confirmModal, setConfirmModal] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
-
-  const fetchProducts = async () => {
-    const response = await axios
-      .get("https://fakestoreapi.com/products")
-      .catch((err) => console.log(err));
-    if (response) {
-      const products = response.data;
-      setProducts(products);
-    }
-  };
 
   const data = useMemo(() => tableData, [tableData]);
 
@@ -158,10 +147,6 @@ const FundTransferTable = ({
       type: "success",
     });
   };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   return (
     <>

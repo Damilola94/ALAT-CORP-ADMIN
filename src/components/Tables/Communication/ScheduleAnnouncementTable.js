@@ -7,7 +7,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 
 import GlobalFilter from "../GlobalFilter";
 import Pagination from "../Pagination";
-import { MOCK_DUMMY_ANNOUNCEMENT } from "../../DummyData";
+import { MOCK_DUMMY_SCHEDULED_ANNOUNCEMENT } from "../../DummyData";
 import EmptyState from "../../EmptyState";
 
 const ScheduleAnnouncementTable = ({ handleCreateAnnouncement }) => {
@@ -24,7 +24,7 @@ const ScheduleAnnouncementTable = ({ handleCreateAnnouncement }) => {
     }
   };
 
-  const data = useMemo(() => MOCK_DUMMY_ANNOUNCEMENT, []);
+  const data = useMemo(() => MOCK_DUMMY_SCHEDULED_ANNOUNCEMENT, []);
 
   const transactionData = useMemo(() => [...data], [data]);
 
@@ -52,9 +52,6 @@ const ScheduleAnnouncementTable = ({ handleCreateAnnouncement }) => {
             <div className="flex">
               <button
                 className="pl-4 pr-4 pt-2 pb-2 text-xl text-dark-purple"
-                onMouseMove={() => {
-                  handleMouseOver();
-                }}
                 onClick={() => handleEditModal(row.values)}>
                 <AiOutlineEdit />
               </button>

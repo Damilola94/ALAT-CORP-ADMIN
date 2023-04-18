@@ -69,14 +69,13 @@ const BackupDataRecovery = () => {
       <div className="h-full flex flex-col justify-between w-5/6 p-6">
         <div>
           <h1 className="font-bold text-xl mb-3">Backup and Data Recovery</h1>
-          <p className="text-gray-500 mb-6">
-            Lorem ipsum dolor asset ifish juxtereb fghdh hdh hfed
-          </p>
+          <p className="text-gray-500 mb-6">Backup and recover files here</p>
         </div>
         <div className="mt-11 w-full">
           <button
             className="border-dark-purple border-2 text-dark-purple px-5 py-2 rounded-lg font-semibold cursor-pointer hover:bg-dark-purple hover:text-white translate duration-200 ease-in-out"
-            onClick={() => handleChangePassword()}>
+            onClick={() => handleChangePassword()}
+          >
             Download All Files
           </button>
         </div>

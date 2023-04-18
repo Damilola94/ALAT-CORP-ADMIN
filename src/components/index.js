@@ -5,6 +5,8 @@ export { default as TransactionHistoryContainer } from "./Transaction/Transactio
 export { default as FundTransferContainer } from "./Transaction/FundTransferContainer";
 export { default as BeneficiaryContainer } from "./Transaction/BeneficiaryContainer";
 export { default as ContributionContainer } from "./Transaction/ContributionContainer";
+export { default as MemberLoanContainer } from "./LoanManagement/MemberLoanContainer";
+export { default as LoanConfigurations } from "./LoanManagement/LoanConfigurations";
 export { default as EditorCointainer } from "./Communication/Announcement/EditorCointainer";
 export { default as AnnouncementContainer } from "./Communication/Announcement/AnnouncementContainer";
 export { default as ChatContainer } from "./Communication/ChatBox";
@@ -20,4 +22,4 @@ export { default as Modal } from "./Modals/Modal";
 export { default as SuccessModal } from "./Modals/SuccessModal";
 export { default as SideBar } from "./SideBars/SideBar";
 export { default as RightSideModal } from "./Modals/RightSideModal";
-export { default as ApproveModal } from "./Modals/ApproveModal";
+export { default as ApproveModal } from "./Modals/RejectModal";

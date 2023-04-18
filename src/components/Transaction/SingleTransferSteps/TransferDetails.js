@@ -9,7 +9,9 @@ import {
   addBeneficiary,
   beneficiaryListValue,
   selectedBeneficiaryListValue,
-} from "@/redux/beneficiarySlice";
+  previousStepBoolean,
+  onPreviousStep
+} from "@/redux/transactionSlice";
 import BeneficiariesModal from "@/components/Modals/BeneficiariesModal";
 
 const TransferDetails = ({ handleEditModal }) => {
@@ -19,6 +21,7 @@ const TransferDetails = ({ handleEditModal }) => {
   const [beneficiariesModal, setBeneficiariesModal] = useState(false);
   const tableData = useSelector(beneficiaryListValue);
   const selectedData = useSelector(selectedBeneficiaryListValue);
+  const previousStep = useSelector(previousStepBoolean);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +29,9 @@ const TransferDetails = ({ handleEditModal }) => {
   };
 
   const handleAddMore = () => {
+    if (previousStep === true) {
+      dispatch(onPreviousStep(false));
+    } 
     const addMoreData = [];
     addMoreData.push({ "s/n": moreBeneficiary.length + 1, ...userData });
     setMoreBeneficiary((prevState) => {
@@ -35,8 +41,12 @@ const TransferDetails = ({ handleEditModal }) => {
   };
 
   useEffect(() => {
-    dispatch(addBeneficiary(moreBeneficiary));
-  }, [moreBeneficiary]);
+    if (previousStep === false) {
+      dispatch(addBeneficiary(moreBeneficiary));
+    } else {
+      return;
+    }
+  }, [moreBeneficiary, previousStep]);
 
   const handleRemove = (value) => {
     const removedBeneficiary = moreBeneficiary.filter(

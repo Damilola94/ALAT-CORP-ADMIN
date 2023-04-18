@@ -5,7 +5,7 @@ import { FiUploadCloud } from "react-icons/fi";
 import { ImDatabase } from "react-icons/im";
 
 import FundTransferTable from "@/components/Tables/Transaction/FundTransferTable";
-import { addBeneficiary, beneficiaryListValue } from "@/redux/beneficiarySlice";
+import { addBeneficiary, beneficiaryListValue } from "@/redux/transactionSlice";
 
 const BulkTransferDetails = ({ handleEditModal }) => {
   const dispatch = useDispatch();

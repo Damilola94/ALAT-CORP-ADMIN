@@ -16,10 +16,10 @@ const GlobalContainer = ({
   return (
     <div
       className={`mx-6 mt-6 flex flex-col bg-white  ${
-        pageName === "Users Overview" ? "rounded-b-lg " : ""
+        pageName === "Users Overview" ? "rounded-b-lg" : ""
       } `}>
       <div
-        className={`flex space-x-3 justify-between rounded-t-lg border border-gray-200 p-2`}>
+        className={`flex space-x-3 justify-between rounded-t-lg border-b border-gray-200 p-2`}>
         <div className="flex space-x-4 items-center">
           {backButton && (
             <MdOutlineKeyboardBackspace

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { StepperContext } from "@/contexts/StepperContex";
 import Stepper from "./Stepper";
@@ -11,14 +12,20 @@ import BulkConfirmDetails from "./BulkTransferSteps/BulkConfirmDetails";
 import BulkCompleteTransaction from "./BulkTransferSteps/BulkCompleteTransaction";
 import EditModal from "../Modals/EditModal";
 import SuccessModal from "../Modals/SuccessModal";
+import { useMutation } from "react-query";
+import handleFetch from "@/services/api/handleFetch";
+import notification from "@/utilities/notification";
+import {onPreviousStep} from "@/redux/transactionSlice"
 
-const StepperUI = () => {
+const StepperUI = () => { 
+  const dispatch = useDispatch();
   const [currentStep, setCurrentStep] = useState(1);
   const [modal, setModal] = useState(false);
   const [userData, setUserData] = useState("");
   const [options, setOptions] = useState(1);
   const [editModal, setEditModal] = useState(false);
   const [editModalId, setEditModalId] = useState("");
+  const [content, setContent] = useState("");
   const steps = ["Transfer Details", "Confirm Details", "Complete Transaction"];
 
   const handleEditModal = (value) => {
@@ -54,11 +61,61 @@ const StepperUI = () => {
     let newStep = currentStep;
     direction === "next" ? newStep++ : newStep--;
     newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
+    dispatch(onPreviousStep(true))
   };
 
   const handleLastClick = () => {
     setModal(!modal);
+    setUserData(" ")
   };
+
+  const fundTransferMutation = useMutation(handleFetch, {
+    onSuccess: (res) => {
+      if (res?.statusCode === 201) {
+        setContent(res.data.data[0])
+        handleLastClick()
+      }
+    },
+    onError: (err) => {  
+      notification({
+        title: "Error",
+        message: err?.toString() || "Something went wrong.",
+        type: "danger",
+      });
+    },
+  });
+
+  const handleFundTransfer = () => {
+    if (userData == null) {
+      notification({
+        title: "Form Error",
+        message: "Please fill all fields",
+        type: "danger",
+      });
+      return;
+    }
+    fundTransferMutation.mutate({
+      endpoint: "transactions",
+      extra: "fund-transfer",
+      method: "POST",
+      auth: true,
+      body: {
+        bankDetailsDtos: [
+          {
+            bankName: userData["Bank Name"],
+            accountName: userData["Account Name"],
+            description: userData?.Description,
+            accountNumber: userData["Account Number"],
+            amount: parseInt(userData.Amount),
+            saveBeneficiary: false,
+          },
+        ],
+        pin: userData?.enterpin,
+      },
+    });
+  };
+
+  const { isLoading, isSuccess } = fundTransferMutation;
 
   return (
     <>
@@ -69,8 +126,8 @@ const StepperUI = () => {
           editModalId={editModalId}
         />
       )}
-      {modal && (
-        <SuccessModal handleLastClick={handleLastClick} modal={modal} />
+     {modal && (
+        <SuccessModal handleLastClick={handleLastClick} modal={modal} content={content}/>
       )}
       <div className="bg-white">
         <div className="p-5">
@@ -83,7 +140,8 @@ const StepperUI = () => {
                 options === 1
                   ? "border-dark-purple text-dark-purple"
                   : "border-gray-400 text-gray-400"
-              }  px-4 py-2 rounded-md font-semibold cursor-pointer flex  text-base`}>
+              }  px-4 py-2 rounded-md font-semibold cursor-pointer flex  text-base`}
+            >
               <input
                 type="radio"
                 className={`${
@@ -98,7 +156,8 @@ const StepperUI = () => {
                 options === 2
                   ? "border-dark-purple text-dark-purple"
                   : "border-gray-400"
-              } px-4 py-2 rounded-md font-semibold cursor-pointer flex text-base`}>
+              } px-4 py-2 rounded-md font-semibold cursor-pointer flex text-base`}
+            >
               <input
                 type="radio"
                 className={`${
@@ -130,7 +189,8 @@ const StepperUI = () => {
                     value={{
                       userData,
                       setUserData,
-                    }}>
+                    }}
+                  >
                     {displaySingleTransferSteps(currentStep)}
                   </StepperContext.Provider>
                 </div>
@@ -140,7 +200,7 @@ const StepperUI = () => {
             <div className="">
               <StepperControl
                 handleClick={handleClick}
-                handleLastClick={handleLastClick}
+                handleLastClick={handleFundTransfer}
                 currentStep={currentStep}
                 steps={steps}
               />
@@ -165,7 +225,8 @@ const StepperUI = () => {
                     value={{
                       userData,
                       setUserData,
-                    }}>
+                    }}
+                  >
                     {displayBulkTransferSteps(currentStep)}
                   </StepperContext.Provider>
                 </div>
@@ -175,7 +236,7 @@ const StepperUI = () => {
             <div className="">
               <StepperControl
                 handleClick={handleClick}
-                handleLastClick={handleLastClick}
+                handleLastClick={handleFundTransfer}
                 currentStep={currentStep}
                 steps={steps}
               />

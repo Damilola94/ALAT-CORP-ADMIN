@@ -10,11 +10,13 @@ const handleFetch = async ({
   endpoint = '', extra = null, method = 'GET', auth = false,
   body = null, pQuery = null, param = null, multipart = false,
   responseType = null
-}:any = {}) => {
-  const headers: any = {
+} = {}) => {
+
+  const headers = {
     'Content-Type': multipart ? 'multipart/form-data' : 'application/json',
-    'X-API-KEY': process.env.NEXT_PUBLIC_API_KEY
+    "Access-Control-Allow-Origin":"*",    
   };
+
   let url = endpoints[endpoint] || endpoint;
 
   if (extra) {
@@ -28,7 +30,6 @@ const handleFetch = async ({
   if (pQuery) {
     let paramsArray = Object.keys(pQuery)
       .map((key) => pQuery[key] && `${encodeURIComponent(key)}=${encodeURIComponent(pQuery[key])}`);
-
     paramsArray = paramsArray.filter((item) => item);
     url += `?${paramsArray.join('&')}`;
   }
@@ -36,10 +37,10 @@ const handleFetch = async ({
   if (auth) {
     const storedData = Cookies.get('data');
     const data = storedData && JSON.parse(storedData);
-    headers.authorization = `bearer ${data?.accessToken}`;
+    headers.authorization = `Bearer ${data?.token}`;
   }
 
-  const options: any = {
+  const options = {
     url, method, headers
   };
 
@@ -52,10 +53,13 @@ const handleFetch = async ({
   }
 
   logger(options);
+
   return axiosInstance(options)
-    .then((response) => (responseType === 'blob'
+    .then((response) =>     
+    (responseType === 'blob'
       ? response
-      : ({ ...response.data, method, status: response.status })))
+      : ({ ...response.data, method, status: response.status }))
+      )
     .catch((error) => {
       throw new Error(errorHandler(error, auth));
     });

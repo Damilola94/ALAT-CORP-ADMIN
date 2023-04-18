@@ -8,27 +8,27 @@ import { MdOutlineBackup } from "react-icons/md";
 const SettingData = [
   {
     title: "General",
-    subtitle: "Lorem ipsum dolor asset ifish juxtereb fghdh hdh hfed",
+    subtitle: "View your Cooperative account information here",
     icon: <AiOutlineUser />,
   },
   {
     title: "Account",
-    subtitle: "Lorem ipsum dolor asset ifish juxtereb fghdh hdh hfed",
+    subtitle: "View and update your  account information here",
     icon: <ImDatabase />,
   },
   {
     title: "Notifications",
-    subtitle: "Lorem ipsum dolor asset ifish juxtereb fghdh hdh hfed",
+    subtitle: "Manage your account notifications here",
     icon: <IoIosNotificationsOutline />,
   },
   {
     title: "Security Settings",
-    subtitle: "Lorem ipsum dolor asset ifish juxtereb fghdh hdh hfed",
+    subtitle: "View and update authentication details here",
     icon: <GrSecure className="text-gray-500" />,
   },
   {
     title: "Backup and Recovery",
-    subtitle: "Lorem ipsum dolor asset ifish juxtereb fghdh hdh hfed",
+    subtitle: "Backup and recover files here",
     icon: <MdOutlineBackup />,
   },
 ];
